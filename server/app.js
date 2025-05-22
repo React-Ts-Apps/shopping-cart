@@ -7,6 +7,7 @@ const app = express();
 
 // ✅ Enable CORS for all origins
 app.use(cors({ origin: FRONTEND_URL }));
+app.use(express.json())
 
 app.use('/items', itemsRoute);
 app.use('/admin/items', adminProductListRoute)
