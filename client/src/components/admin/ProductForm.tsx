@@ -52,7 +52,8 @@ const ProductForm = () => {
                     placeholder="Image URL" className="flex-1 border px-3 py-2 rounded" />
             </div>
             <div className="flex justify-end">
-                <button type="submit" className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                <button type="submit" className="mt-4 bg-blue-600 text-white px-4 py-2 rounded
+                 hover:bg-blue-900 active:scale-95 transition-all duration-150 active:shadow:inner">
                     Submit
                 </button>
             </div>

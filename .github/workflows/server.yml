@@ -16,7 +16,9 @@ jobs:
         working-directory: server
 
     env:
-      MONGO_URI: ${{ secrets.MONGO_URI }}
+    
+      MONGO_URL: ${{ secrets.MONGO_URL }}
+
 
     steps:
       - uses: actions/checkout@v3
