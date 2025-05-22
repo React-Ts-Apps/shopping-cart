@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import instance from "../../api/axios"
 import type { ItemProps } from "../../types"
+import axios from "axios"
+
 
 const ProductList = () => {
     const [data, setData] = useState<ItemProps[]>([])
     useEffect(() => {
-        instance.get('/admin/items').then((res) => setData(res.data)).catch((error) => console.error(error))
+        axios.get(`${import.meta.env.VITE_API_URL}/admin/items`).then((res) => setData(res.data)).catch((error) => console.error(error))
     }, [])
     return (
         <div className="space-y-4 max-w-3xl p-10  mx-auto">
