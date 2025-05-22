@@ -1,7 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import LayOut from "./components/LayOut"
+import ItemList from "./components/ItemList"
+import AdminDashBoard from "./components/dashboard/AdminDashBoard"
 
 function App() {
-  return (<LayOut />)
+  return (
+    <BrowserRouter>
+      <LayOut />
+      <Routes>
+        <Route path='/items' element={<ItemList />} />
+        <Route path='/admin' element={<AdminDashBoard />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App
