@@ -17,7 +17,7 @@ jobs:
 
     env:
     
-      MONGO_URI: ${{ secrets.MONGO_URL }}
+      MONGO_URL: ${{ secrets.MONGO_URL }}
 
 
     steps:
