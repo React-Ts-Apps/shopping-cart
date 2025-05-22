@@ -1,9 +1,17 @@
 import { useState, type ChangeEvent, type FormEvent } from "react"
+import instance from "../../api/axios"
 
 const ProductForm = () => {
     const [form, setForm] = useState({ name: '', description: '', price: 0, imgSrc: '' })
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        try {
+            console.log(form)
+            const response = await instance.post('/admin/items', form)
+            console.log("item added", response.data)
+        } catch (error) {
+            console.log('Failed to add item', error)
+        }
     }
 
     const handleOnChange = (
