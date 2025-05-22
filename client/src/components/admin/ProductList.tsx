@@ -26,9 +26,9 @@ const ProductList = () => {
                     </thead>
                     <tbody>
                         {
-                            data.map((item) => (
-                                <tr key={item.id}>
-                                    <td className="py-2 px-4 text-left border-b">{item.id}</td>
+                            data.map((item, index) => (
+                                <tr key={index}>
+                                    <td className="py-2 px-4 text-left border-b">{index + 1}</td>
                                     <td className="py-2 px-4 text-left border-b">{item.name}</td>
                                     <td className="py-2 px-4 text-left border-b">{item.description}</td>
                                     <td className="py-2 px-4 text-left border-b">{item.price}kr</td>
