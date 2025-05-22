@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import LayOut from "./components/LayOut"
 import ItemList from "./components/ItemList"
-import AdminDashBoard from "./components/dashboard/AdminDashBoard"
+import AdminDashBoard from "./components/admin/AdminDashBoard"
 
 function App() {
   return (

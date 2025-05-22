@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const itemsRoute = require('./routes/userItemRoute');
-const adminRoute = require('./routes/adminRoute')
+const adminProductListRoute = require('./routes/adminProductListRoute')
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173'
 const app = express();
 
@@ -9,6 +9,6 @@ const app = express();
 app.use(cors({ origin: FRONTEND_URL }));
 
 app.use('/items', itemsRoute);
-app.use('/admin', adminRoute)
+app.use('/admin/items', adminProductListRoute)
 
 module.exports = app;

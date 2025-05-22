@@ -1,4 +1,5 @@
-const getAdmin = (req, res) => {
-    res.send('I am admin')
+const items = require('../data/items')
+const getAdminProductList = (req, res) => {
+    res.json(items)
 }
-module.exports = { getAdmin }
+module.exports = { getAdminProductList }
