@@ -8,8 +8,9 @@ function App() {
     <BrowserRouter>
       <LayOut />
       <Routes>
+        <Route path='/' element={<ItemList />} />
         <Route path='/items' element={<ItemList />} />
-        <Route path='/admin' element={<AdminDashBoard />} />
+        <Route path='/admin/items' element={<AdminDashBoard />} />
       </Routes>
     </BrowserRouter>
   )

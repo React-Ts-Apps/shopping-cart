@@ -12,8 +12,8 @@ const ItemList = () => {
     }, [])
 
     return (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 p-5">
-        {items.map((item) =>
-            <Card data={item} />
+        {items.map((item, index) =>
+            <Card key={index} data={item} />
         )}
     </div>)
 }
