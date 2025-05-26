@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react"
-import Card from "./ui/Card"
-import instance from "../api/axios"
-import LoadData from "./ui/LoadData"
+import Card from "../ui/Card"
+import instance from "../../api/axios"
+import LoadData from "../ui/LoadData"
 
 const ItemList = () => {
 
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
-    console.log(loading)
     useEffect(() => {
         instance.get('/items').
             then((response) => {

@@ -1,16 +1,19 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import LayOut from "./components/ui/LayOut"
-import ItemList from "./components/ItemList"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import ItemList from "./components/user/ItemList"
 import AdminDashBoard from "./components/admin/AdminDashBoard"
+import ActionPage from "./components/user/ActionPage"
+import LayOut from "./components/ui/LayOut"
 
 function App() {
   return (
     <BrowserRouter>
-      <LayOut />
       <Routes>
-        <Route path='/' element={<Navigate to="/admin/items" />} />
-        <Route path='/items' element={<ItemList />} />
-        <Route path='/admin/items' element={<AdminDashBoard />} />
+        <Route path='/' element={<LayOut />} >
+          <Route index element={<ItemList />} />
+          <Route path='/home' element={<ItemList />} />
+          <Route path='/:action' element={<ActionPage />} />
+          <Route path='/:admin/items' element={<AdminDashBoard />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )

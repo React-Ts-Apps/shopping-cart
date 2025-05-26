@@ -1,9 +1,15 @@
-
+import { Outlet } from "react-router-dom"
 import NavBar from "./NavBar"
 
 const LayOut = () => {
-    return (<div>
-        <NavBar />
-    </div>)
+    //LL
+    return (
+        <>
+            <NavBar />
+            <main>
+                <Outlet />
+            </main>
+        </>
+    )
 }
 export default LayOut
