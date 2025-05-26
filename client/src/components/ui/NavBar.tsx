@@ -1,11 +1,20 @@
 
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ShoppingCart, User } from 'lucide-react';
 
 const NavBar = () => {
     const { admin } = useParams<{ admin: string }>();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const navigate = useNavigate()
+
+    const handleLogin = () => {
+        navigate('/login', { replace: true })
+    }
+
+    const handleSignUp = () => {
+        navigate('/signup', { replace: true })
+    }
 
     //@space-x-6 adds horizontal space among direct children
     return (
@@ -23,7 +32,7 @@ const NavBar = () => {
                         ) : (
                             <>
                                 <li>
-                                    <span className="cursor-pointer text-gray-800 hover:text-blue-600">Home</span>
+                                    <span onClick={() => { navigate('/home', { replace: true }) }} className="cursor-pointer text-gray-800 hover:text-blue-600">Home</span>
                                 </li>
                                 <li>
                                     <span className="cursor-pointer text-gray-800 hover:text-blue-600">Products</span>
@@ -49,8 +58,8 @@ const NavBar = () => {
                         </button>
                         {isDropdownOpen && (
                             <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded shadow-md z-50">
-                                <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer">Sign Up</div>
-                                <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer">Login</div>
+                                <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleSignUp}>Sign Up</div>
+                                <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogin}>Login</div>
                             </div>
                         )}
                     </div>

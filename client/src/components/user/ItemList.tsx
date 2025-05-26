@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import Card from "../ui/Card"
 import instance from "../../api/axios"
 import LoadData from "../ui/LoadData"
-import NavBar from "../ui/NavBar"
 
 const ItemList = () => {
 
@@ -22,7 +21,6 @@ const ItemList = () => {
 
     return (
         <div>
-            <NavBar />
             {loading ? <LoadData message='Render responding...' /> :
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 p-5">
                     {items.map((item, index) =>
