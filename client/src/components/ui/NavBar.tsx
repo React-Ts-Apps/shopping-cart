@@ -16,10 +16,12 @@ const NavBar = () => {
     const user = useSelector((state: RootState) => state.auth.user)
 
     const handleLogin = () => {
+        setIsDropdownOpen(false)
         navigate('/login', { replace: true })
     }
 
     const handleSignUp = () => {
+        setIsDropdownOpen(false)
         navigate('/signup', { replace: true })
     }
 
@@ -63,7 +65,7 @@ const NavBar = () => {
 
                     <div className="relative">
                         <button
-                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            onClick={() => setIsDropdownOpen((prev) => !prev)}
                             className="flex items-center space-x-2 text-gray-800 hover:text-blue-600 font-semibold"
                         >
                             <User className="w-5 h-5" />
