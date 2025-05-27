@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import getItems from '../controllers/user/userItemController.js'
+import getItems from '../controllers/shared/itemController.js'
 const router = Router()
 
 //GET: fetch all items
