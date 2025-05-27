@@ -2,18 +2,33 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ShoppingCart, User } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '../../redux/store';
+import { logOut } from '../../redux/slices/authSlice';
+
 
 const NavBar = () => {
     const { admin } = useParams<{ admin: string }>();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const user = useSelector((state: RootState) => state.auth.user)
 
     const handleLogin = () => {
+        setIsDropdownOpen(false)
         navigate('/login', { replace: true })
     }
 
     const handleSignUp = () => {
+        setIsDropdownOpen(false)
         navigate('/signup', { replace: true })
+    }
+
+    const handleLogOut = () => {
+        sessionStorage.removeItem('user')
+        sessionStorage.removeItem('token')
+        dispatch(logOut())
     }
 
     //@space-x-6 adds horizontal space among direct children
@@ -50,7 +65,7 @@ const NavBar = () => {
 
                     <div className="relative">
                         <button
-                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            onClick={() => setIsDropdownOpen((prev) => !prev)}
                             className="flex items-center space-x-2 text-gray-800 hover:text-blue-600 font-semibold"
                         >
                             <User className="w-5 h-5" />
@@ -58,8 +73,15 @@ const NavBar = () => {
                         </button>
                         {isDropdownOpen && (
                             <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded shadow-md z-50">
-                                <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleSignUp}>Sign Up</div>
-                                <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogin}>Login</div>
+                                {user ? <>
+                                    <div className="py-2 px-4 hover:bg-gray-100 text-amber-900 cursor-pointer">Welcome {user.name}!</div>
+                                    <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogOut}>LogOut</div>
+                                </> :
+                                    <>
+                                        <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleSignUp}>Sign Up</div>
+                                        <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogin}>Login</div>
+                                    </>}
+
                             </div>
                         )}
                     </div>

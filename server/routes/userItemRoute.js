@@ -1,7 +1,8 @@
-const express = require('express')
-const router = express.Router()
-const { getItems } = require('../controllers/user/userItemController')
+import { Router } from 'express'
+import getItems from '../controllers/shared/itemController.js'
+const router = Router()
 
 //GET: fetch all items
 router.get('/items', getItems)
-module.exports = router
+
+export default router

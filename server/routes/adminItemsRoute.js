@@ -1,11 +1,12 @@
-const express = require('express')
-const router = express.Router()
-const { getAdminProductList, addItem } = require('../controllers/admin/adminController')
+import { Router } from 'express'
+import adminController from '../controllers/admin/adminController.js'
+
+const router = Router()
 
 //GET: fetch all products
-router.get('/items', getAdminProductList)
+router.get('/items', adminController.getAdminProductList)
 
 //POST: add new product
-router.post('/save/item', addItem)
-module.exports = router
+router.post('/save/item', adminController.addItem)
+export default router
 

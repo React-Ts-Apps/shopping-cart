@@ -1,4 +1,4 @@
-const User = require('../../models/UserModel')
+import User from '../../models/UserModel.js'
 
 const signUp = async (req, res) => {
     const { name, email, password } = req.body
@@ -34,4 +34,6 @@ const login = async (req, res) => {
 
 }
 
-module.exports = { signUp, login }
+const auth = { signUp, login }
+
+export default auth

@@ -1,26 +1,25 @@
-const express = require('express');
-const cors = require('cors');
+import express, { json } from 'express';
+import cors from 'cors';
 
-const itemsRoute = require('./routes/userItemRoute');
-const adminProductListRoute = require('./routes/adminItemsRoute')
-const authRoute = require('./routes/authRoutes')
-
-
-require('dotenv').config()
+import itemsRoute from './routes/userItemRoute.js';
+import adminProductListRoute from './routes/adminItemsRoute.js';
+import authRoute from './routes/authRoutes.js';
+import connectDB from './config/db.js';
+import 'dotenv/config'
 
 const FRONTEND_URL = process.env.FRONTEND_URL
 
-const connectDB = require('./config/db')
+
 const app = express();
 connectDB()
 
 // Enable CORS for all origins
 app.use(cors({ origin: FRONTEND_URL }));
-app.use(express.json())
+app.use(json())
 
 app.use('/home', itemsRoute);
 app.use('/admin', adminProductListRoute)
 app.use('/auth', authRoute)
 
 
-module.exports = app;
+export default app;
