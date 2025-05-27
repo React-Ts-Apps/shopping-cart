@@ -1,22 +1,25 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import type { LoginProps } from "../../types"
 import { useState, type ChangeEvent, type FormEvent } from "react"
 import instance from "../../api/axios"
+import type { AxiosError } from "axios"
+import { useDispatch } from "react-redux"
+import { loginSuccess } from "../../redux/slices/authSlice"
 
 const LoginForm = () => {
     const [form, setForm] = useState<LoginProps>({ email: '', password: '' })
-    const [message, setMessage] = useState<string | null>(null)
     const [error, setError] = useState<string | null>(null)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const validateForm = () => {
         const { email, password } = form
-        if (!email || !password) return 'All fields required'
+        if (!email || !password) return 'All fields are required'
         return null
     }
 
     const handleSubmit = async (ev: FormEvent) => {
         ev.preventDefault()
-
         try {
             const errorMessage = validateForm()
             if (errorMessage) {
@@ -24,11 +27,24 @@ const LoginForm = () => {
                 return
             }
             const response = await instance.post('/auth/login', form)
-            const { data } = response
-            setMessage(data.message)
-            setError(null)
-        } catch (error) {
-            console.log(error)
+
+            if (response.data) {
+                console.log(response.data)
+                const { _id, name, email, token } = response.data
+                const user = { _id, name, email }
+                sessionStorage.setItem('user', JSON.stringify(user))
+                sessionStorage.setItem('token', token)
+                dispatch(loginSuccess({ user, token }))
+                setError(null)
+                navigate('/', { replace: true })
+            }
+        } catch (er) {
+            const axiosError = er as AxiosError<{ message: string }>
+            if (axiosError.response?.data?.message) {
+                setError(axiosError.response.data.message)
+            } else {
+                setError('Something went wrong')
+            }
         }
     }
 
@@ -57,7 +73,6 @@ const LoginForm = () => {
                     <button type="submit" className="border rounded mt-4 px-2 py-2 bg-blue-600 hover:bg-blue-900 text-white">Login</button>
                 </div>
                 <div className="h-6 text-center">
-                    {message && <p className="text-green-700 font-medium">{message}</p>}
                     {error && <p className="text-red-700 font-medium">{error}</p>}
                 </div>
             </div>
