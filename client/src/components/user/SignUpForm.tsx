@@ -17,7 +17,7 @@ const SignUpForm = () => {
     const validateForm = () => {
         const { name, email, password } = form
         if (!name || !email || !password) return 'All fields are required'
-        if (password.length < 4) return 'Password must be at least 6 characters'
+        if (password.length < 4) return 'Password must be at least 4 characters'
         return null
     }
 
