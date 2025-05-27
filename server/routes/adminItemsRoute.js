@@ -3,9 +3,9 @@ const router = express.Router()
 const { getAdminProductList, addItem } = require('../controllers/admin/adminController')
 
 //GET: fetch all products
-router.get('/', getAdminProductList)
+router.get('/items', getAdminProductList)
 
 //POST: add new product
-router.post('/', addItem)
+router.post('/save/item', addItem)
 module.exports = router
 

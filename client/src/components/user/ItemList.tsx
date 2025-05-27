@@ -8,7 +8,7 @@ const ItemList = () => {
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        instance.get('/items').
+        instance.get('/home/items').
             then((response) => {
                 setItems(response.data)
                 setLoading(false)

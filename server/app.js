@@ -18,8 +18,9 @@ connectDB()
 app.use(cors({ origin: FRONTEND_URL }));
 app.use(express.json())
 
-app.use('/items', itemsRoute);
-app.use('/admin/items', adminProductListRoute)
-app.use('/signup', authRoute)
+app.use('/home', itemsRoute);
+app.use('/admin', adminProductListRoute)
+app.use('/auth', authRoute)
+
 
 module.exports = app;
