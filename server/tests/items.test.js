@@ -8,8 +8,7 @@ describe('GET /items', () => {
         expect(response.statusCode).toBe(200)
         expect(Array.isArray(response.body)).toBe(true)
     })
-
-    afterAll(async () => {
-        await connection.close()
-    })
+})
+afterAll(async () => {
+    await connection.close()
 })
