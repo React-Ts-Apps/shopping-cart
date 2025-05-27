@@ -7,7 +7,7 @@ const ProductForm = () => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            const response = await instance.post('/admin/items', form)
+            const response = await instance.post('/admin/save/item', form)
             console.log("item added", response.data)
         } catch (error) {
             console.log('Failed to add item', error)

@@ -1,6 +1,6 @@
 const User = require('../../models/UserModel')
 
-const auth = async (req, res) => {
+const signUp = async (req, res) => {
     const { name, email, password } = req.body
     try {
         // Check use already exists
@@ -16,4 +16,22 @@ const auth = async (req, res) => {
 
 }
 
-module.exports = { auth }
+const login = async (req, res) => {
+    const { email, password } = req.body
+    try {
+        const user = await User.findOne({ email })
+        if (!user) {
+            return res.status(400).json({ message: 'Email not registered' })
+        }
+        const isMatch = await user.matchPassword(password)
+        if (!isMatch) {
+            return res.status(400).json({ user, message: 'Invalid email or password' })
+        }
+        return res.status(200).json({ _id: user._id, name: user.name, email: user.email, message: 'Login successfully' })
+    } catch (error) {
+        return res.status(500).json({ message: 'Server Error', error })
+    }
+
+}
+
+module.exports = { signUp, login }

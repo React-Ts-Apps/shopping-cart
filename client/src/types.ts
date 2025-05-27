@@ -10,3 +10,5 @@ export type UserProps = {
     email: string;
     password: string;
 }
+
+export type LoginProps = Omit<UserProps, 'name'>

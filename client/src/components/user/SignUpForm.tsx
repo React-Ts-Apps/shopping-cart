@@ -33,7 +33,7 @@ const SignUpForm = () => {
                 setMessage(null)
                 return
             }
-            const response = await instance.post('/signup', { name, email, password })
+            const response = await instance.post('/auth/signup', { name, email, password })
             const { data } = response
             setMessage(data.message)
             setError(null)
@@ -99,11 +99,6 @@ const SignUpForm = () => {
                     Submit
                 </button>
             </div>
-
-            /**
-            * * Reserved message space
-            * ToDo: Find a better place to show messages
-            */
 
             <div className="h-6 text-center">
                 {message && <p className="text-green-700 font-medium">{message}</p>}
