@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-require('dotenv').config();
+import { connect } from 'mongoose';
+import 'dotenv/config'
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(process.env.MONGO_URL, {
+        const conn = await connect(process.env.MONGO_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
@@ -13,4 +13,4 @@ const connectDB = async () => {
         process.exit(1)
     }
 }
-module.exports = connectDB
+export default connectDB

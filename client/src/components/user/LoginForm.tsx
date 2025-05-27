@@ -30,11 +30,10 @@ const LoginForm = () => {
 
             if (response.data) {
                 console.log(response.data)
-                const { _id, name, email, token } = response.data
+                const { _id, name, email } = response.data
                 const user = { _id, name, email }
                 sessionStorage.setItem('user', JSON.stringify(user))
-                sessionStorage.setItem('token', token)
-                dispatch(loginSuccess({ user, token }))
+                dispatch(loginSuccess({ user }))
                 setError(null)
                 navigate('/', { replace: true })
             }

@@ -1,4 +1,4 @@
-const Items = require('../../models/ItemsModel')
+import Items from '../../models/ItemsModel.js'
 
 const getItems = async (req, res) => {
     try {
@@ -9,4 +9,4 @@ const getItems = async (req, res) => {
     }
 }
 
-module.exports = { getItems }
+export default getItems 

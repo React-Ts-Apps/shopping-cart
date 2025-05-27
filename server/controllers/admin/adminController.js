@@ -1,5 +1,5 @@
-const Items = require('../../models/ItemsModel')
-const { getItems } = require('../shared/itemController')
+import Items from '../../models/ItemsModel.js'
+import getItems from '../shared/itemController.js'
 
 const addItem = async (req, res) => {
     const { name, description, price, imgSrc } = req.body
@@ -20,4 +20,5 @@ const addItem = async (req, res) => {
         res.status(500).json({ message: 'Server Error' })
     }
 }
-module.exports = { getAdminProductList: getItems, addItem }
+const adminController = { getAdminProductList: getItems, addItem }
+export default adminController

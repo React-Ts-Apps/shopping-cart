@@ -1,11 +1,11 @@
-const mongoose = require('mongoose')
+import { Schema, model } from 'mongoose'
 
-const itemSchema = new mongoose.Schema({
+const itemSchema = new Schema({
     name: String,
     description: String,
     price: Number,
     imgSrc: String
 })
 
-const Items = mongoose.model('Items', itemSchema)
-module.exports = Items
+const Items = model('Items', itemSchema)
+export default Items

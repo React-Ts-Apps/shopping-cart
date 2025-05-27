@@ -1,8 +1,8 @@
-const express = require('express')
-const router = express.Router()
-const { signUp, login } = require('../controllers/shared/authController')
+import { Router } from 'express'
+import auth from '../controllers/shared/authController.js'
+const router = Router()
 
-router.post('/signup', signUp)
-router.post('/login', login)
+router.post('/signup', auth.signUp)
+router.post('/login', auth.login)
 
-module.exports = router
+export default router

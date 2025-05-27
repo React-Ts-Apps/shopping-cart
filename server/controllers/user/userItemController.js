@@ -1,3 +1,3 @@
-const { getItems } = require('../shared/itemController')
+import getItems from '../shared/itemController.js'
 
-module.exports = { getItems }
+export default getItems 

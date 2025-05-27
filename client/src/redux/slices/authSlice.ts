@@ -8,7 +8,6 @@ interface User {
 
 interface AuthState {
     user: User | null
-    token: string | null
     isLoggedIn: boolean
 }
 
@@ -21,7 +20,7 @@ const initialState: AuthState = {
             return null
         }
     })(),   //Immediately invoke arrow function
-    token: sessionStorage.getItem('token') || null,
+
     isLoggedIn: !!sessionStorage.getItem('token')
 };
 
@@ -32,7 +31,6 @@ const authSlice = createSlice({
         loginSuccess: (state, action) => {
             const { user, token } = action.payload
             state.user = user;
-            state.token = token;
             state.isLoggedIn = true;
 
             sessionStorage.setItem('user', JSON.stringify(user));
@@ -40,7 +38,6 @@ const authSlice = createSlice({
         },
         logOut: (state) => {
             state.user = null;
-            state.token = null;
             state.isLoggedIn = false;
 
             sessionStorage.clear()

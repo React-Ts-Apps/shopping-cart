@@ -1,6 +1,6 @@
-const request = require('supertest')
-const mongoose = require('mongoose')
-const app = require('../app')
+import request from 'supertest'
+import { connection } from 'mongoose'
+import app from '../app'
 
 describe('GET /items', () => {
     it('Should return all items with status 200', async () => {
@@ -10,6 +10,6 @@ describe('GET /items', () => {
     })
 
     afterAll(async () => {
-        await mongoose.connection.close()
+        await connection.close()
     })
 })
