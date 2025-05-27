@@ -5,3 +5,8 @@ export type ItemProps = {
     description: string;
     imgSrc: string;
 }
+export type UserProps = {
+    name: string;
+    email: string;
+    password: string;
+}
