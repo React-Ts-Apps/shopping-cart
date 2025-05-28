@@ -1,5 +1,5 @@
 import request from 'supertest'
-import { connection } from 'mongoose'
+import mongoose from 'mongoose'
 import app from '../app'
 
 describe('GET /items', () => {
@@ -10,5 +10,5 @@ describe('GET /items', () => {
     })
 })
 afterAll(async () => {
-    await connection.close()
+    await mongoose.connection.close()
 })

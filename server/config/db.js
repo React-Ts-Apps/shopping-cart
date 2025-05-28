@@ -3,10 +3,7 @@ import 'dotenv/config'
 
 const connectDB = async () => {
     try {
-        const conn = await connect(process.env.MONGO_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
+        const conn = await connect(process.env.MONGO_URL)
         console.log(`Connection established: ${conn.connection.name}`)
     } catch (error) {
         console.log('MongoDb connection error', error)

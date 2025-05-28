@@ -5,11 +5,13 @@ import { ShoppingCart, User } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../redux/store';
 import { logOut } from '../../redux/slices/authSlice';
+import { cartCountSelector } from '../../redux/selectors/cartCountSelector';
 
 
 const NavBar = () => {
     const { admin } = useParams<{ admin: string }>();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const cartCount = useSelector(cartCountSelector)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -55,7 +57,9 @@ const NavBar = () => {
                                 <li>
                                     <div className="relative text-gray-800 cursor-pointer hover:text-blue-600">
                                         <ShoppingCart className="w-6 h-6" />
-                                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">3</span>
+                                        {
+                                            cartCount > 0 ? <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">{cartCount}</span>
+                                                : ''}
                                     </div>
                                 </li>
                             </>
@@ -69,17 +73,16 @@ const NavBar = () => {
                             className="flex items-center space-x-2 text-gray-800 hover:text-blue-600 font-semibold"
                         >
                             <User className="w-5 h-5" />
-                            <span>Account</span>
+                            <span className='text-blue-800 hover:cursor-pointer'>{user ? user.name : 'Account'}</span>
                         </button>
                         {isDropdownOpen && (
                             <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded shadow-md z-50">
-                                {user ? <>
-                                    <div className="py-2 px-4 hover:bg-gray-100 text-amber-900 cursor-pointer">Welcome {user.name}!</div>
-                                    <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogOut}>LogOut</div>
-                                </> :
+                                {user ?
+                                    <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogOut}>Log Out</div>
+                                    :
                                     <>
+                                        <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogin}>Log In</div>
                                         <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleSignUp}>Sign Up</div>
-                                        <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogin}>Login</div>
                                     </>}
 
                             </div>
