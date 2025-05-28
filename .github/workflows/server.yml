@@ -27,4 +27,4 @@ jobs:
           node-version: '18'
       - run: npm ci
       - run: npm run lint
-      - run: node --experimental-vm-modules node_modules/jest/bin/jest.js
+      - run: npm test
