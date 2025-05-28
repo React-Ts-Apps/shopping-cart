@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ShoppingCart, User } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../redux/store';
-import { logOut } from '../../redux/slices/authSlice';
-import { cartCountSelector } from '../../redux/selectors/cartCountSelector';
+import { logOut } from '../../redux/features/user/authSlice';
+import { cartCountSelector } from '../../redux/features/cart/selectors';
 
 
 const NavBar = () => {
@@ -16,6 +16,7 @@ const NavBar = () => {
     const dispatch = useDispatch()
 
     const user = useSelector((state: RootState) => state.auth.user)
+
 
     const handleLogin = () => {
         setIsDropdownOpen(false)
@@ -31,6 +32,10 @@ const NavBar = () => {
         sessionStorage.removeItem('user')
         sessionStorage.removeItem('token')
         dispatch(logOut())
+    }
+
+    const viewCart = () => {
+        navigate('/home/cart', { replace: true })
     }
 
     //@space-x-6 adds horizontal space among direct children
@@ -54,9 +59,9 @@ const NavBar = () => {
                                 <li>
                                     <span className="cursor-pointer text-gray-800 hover:text-blue-600">Products</span>
                                 </li>
-                                <li>
+                                <li onClick={viewCart}>
                                     <div className="relative text-gray-800 cursor-pointer hover:text-blue-600">
-                                        <ShoppingCart className="w-6 h-6" />
+                                        <ShoppingCart className="w-6 h-6 text-teal-700" />
                                         {
                                             cartCount > 0 ? <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">{cartCount}</span>
                                                 : ''}

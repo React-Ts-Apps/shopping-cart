@@ -4,7 +4,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react"
 import instance from "../../api/axios"
 import type { AxiosError } from "axios"
 import { useDispatch } from "react-redux"
-import { loginSuccess } from "../../redux/slices/authSlice"
+import { loginSuccess } from "../../redux/features/user/authSlice"
 
 const LoginForm = () => {
     const [form, setForm] = useState<LoginProps>({ email: '', password: '' })

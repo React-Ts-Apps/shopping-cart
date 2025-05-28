@@ -1,7 +1,7 @@
 import { ShoppingCart } from "lucide-react"
 import type { ItemProps } from "../../types"
 import { useDispatch } from "react-redux"
-import { addToCart } from "../../redux/slices/cartSlice"
+import { addToCart } from "../../redux/features/cart/cartSlice"
 
 const Card = ({ data }: { data: ItemProps }) => {
     const dispatch = useDispatch()
