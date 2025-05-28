@@ -1,14 +1,15 @@
 import { ShoppingCart } from "lucide-react"
+import type { ItemProps } from "../../types"
+import { useDispatch } from "react-redux"
+import { addToCart } from "../../redux/features/cart/cartSlice"
 
-type dataProps = {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    imgSrc: string;
-}
+const Card = ({ data }: { data: ItemProps }) => {
+    const dispatch = useDispatch()
 
-const Card = ({ data }: { data: dataProps }) => {
+    const handleAddToCart = () => {
+        dispatch(addToCart(data))
+    }
+
     return (
         <div className="p-4">
             <div className="w-60 rounded-2xl overflow-hidden shadow-md bg-gray-100 p-4 text-center ">
@@ -21,7 +22,7 @@ const Card = ({ data }: { data: dataProps }) => {
                         <ShoppingCart
                             size={24}
                             className="text-blue-500 cursor-pointer hover:text-blue-600"
-                            onClick={() => console.log('Item added')}
+                            onClick={handleAddToCart}
                         />
                     </div>
                 </div>

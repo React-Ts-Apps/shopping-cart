@@ -1,5 +1,5 @@
 export type ItemProps = {
-    id: number;
+    _id: number;
     name: string;
     price: number;
     description: string;
@@ -12,3 +12,8 @@ export type UserProps = {
 }
 
 export type LoginProps = Omit<UserProps, 'name'>
+
+export type CartItemProps = ItemProps & {
+    quantity: number;
+}
+

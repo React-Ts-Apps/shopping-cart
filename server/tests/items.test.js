@@ -1,6 +1,7 @@
 import request from 'supertest'
-import { connection } from 'mongoose'
+import mongoose from 'mongoose'
 import app from '../app'
+import { describe, it, expect, afterAll } from 'vitest'
 
 describe('GET /items', () => {
     it('Should return all items with status 200', async () => {
@@ -10,5 +11,5 @@ describe('GET /items', () => {
     })
 })
 afterAll(async () => {
-    await connection.close()
+    await mongoose.connection.close()
 })

@@ -90,8 +90,8 @@ const SignUpForm = () => {
                     className="border border-blue-900 rounded p-1"
                 />
             </div>
-            <div className="flex flex-row gap-4 justify-end">
-                <Link to="/login" className="pt-4 text-blue-700 font-semibold hover:underline">Login existing user</Link>
+            <div className="flex flex-row gap-4 justify-between">
+                <Link to="/login" className="pt-4 text-blue-700 hover:underline">Login existing user?</Link>
                 <button
                     type="submit"
                     className="w-24 mt-2 px-3 py-2 bg-blue-600 hover:bg-blue-900 text-white rounded"
