@@ -1,0 +1,44 @@
+{
+  "name": "micro-frontends",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "shopping-host",
+    "recipes-remote"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:remote\" \"npm run dev:host\"",
+    "dev:remote": "npm run dev --prefix ./recipes-remote",
+    "dev:host": "npm run dev --prefix ./shopping-host",
+    "build": "npm run build:remote && npm run build:host",
+    "build:remote": "npm run build --prefix ./recipes-remote",
+    "build:host": "npm run build --prefix ./shopping-host",
+    "preview": "concurrently \"npm run preview:remote\" \"npm run preview:host\"",
+    "preview:remote": "npm run preview --prefix ./recipes-remote",
+    "preview:host": "npm run preview --prefix ./shopping-host"
+  },
+  "keywords": [],
+  "author": "Shiji Bijo",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.8",
+    "@tanstack/react-query": "^5.79.0",
+    "axios": "^1.9.0",
+    "lucide-react": "^0.511.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.1",
+    "react-tooltip": "^5.28.1",
+    "tailwindcss": "^4.1.8"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.33.0",
+    "@typescript-eslint/parser": "^8.33.0",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.27.0",
+    "eslint-plugin-react": "^7.37.5",
+    "typescript": "^5.8.3"
+  }
+}
