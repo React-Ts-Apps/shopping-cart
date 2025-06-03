@@ -38,6 +38,10 @@ const NavBar = () => {
         navigate('/home/cart', { replace: true })
     }
 
+    const showRecipes = () => {
+        navigate('/recipes', { replace: true })
+    }
+
     //@space-x-6 adds horizontal space among direct children
     return (
         <nav className="w-full bg-gray-100 shadow-md p-4">
@@ -56,8 +60,8 @@ const NavBar = () => {
                                 <li>
                                     <span onClick={() => { navigate('/home', { replace: true }) }} className="cursor-pointer text-gray-800 hover:text-blue-600">Home</span>
                                 </li>
-                                <li>
-                                    <span className="cursor-pointer text-gray-800 hover:text-blue-600">Products</span>
+                                <li onClick={showRecipes}>
+                                    <span className="cursor-pointer text-gray-800 hover:text-blue-600">Recipes</span>
                                 </li>
                                 <li onClick={viewCart}>
                                     <div className="relative text-gray-800 cursor-pointer hover:text-blue-600">

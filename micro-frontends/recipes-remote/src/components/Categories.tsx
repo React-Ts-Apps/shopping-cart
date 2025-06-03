@@ -8,7 +8,7 @@ const Categories = () => {
 
   const handleCategoryChange = (categoryName: string) => {
     setSelectedCategory(categoryName)
-    navigate(`/${mealHubItem}/${categoryName}/page/1`, { replace: true })
+    navigate(`/recipes/${mealHubItem}/${categoryName}/page/1`, { replace: true })
   }
 
   return (

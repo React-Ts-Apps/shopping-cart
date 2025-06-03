@@ -14,7 +14,6 @@ const MealDetails = () => {
     if (isError) return <ErrorLoader message='Something went wrong..' />
 
     const meal = shouldFetch ? fetchedData?.[0] : selectedDish
-
     return (
         meal &&
         <div className="pl-70 pt-10 h-[80vh] overflow-y-auto">

@@ -19,7 +19,6 @@ const SideBar = () => {
     useEffect(() => {
         if (mealHubItem === 'random' && randomData?.[0]) {
             setSelectedDish(randomData[0])
-            navigate('/random', { replace: true })
         }
     }, [mealHubItem, navigate, randomData, setSelectedDish])
 
@@ -28,8 +27,10 @@ const SideBar = () => {
     if (isError) return <ErrorLoader message='Something went wrong..' />
 
     const handleHubChange = (item: MealHubProps) => {
-        if (mealHubItem !== item) setMealHubItem(item)
-        navigate('/', { replace: true })
+        if (mealHubItem !== item) {
+            setMealHubItem(item)
+            navigate('/recipes')
+        }
     }
     return (
         <>

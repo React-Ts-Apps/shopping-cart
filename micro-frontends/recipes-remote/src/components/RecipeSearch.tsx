@@ -8,7 +8,7 @@ const RecipeSearch = () => {
     const navigate = useNavigate()
     const handleOnClick = () => {
         setSearchText(input)
-        navigate(`/search/${input}/page/1`, { replace: true })
+        navigate(`/recipes/search/${input}/page/1`, { replace: true })
     }
 
     useEffect(() => {

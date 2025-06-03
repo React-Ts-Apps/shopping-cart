@@ -27,13 +27,13 @@ const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
   const handleShowFullRecipe = () => {
     setSelectedDish(selectedDish?.[0])
     closePopUp()
-    navigate(`/view/${selectedDishId}`, { replace: true })
+    navigate(`/recipes/view/${selectedDishId}`, { replace: true })
   }
 
   const handleShowList = (ingredient: string) => {
     setSelectedIngredient(ingredient)
     closePopUp()
-    navigate(`/ingredients/${ingredient}/page/${currentPage}`, { replace: true })
+    navigate(`/recipes/ingredients/${ingredient}/page/${currentPage}`, { replace: true })
   }
 
   return (

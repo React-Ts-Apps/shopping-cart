@@ -8,7 +8,7 @@ const Areas = () => {
 
     function handleChange(areaName: string) {
         setSelectedArea(areaName)
-        navigate(`/${mealHubItem}/${areaName}/page/1`, { replace: true })
+        navigate(`/recipes/${mealHubItem}/${areaName}/page/1`, { replace: true })
     }
 
     return <MealGroups type='areas' onItemClick={(name) => handleChange(name)} />
