@@ -1,10 +1,13 @@
 import Product from '../models/ProductModel.js'
+import ErrorHandler from '../utils/errorHandler.js'
+import asyncError from '../middlewares/asyncError.js'
 
 //Create product - /api/v1/product/new
-const newProduct = async (req, res) => {
+// eslint-disable-next-line no-unused-vars
+const newProduct = asyncError(async (req, res, next) => {
     const product = await Product.create(req.body)
     return res.status(201).json({ success: true, product })
-}
+})
 
 //Get products - /api/v1/products
 const getProducts = async (req, res) => {
@@ -13,11 +16,11 @@ const getProducts = async (req, res) => {
 }
 
 //Get single product - /api/v1/products/:id
-const getProductById = async (req, res) => {
+const getProductById = async (req, res, next) => {
     const product = await Product.findById(req.params.id)
 
     if (!product) {
-        return res.status(404).json({ success: false, message: 'Product not found' })
+        return next(new ErrorHandler('Product not found', 404))
     }
     return res.status(201).json({ success: true, product })
 }
