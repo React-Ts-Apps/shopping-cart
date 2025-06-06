@@ -9,7 +9,8 @@
     "dev": "nodemon server.js",
     "test": "vitest run",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "seeder": "node utils/seeder.js"
   },
   "keywords": [],
   "author": "",
