@@ -1,6 +1,7 @@
 import Product from '../models/ProductModel.js'
 import ErrorHandler from '../utils/errorHandler.js'
 import asyncError from '../middlewares/asyncError.js'
+import SearchFeatures from '../utils/searchFeatures.js'
 
 //Create product - /api/v1/product/new
 // eslint-disable-next-line no-unused-vars
@@ -10,8 +11,10 @@ const newProduct = asyncError(async (req, res, next) => {
 })
 
 //Get products - /api/v1/products
+//Search using keyword
 const getProducts = async (req, res) => {
-    const products = await Product.find()
+    const searchFeatures = new SearchFeatures(Product.find(), req.query).search()
+    const products = await searchFeatures.query
     return res.status(201).json({ success: true, products, count: products.length })
 }
 

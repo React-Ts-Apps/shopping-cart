@@ -1,7 +1,7 @@
 export const data = [
     {
         "name": "Organic Strawberries",
-        "price": 4.99,
+        "price": 40,
         "description": "Fresh organic strawberries, rich in vitamins and antioxidants.",
         "ratings": 4.5,
         "images": [
@@ -29,7 +29,7 @@ export const data = [
     },
     {
         "name": "Whole Wheat Flour",
-        "price": 2.49,
+        "price": 20,
         "description": "Healthy whole wheat flour ideal for baking and cooking.",
         "ratings": 4.2,
         "images": [
@@ -52,7 +52,7 @@ export const data = [
     },
     {
         "name": "Greek Yogurt",
-        "price": 3.99,
+        "price": 30,
         "description": "Creamy and rich Greek yogurt packed with protein.",
         "ratings": 4.8,
         "images": [
@@ -85,7 +85,7 @@ export const data = [
     },
     {
         "name": "Almonds - Raw",
-        "price": 6.49,
+        "price": 99,
         "description": "Natural, unsalted almonds packed with nutrients.",
         "ratings": 4.6,
         "images": [
@@ -113,7 +113,7 @@ export const data = [
     },
     {
         "name": "Salmon Fillet",
-        "price": 12.99,
+        "price": 180,
         "description": "Fresh Atlantic salmon fillet, great for grilling or baking.",
         "ratings": 4.9,
         "images": [
