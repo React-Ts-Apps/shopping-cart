@@ -39,6 +39,14 @@ class ApiFeatures {
         return this
     }
 
+    paginate(resPerPage) {
+        const currentPage = Number(this.queryStr.page) || 1
+        //Skip products in previous pages
+        const skip = resPerPage * (currentPage - 1)
+        this.query = this.query.limit(resPerPage).skip(skip)
+        return this
+    }
+
 
 }
 export default ApiFeatures
