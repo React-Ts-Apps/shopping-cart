@@ -1,6 +1,7 @@
 import express, { json } from 'express';
 import cors from 'cors';
 import productsRoute from './routes/productsRoute.js';
+import authRoutes from './routes/authRoutes.js'
 import connectDB from './config/db.js';
 import 'dotenv/config'
 import errorMiddleware from './middlewares/error.js';
@@ -19,6 +20,7 @@ app.use(cors({ origin: FRONTEND_URL }));
 app.use(json())
 
 app.use('/api/v1', productsRoute)
+app.use('/api/v1', authRoutes)
 app.use(errorMiddleware)
 
 

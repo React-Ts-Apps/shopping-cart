@@ -13,11 +13,10 @@ const newProduct = asyncError(async (req, res, next) => {
 //Get products - /api/v1/products
 //Search using keyword
 const getProducts = async (req, res) => {
-    const resPerPage = 2
     const searchFeatures = new ApiFeatures(Product.find(), req.query).
         search().
         filter().
-        paginate(resPerPage)
+        paginate()
 
     const products = await searchFeatures.query
     return res.status(201).json({ success: true, count: products.length, products })
