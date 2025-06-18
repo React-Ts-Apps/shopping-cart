@@ -30,4 +30,12 @@ const login = asyncError(async (req, res, next) => {
     sendJwt(user, res, 201)
 
 })
-export { registerUser, login }
+
+const logout = (req, res, next) => {
+    res.cookie('token', null, { expires: new Date(Date.now()), httpOnly: true })
+        .status(200)
+        .json({ success: true, message: 'Successfully loggedout' })
+    next()
+}
+
+export { registerUser, login, logout }

@@ -16,3 +16,12 @@ export const isAuthenticated = asyncError(async (req, res, next) => {
     next()
 })
 
+export const isAuthenticatedRole = (...roles) => {
+    return (req, resp, next) => {
+        if (!roles.includes(req.user.role)) {
+            return next(new ErrorHandler(`Role ${req.user.role} not allowed for this operation`, 401))
+        }
+        next()
+    }
+}
+
