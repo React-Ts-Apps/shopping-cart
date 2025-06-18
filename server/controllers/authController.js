@@ -1,6 +1,7 @@
 import asyncError from "../middlewares/asyncError.js";
 import User from "../models/UserModel.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import sendJwt from "../utils/jwt.js";
 
 // eslint-disable-next-line no-unused-vars
 const registerUser = asyncError(async (req, res, next) => {
@@ -9,23 +10,24 @@ const registerUser = asyncError(async (req, res, next) => {
         name, email, password, avatar
     })
 
-    const token = user.getJwtToken()
-    res.status(201).json({ success: true, user, token })
+    sendJwt(user, res, 201)
 })
 
 const login = asyncError(async (req, res, next) => {
     const { email, password } = req.body
     if (!email || !password) {
-        return new ErrorHandler(next('Please enter email and password', 400))
+        return next(new ErrorHandler('Please enter email and password', 400))
     }
     //Find the user
-    const user = await User.findOne().select('+password')
+    const user = await User.findOne({ email }).select('+password')
     if (!user) {
-        return new ErrorHandler('Invalid email or password', 400)
+        return next(new ErrorHandler('Invalid email or password', 401))
     }
     if (! await user.isValidPassword(password)) {
-        return new ErrorHandler('Invalid email or password', 400)
+        return next(new ErrorHandler('Invalid email or password', 401))
     }
+
+    sendJwt(user, res, 201)
 
 })
 export { registerUser, login }

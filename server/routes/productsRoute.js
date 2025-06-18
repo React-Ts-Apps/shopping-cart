@@ -1,9 +1,11 @@
 import { Router } from 'express'
 import { newProduct, getProducts, getProductById, updateProduct, deleteProduct } from '../controllers/productController.js'
+//import { isAuthenticated } from '../middlewares/authenticate.js'
 
 const router = Router()
 
 //GET: All products
+//router.route('/products').get(isAuthenticated, getProducts)
 router.route('/products').get(getProducts)
 
 //POST: add new product

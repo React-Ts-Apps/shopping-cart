@@ -6,6 +6,7 @@ import connectDB from './config/db.js';
 import 'dotenv/config'
 import errorMiddleware from './middlewares/error.js';
 import qs from 'qs'
+import cookieParser from 'cookie-parser';
 const FRONTEND_URL = process.env.FRONTEND_URL
 
 
@@ -18,7 +19,7 @@ connectDB()
 // Enable CORS for all origins
 app.use(cors({ origin: FRONTEND_URL }));
 app.use(json())
-
+app.use(cookieParser())
 app.use('/api/v1', productsRoute)
 app.use('/api/v1', authRoutes)
 app.use(errorMiddleware)
