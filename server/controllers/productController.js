@@ -6,6 +6,7 @@ import ApiFeatures from '../utils/apiFeatures.js'
 //Create product - /api/v1/product/new
 // eslint-disable-next-line no-unused-vars
 const newProduct = asyncError(async (req, res, next) => {
+    req.body.user = req.user.id
     const product = await Product.create(req.body)
     return res.status(201).json({ success: true, product })
 })
