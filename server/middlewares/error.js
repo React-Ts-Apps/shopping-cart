@@ -24,7 +24,8 @@ const errorMiddleware = (err, req, res, next) => {
             message = 'Rosource not found'
         }
 
-        const error = new Error(message)
+        let error = new Error(message)
+        error.statusCode = 400
 
         res.status(statusCode).json({
             success: false,
