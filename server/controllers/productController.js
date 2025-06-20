@@ -6,6 +6,7 @@ import ApiFeatures from '../utils/apiFeatures.js'
 //Create product - /api/v1/product/new
 // eslint-disable-next-line no-unused-vars
 const newProduct = asyncError(async (req, res, next) => {
+    req.body.user = req.user.id
     const product = await Product.create(req.body)
     return res.status(201).json({ success: true, product })
 })
@@ -13,11 +14,10 @@ const newProduct = asyncError(async (req, res, next) => {
 //Get products - /api/v1/products
 //Search using keyword
 const getProducts = async (req, res) => {
-    const resPerPage = 2
     const searchFeatures = new ApiFeatures(Product.find(), req.query).
         search().
         filter().
-        paginate(resPerPage)
+        paginate()
 
     const products = await searchFeatures.query
     return res.status(201).json({ success: true, count: products.length, products })

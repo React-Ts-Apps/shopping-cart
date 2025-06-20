@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import mongoose, { Schema, model } from 'mongoose'
 
 const productSchema = new Schema(
     {
@@ -79,6 +79,9 @@ const productSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now()
+        },
+        user: {
+            type: mongoose.Types.ObjectId
         }
 
     })
