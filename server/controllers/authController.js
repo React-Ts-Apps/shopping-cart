@@ -7,7 +7,7 @@ import crypto from 'crypto'
 
 //Register user- /api/v1/register
 // eslint-disable-next-line no-unused-vars
-const registerUser = asyncError(async (req, res, next) => {
+export const registerUser = asyncError(async (req, res, next) => {
     const { name, email, password, avatar } = req.body
     const user = await User.create({
         name, email, password, avatar
@@ -17,7 +17,7 @@ const registerUser = asyncError(async (req, res, next) => {
 })
 
 //Login- /api/v1/login
-const login = asyncError(async (req, res, next) => {
+export const login = asyncError(async (req, res, next) => {
     const { email, password } = req.body
     if (!email || !password) {
         return next(new ErrorHandler('Please enter email and password', 400))
@@ -36,7 +36,7 @@ const login = asyncError(async (req, res, next) => {
 })
 
 //Logout- /api/v1/logout
-const logout = (req, res, next) => {
+export const logout = (req, res, next) => {
     res.cookie('token', null, { expires: new Date(Date.now()), httpOnly: true })
         .status(200)
         .json({ success: true, message: 'Successfully loggedout' })
@@ -44,7 +44,7 @@ const logout = (req, res, next) => {
 }
 
 //Forgot password- /api/v1/forgot/password
-const forgotPassword = asyncError(async (req, res, next) => {
+export const forgotPassword = asyncError(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email })
     if (!user) {
         return next(new ErrorHandler('User does not exist'))
@@ -75,7 +75,7 @@ const forgotPassword = asyncError(async (req, res, next) => {
 })
 
 //Reset Password- /api/v1/reset/:token
-const resetPassword = asyncError(async (req, res, next) => {
+export const resetPassword = asyncError(async (req, res, next) => {
     const token = crypto.createHash('sha256').update(req.params.token).digest('hex')
     console.log(token)
     const user = await User.findOne({
@@ -98,13 +98,13 @@ const resetPassword = asyncError(async (req, res, next) => {
 
 //Get user profile - /api/v1/myprofile
 // eslint-disable-next-line no-unused-vars
-const getUserProfile = asyncError(async (req, res, next) => {
+export const getUserProfile = asyncError(async (req, res, next) => {
     const user = await User.findById(req.user.id)
     res.status(200).json({ success: true, user })
 })
 
 //Change password - /password/change
-const changePassword = asyncError(async (req, res, next) => {
+export const changePassword = asyncError(async (req, res, next) => {
     const user = await User.findById(req.user.id).select('+password')
 
     //Check old password
@@ -120,7 +120,7 @@ const changePassword = asyncError(async (req, res, next) => {
 
 //Update profile -/update/profile
 // eslint-disable-next-line no-unused-vars
-const updateProfile = asyncError(async (req, res, next) => {
+export const updateProfile = asyncError(async (req, res, next) => {
     const newUserData = {
         name: req.body.name,
         email: req.body.email
@@ -133,8 +133,45 @@ const updateProfile = asyncError(async (req, res, next) => {
     res.status(200).json({ success: true, user })
 })
 
-export {
-    registerUser, login, logout,
-    forgotPassword, resetPassword, getUserProfile,
-    changePassword, updateProfile
-}
+//Admin: Get all users - /admin/users
+// eslint-disable-next-line no-unused-vars
+export const getUsers = asyncError(async (req, res, next) => {
+    const users = await User.find()
+    res.status(200).json({ success: true, users })
+})
+
+//Admin: Get specific user -/admin/user/:id
+export const getUser = asyncError(async (req, res, next) => {
+    const user = await User.findById(req.params.id)
+    if (!user) {
+        return next(new ErrorHandler('User does not exist', 401))
+    }
+    res.status(200).json({ success: true, user })
+})
+
+//Admin: Update user details - /admin/update/:id
+export const updateUser = asyncError(async (req, res, next) => {
+    const newData = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role
+    }
+    const user = await User.findByIdAndUpdate(req.params.id, newData, {
+        new: true,
+        runValidators: true
+    })
+    if (!user) {
+        return next(new ErrorHandler('Cannot update this user. Check if user exists and details are correct', 401))
+    }
+    res.status(200).json({ success: true, user })
+})
+
+//Admin: Delete user -/admin/delete/:id
+export const deleteUser = asyncError(async (req, res, next) => {
+    const user = await User.findById(req.params.id)
+    if (!user) {
+        return next(new ErrorHandler('User does not exist', 401))
+    }
+    await User.findByIdAndDelete(req.params.id)
+    res.status(200).json({ success: true, message: 'User deleted' })
+})
