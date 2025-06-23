@@ -62,17 +62,20 @@ const productSchema = new Schema(
         },
         reviews: [
             {
-                name: {
-                    type: String,
-                    required: true
-                },
+                user: mongoose.SchemaTypes.ObjectId,
+
                 rating: {
-                    type: String,
+                    type: Number,
+                    default: 0,
                     required: true
                 },
                 comment: {
                     type: String,
                     required: true
+                },
+                date: {
+                    type: Date,
+                    default: Date.now()
                 }
             }
         ],

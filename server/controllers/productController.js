@@ -54,4 +54,76 @@ const deleteProduct = async (req, res) => {
     return res.status(200).json({ success: true, message: 'Product deleted' })
 }
 
-export { newProduct, getProducts, getProductById, updateProduct, deleteProduct }
+//Create review - /api/v1/review
+// eslint-disable-next-line no-unused-vars
+const createReview = asyncError(async (req, res, next) => {
+    console.log(req.body)
+    const { productId, comment, rating } = req.body
+    const review = {
+        user: req.user.id,
+        comment,
+        rating
+    }
+    const product = await Product.findById(productId)
+    //Find if user already reviewed
+    const hasReviewed = product.reviews.find(review => {
+        return review.user.toString() === req.user.id.toString()
+    })
+
+    if (hasReviewed) {
+        //Update existing review
+        product.reviews.forEach(review => {
+            if (review.user.toString() === req.user.id.toString()) {
+                review.comment = comment
+                review.rating = rating
+            }
+        })
+
+    } else {
+        //Add new review
+        product.reviews.push(review)
+        product.numOfReviews = product.reviews.length
+    }
+    //Update overall product ratings
+    product.ratings = product.reviews.reduce((accum, review) => {
+        return review.rating + accum
+    }, 0) / product.numOfReviews
+
+    await product.save({ validateBeforeSave: false })
+    res.status(200).json({ success: true })
+
+})
+
+//Create review - /api/v1/reviews
+const getReviews = asyncError(async (req, res) => {
+    const product = await Product.findById(req.query.id)
+    res.status(200).json({ success: true, reviews: product.reviews })
+})
+
+//Delete review - /api/v1/review
+
+const deleteReview = asyncError(async (req, res) => {
+    const product = await Product.findById(req.query.productId)
+
+    const reviews = product.reviews.filter(review => review.id.toString() !== req.query.id.toString())
+    const numOfReviews = reviews.length
+    let ratings = 0
+    if (numOfReviews > 0) {
+        ratings = reviews.reduce((accum, review) => {
+            return review.rating + accum
+        }, 0) / numOfReviews
+    }
+    await Product.findByIdAndUpdate(req.query.productId, { reviews, ratings, numOfReviews })
+    res.status(200).json({ success: true })
+})
+
+export {
+    newProduct,
+    getProducts,
+    getProductById,
+    updateProduct,
+    deleteProduct,
+    createReview,
+    getReviews,
+    deleteReview
+}
