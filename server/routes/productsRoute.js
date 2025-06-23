@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { newProduct, getProducts, getProductById, updateProduct, deleteProduct } from '../controllers/productController.js'
+import { newProduct, getProducts, getProductById, updateProduct, deleteProduct, createReview, getReviews, deleteReview } from '../controllers/productController.js'
 import { isAuthenticated, isAuthenticatedRole } from '../middlewares/authenticate.js'
 
 const router = Router()
@@ -13,6 +13,10 @@ router.route('/products/:id').
     get(getProductById).
     put(isAuthenticated, isAuthenticatedRole('admin'), updateProduct).
     delete(isAuthenticated, isAuthenticatedRole('admin'), deleteProduct)
+
+router.route('/review').put(isAuthenticated, createReview).
+    delete(isAuthenticated, deleteReview)
+router.route('/reviews').get(getReviews)
 
 //Admin routes    
 //POST: add new product
