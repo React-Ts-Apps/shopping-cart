@@ -5,8 +5,10 @@ import { clearCart, decrementCartItem, deleteCartItem, incrementCartItem } from 
 import { cartSumSelector } from "../../redux/features/cart/selectors"
 import { Tooltip } from 'react-tooltip'
 import { Link } from "react-router-dom"
+import { useTitle } from "../../hooks/useTitle"
 
 const CartView = () => {
+    useTitle('Cart')
     const items = useSelector((state: RootState) => state.cart.items)
     const dispatch = useDispatch()
     const cartSum = useSelector(cartSumSelector)
@@ -34,7 +36,7 @@ const CartView = () => {
                             {items.map((item) => (
                                 <tr key={item._id} className="border-b hover:bg-gray-50 transition">
                                     <td className="px-4 py-3">
-                                        <img src={item.imgSrc} className="w-6 h-6" />
+                                        <img src={item.images[0].image} className="w-6 h-6" />
                                     </td>
                                     <td className="px-4 py-3">{item.name}</td>
                                     <td className="px-4 py-3 flex flex-row gap-2">

@@ -3,11 +3,12 @@ import Card from "../product/Card"
 import instance from "../../api/axios"
 import LoadData from "../ui/LoadData"
 import type { ItemProps } from "../../types"
+import { useTitle } from "../../hooks/useTitle"
 
 const ItemList = () => {
-
     const [items, setItems] = useState<ItemProps[]>([])
     const [loading, setLoading] = useState(true)
+    useTitle('Home')
     useEffect(() => {
         instance.get('/api/v1/products').
             then((response) => {
