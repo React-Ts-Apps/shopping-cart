@@ -1,35 +1,15 @@
 
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ShoppingCart, User } from 'lucide-react';
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../redux/store';
-import { logOut } from '../../redux/features/user/authSlice';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { ShoppingCart } from 'lucide-react';
+import { useSelector } from 'react-redux';
 import { cartCountSelector } from '../../redux/features/cart/selectors';
+import Search from './Search';
 
 const NavBar = () => {
     const { admin } = useParams<{ admin: string }>();
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
     const cartCount = useSelector(cartCountSelector);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const user = useSelector((state: RootState) => state.auth.user);
-
-    const handleLogin = () => {
-        setIsDropdownOpen(false);
-        navigate('/login', { replace: true });
-    };
-
-    const handleSignUp = () => {
-        setIsDropdownOpen(false);
-        navigate('/signup', { replace: true });
-    };
-
-    const handleLogOut = () => {
-        sessionStorage.removeItem('user');
-        sessionStorage.removeItem('token');
-        dispatch(logOut());
-    };
 
     const viewCart = () => {
         navigate('/home/cart', { replace: true });
@@ -76,35 +56,12 @@ const NavBar = () => {
                             </>
                         )}
                     </ul>
-
-                    <div className="relative">
-                        <button
-                            onClick={() => setIsDropdownOpen((prev) => !prev)}
-                            className="flex items-center space-x-2 text-white hover:text-orange-300 font-semibold"
-                        >
-                            <User className="w-5 h-5" />
-                            <span className="hover:cursor-pointer">{user ? user.name : 'Account'}</span>
-                        </button>
-
-                        {isDropdownOpen && (
-                            <div className="absolute right-0 mt-2 w-32 bg-teal-800 text-white border border-teal-700 rounded shadow-md z-50">
-                                {user ? (
-                                    <div className="py-2 px-4 hover:bg-teal-700 cursor-pointer" onClick={handleLogOut}>
-                                        Log Out
-                                    </div>
-                                ) : (
-                                    <>
-                                        <div className="py-2 px-4 hover:bg-teal-700 cursor-pointer" onClick={handleLogin}>
-                                            Log In
-                                        </div>
-                                        <div className="py-2 px-4 hover:bg-teal-700 cursor-pointer" onClick={handleSignUp}>
-                                            Sign Up
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        )}
+                    <div>
+                        <Search />
                     </div>
+                    <Link to='/' className='block bg-orange-300  font-semibold text-sm py-2 px-4 p-2 rounded-sm hover:bg-teal-700'>
+                        Login
+                    </Link>
                 </div>
             </div>
         </nav>

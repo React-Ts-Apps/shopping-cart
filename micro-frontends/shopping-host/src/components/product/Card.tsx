@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import type { ItemProps } from "../../types";
 import { addToCart } from "../../redux/features/cart/cartSlice";
-import ReviewStars from "./ReviewStars";
+import ReviewStars from "../ui/ReviewStars";
 
 const Card = ({ data }: { data: ItemProps }) => {
     const dispatch = useDispatch()
