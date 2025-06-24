@@ -1,5 +1,5 @@
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { cartCountSelector } from '../../redux/features/cart/selectors';
@@ -59,6 +59,9 @@ const NavBar = () => {
                     <div>
                         <Search />
                     </div>
+                    <Link to='/' className='block bg-orange-300  font-semibold text-sm py-2 px-4 p-2 rounded-sm hover:bg-teal-700'>
+                        Login
+                    </Link>
                 </div>
             </div>
         </nav>
