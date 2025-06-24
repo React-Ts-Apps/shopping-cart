@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Card from "../ui/Card"
+import Card from "../product/Card"
 import instance from "../../api/axios"
 import LoadData from "../ui/LoadData"
 import type { ItemProps } from "../../types"
