@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import ItemList from "./components/user/ItemList"
+import ProductList from "./components/product/ProductList"
 import AdminDashBoard from "./components/admin/AdminDashBoard"
 import ActionPage from "./components/user/ActionPage"
 import LayOut from "./components/ui/LayOut"
@@ -14,8 +14,8 @@ function App() {
 
       <Routes>
         <Route path='/' element={<LayOut />} >
-          <Route index element={<ItemList />} />
-          <Route path='/home' element={<ItemList />} />
+          <Route index element={<ProductList />} />
+          <Route path='/home' element={<ProductList />} />
           <Route path='/home/cart' element={<CartView />} />
           <Route path='/recipes/*' element={
 
