@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import ItemList from "./components/user/ItemList"
 import AdminDashBoard from "./components/admin/AdminDashBoard"
 import ActionPage from "./components/user/ActionPage"
@@ -7,9 +7,10 @@ import CartView from "./components/user/CartView"
 
 import RecipeApp from "recipes-remote/RecipesApp"
 
+
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
 
       <Routes>
         <Route path='/' element={<LayOut />} >
@@ -26,7 +27,8 @@ function App() {
 
         </Route>
       </Routes>
-    </BrowserRouter>
+
+    </Router>
   )
 }
 
