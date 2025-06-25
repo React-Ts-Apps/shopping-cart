@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import type { ItemProps } from "../../types";
 import { addToCart } from "../../redux/features/cart/cartSlice";
-import ReviewStars from "./ReviewStars";
+import ReviewStars from "../ui/ReviewStars";
 
 const Card = ({ data }: { data: ItemProps }) => {
     const dispatch = useDispatch()
@@ -39,7 +39,7 @@ const Card = ({ data }: { data: ItemProps }) => {
                         />
                     </div>
 
-                    <Link to='/'
+                    <Link to={`/product/${data._id}`}
                         className="block text-white text-sm text-center w-full py-2 bg-teal-900 hover:bg-teal-800 rounded">
                         View Details
                     </Link>
