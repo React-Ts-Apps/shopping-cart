@@ -39,7 +39,7 @@ const Card = ({ data }: { data: ItemProps }) => {
                         />
                     </div>
 
-                    <Link to='/'
+                    <Link to={`/product/${data._id}`}
                         className="block text-white text-sm text-center w-full py-2 bg-teal-900 hover:bg-teal-800 rounded">
                         View Details
                     </Link>
