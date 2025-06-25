@@ -3,14 +3,21 @@ import LoadData from "../ui/LoadData"
 import type { ItemProps } from "../../types"
 import { useTitle } from "../../hooks/useTitle"
 import { useGetProductsQuery } from "../../services/productsApi"
+import { useEffect } from "react"
+import type { FetchBaseQueryError } from "@reduxjs/toolkit/query"
+import { fetchError } from "../../utils/fetchError"
 
 const ProductList = () => {
     const { data, error, isLoading } = useGetProductsQuery({})
     useTitle('Home')
 
+    useEffect(() => {
+        if (error) {
+            fetchError(error as FetchBaseQueryError)
+        }
+    }, [error])
+    if (error) return null
     if (isLoading) return <LoadData message='Render responding...' />
-    if (error) return <p className="p-10 font-semibold text-red-600">Error in loading..</p>
-
     return (
         <div>
 
