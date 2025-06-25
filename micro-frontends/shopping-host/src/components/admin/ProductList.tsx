@@ -43,7 +43,7 @@ const ProductList = () => {
                                             <td className="py-2 px-4 text-left border-b">{item.description}</td>
                                             <td className="py-2 px-4 text-left border-b">{item.price}kr</td>
                                             <td className="py-2 px-4 text-left border-b">
-                                                <img src={item.imgSrc} alt={item.name} className="w-16 h-16" /></td>
+                                                <img src={item.images[0].image} alt={item.name} className="w-16 h-16" /></td>
                                         </tr>
                                     ))
                                 }
