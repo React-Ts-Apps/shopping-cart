@@ -7,7 +7,9 @@ export const data = [
         "images": [
             {
                 "image": "https://www.themealdb.com/images/ingredients/strawberries-small.png"
-            }
+            },
+            { "image": "https://www.themealdb.com//images//media//meals//oe8rg51699014028.jpg" },
+            { "image": "https://www.themealdb.com//images//media//meals//178z5o1585514569.jpg" }
         ],
         "category": "Fruits",
         "seller": "BerryFarm Co.",
@@ -35,7 +37,10 @@ export const data = [
         "images": [
             {
                 "image": "https://www.themealdb.com/images/ingredients/flour-small.png"
-            }
+            },
+            { "image": "https://www.themealdb.com/images/media/meals/58bkyo1593350017.jpg" },
+            { "image": "https://www.themealdb.com/images/media/meals/rwuyqx1511383174.jpg" },
+            { "image": "https://www.themealdb.com/images/media/meals/0206h11699013358.jpg" }
         ],
         "category": "Baking Items",
         "seller": "HealthyGrains Ltd.",
@@ -58,7 +63,9 @@ export const data = [
         "images": [
             {
                 "image": "https://www.themealdb.com/images/ingredients/yoghurt-small.png"
-            }
+            },
+            { "image": "https://www.themealdb.com/images/ingredients/yogurt.png" },
+            { "image": "https://www.themealdb.com/images/media/meals/y2irzl1585563479.jpg" }
         ],
         "category": "Diary Products",
         "seller": "DairyFresh Co.",
@@ -91,7 +98,10 @@ export const data = [
         "images": [
             {
                 "image": "https://www.themealdb.com/images/ingredients/almonds-small.png"
-            }
+            },
+            { "image": "https://www.themealdb.com/images/media/meals/wxyvqq1511723401.jpg" },
+            { "image": "https://www.themealdb.com/images/media/meals/t3r3ka1560461972.jpg" },
+            { "image": "https://www.themealdb.com/images/media/meals/vwuprt1511813703.jpg" }
         ],
         "category": "Nuts and Seeds",
         "seller": "NutriNuts",
@@ -119,7 +129,8 @@ export const data = [
         "images": [
             {
                 "image": "https://www.themealdb.com/images/ingredients/salmon-small.png"
-            }
+            },
+            { "image": "https://www.themealdb.com/images/media/meals/1549542994.jpg" }
         ],
         "category": "Meat and Fish",
         "seller": "OceanCatch",

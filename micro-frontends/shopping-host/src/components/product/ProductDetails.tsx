@@ -6,6 +6,7 @@ import type { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 import LoadData from "../ui/LoadData"
 import { useTitle } from "../../hooks/useTitle"
 import ReviewStars from "../ui/ReviewStars"
+import Carousel from "../ui/Carousel"
 
 const ProductDetails = () => {
     const { id } = useParams()
@@ -24,9 +25,7 @@ const ProductDetails = () => {
         <div className="max-w-6xl mx-auto px-4 py-8">
             <div className="flex lg:flex-row gap-8">
                 <div className="w-full lg:w-1/2">
-                    <img src={data.product.images[0].image}
-                        alt={data.product.name}
-                        className="w-1/2 max-h-[400px] object-contain rounded shadow" />
+                    <Carousel images={data.product.images} />
                 </div>
                 <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
                     <h3 className="font-semibold text-2xl text-gray-800 mb-2">{data.product.name}</h3>
