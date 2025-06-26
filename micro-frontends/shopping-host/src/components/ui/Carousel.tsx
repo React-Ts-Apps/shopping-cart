@@ -18,7 +18,7 @@ const Carousel = ({ images }: { images: ImageProps[] }) => {
     }
 
     return (
-        <div className="overflow-hidden relative">
+        <div className="relative overflow-hidden">
             <div className="flex transition-transform ease-out duration-40"
                 style={{
                     transform: `translateX(-${current * 100}%)`
@@ -30,7 +30,7 @@ const Carousel = ({ images }: { images: ImageProps[] }) => {
                     </div>
                 ))}
             </div>
-            <div className="flex absolute top-0 justify-between items-center h-full w-full px-3 text-3xl">
+            <div className="flex absolute top-0 justify-between items-center h-full w-full px-3 text-2xl">
                 <button>
                     <FaArrowAltCircleLeft onClick={previousImage} />
                 </button>

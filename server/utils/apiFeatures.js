@@ -41,7 +41,7 @@ class ApiFeatures {
 
     paginate() {
         const currentPage = Number(this.queryStr.page) || 1
-        const limit = Number(this.queryStr.limit) || 5
+        const limit = Number(this.queryStr.limit) || 10
         //Skip products in previous pages
         const skip = limit * (currentPage - 1)
         this.query = this.query.limit(limit).skip(skip)
