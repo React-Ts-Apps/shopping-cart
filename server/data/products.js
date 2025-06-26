@@ -6,10 +6,10 @@ export const data = [
         "ratings": 4.5,
         "images": [
             {
-                "image": "https://www.themealdb.com/images/ingredients/strawberries-small.png"
+                "image": "https://www.themealdb.com/images/ingredients/strawberries-medium.png"
             },
-            { "image": "https://www.themealdb.com//images//media//meals//oe8rg51699014028.jpg" },
-            { "image": "https://www.themealdb.com//images//media//meals//178z5o1585514569.jpg" }
+            { "image": "https://www.themealdb.com//images//media//meals//oe8rg51699014028.jpg/medium" },
+            { "image": "https://www.themealdb.com//images//media//meals//178z5o1585514569.jpg/medium" }
         ],
         "category": "Fruits",
         "seller": "BerryFarm Co.",
@@ -36,11 +36,11 @@ export const data = [
         "ratings": 4.2,
         "images": [
             {
-                "image": "https://www.themealdb.com/images/ingredients/flour-small.png"
+                "image": "https://www.themealdb.com/images/ingredients/flour-medium.png"
             },
-            { "image": "https://www.themealdb.com/images/media/meals/58bkyo1593350017.jpg" },
-            { "image": "https://www.themealdb.com/images/media/meals/rwuyqx1511383174.jpg" },
-            { "image": "https://www.themealdb.com/images/media/meals/0206h11699013358.jpg" }
+            { "image": "https://www.themealdb.com/images/media/meals/58bkyo1593350017.jpg/medium" },
+            { "image": "https://www.themealdb.com/images/media/meals/rwuyqx1511383174.jpg/medium" },
+            { "image": "https://www.themealdb.com/images/media/meals/0206h11699013358.jpg/medium" }
         ],
         "category": "Baking Items",
         "seller": "HealthyGrains Ltd.",
@@ -62,10 +62,10 @@ export const data = [
         "ratings": 4.8,
         "images": [
             {
-                "image": "https://www.themealdb.com/images/ingredients/yoghurt-small.png"
+                "image": "https://www.themealdb.com/images/ingredients/yoghurt-medium.png"
             },
-            { "image": "https://www.themealdb.com/images/ingredients/yogurt.png" },
-            { "image": "https://www.themealdb.com/images/media/meals/y2irzl1585563479.jpg" }
+            { "image": "https://www.themealdb.com/images/ingredients/yogurt.png/medium" },
+            { "image": "https://www.themealdb.com/images/media/meals/y2irzl1585563479.jpg/medium" }
         ],
         "category": "Diary Products",
         "seller": "DairyFresh Co.",
@@ -97,11 +97,11 @@ export const data = [
         "ratings": 4.6,
         "images": [
             {
-                "image": "https://www.themealdb.com/images/ingredients/almonds-small.png"
+                "image": "https://www.themealdb.com/images/ingredients/almonds-medium.png"
             },
-            { "image": "https://www.themealdb.com/images/media/meals/wxyvqq1511723401.jpg" },
-            { "image": "https://www.themealdb.com/images/media/meals/t3r3ka1560461972.jpg" },
-            { "image": "https://www.themealdb.com/images/media/meals/vwuprt1511813703.jpg" }
+            { "image": "https://www.themealdb.com/images/media/meals/wxyvqq1511723401.jpg/medium" },
+            { "image": "https://www.themealdb.com/images/media/meals/t3r3ka1560461972.jpg/medium" },
+            { "image": "https://www.themealdb.com/images/media/meals/vwuprt1511813703.jpg/medium" }
         ],
         "category": "Nuts and Seeds",
         "seller": "NutriNuts",
@@ -128,9 +128,9 @@ export const data = [
         "ratings": 4.9,
         "images": [
             {
-                "image": "https://www.themealdb.com/images/ingredients/salmon-small.png"
+                "image": "https://www.themealdb.com/images/ingredients/salmon-medium.png"
             },
-            { "image": "https://www.themealdb.com/images/media/meals/1549542994.jpg" }
+            { "image": "https://www.themealdb.com/images/media/meals/1549542994.jpg/medium" }
         ],
         "category": "Meat and Fish",
         "seller": "OceanCatch",
@@ -161,9 +161,9 @@ export const data = [
         price: 94.9,
         description: "Cold-pressed olive oil from organic olives. Great for dressings and cooking.",
         ratings: 4.3,
-        images: [{ image: "https://www.themealdb.com/images/ingredients/olive_oil.png" },
-        { image: "https://www.themealdb.com/images/ingredients/olive.png" },
-        { image: "https://www.themealdb.com/images/ingredients/oil.png" }
+        images: [{ image: "https://www.themealdb.com/images/ingredients/olive_oil-medium.png" },
+        { image: "https://www.themealdb.com/images/ingredients/olive.png/medium" },
+        { image: "https://www.themealdb.com/images/ingredients/oil.png/medium" }
         ],
         category: "Oils",
         seller: "GreenHarvest",
@@ -191,8 +191,8 @@ export const data = [
         price: 55.0,
         description: "Crunchy roasted cashews with light sea salt seasoning.",
         ratings: 4.2,
-        images: [{ image: "https://www.themealdb.com/images/ingredients/cashew_nuts.png" },
-        { image: "https://www.themealdb.com/images/media/meals/t3r3ka1560461972.jpg" }
+        images: [{ image: "https://www.themealdb.com/images/ingredients/cashew_nuts-medium.png" },
+        { image: "https://www.themealdb.com/images/media/meals/t3r3ka1560461972.jpg/medium" }
         ],
         category: "Nuts and Seeds",
         seller: "Nutopia",
@@ -214,7 +214,7 @@ export const data = [
         price: 32.5,
         description: "Moist carrot cake with cream cheese frosting and walnut topping.",
         ratings: 5.0,
-        images: [{ image: "https://www.themealdb.com/images/media/meals/vrspxv1511722107.jpg" },
+        images: [{ image: "https://www.themealdb.com/images/media/meals/vrspxv1511722107.jpg/medium" },
         { image: "https://www.themealdb.com/images/ingredients/Carrots-medium.png" },
         { image: "https://www.themealdb.com/images/ingredients/Cream_Cheese-medium.png" }
         ],
@@ -238,8 +238,8 @@ export const data = [
         price: 29.9,
         description: "Fresh organic kale packed with nutrients and perfect for smoothies or salads.",
         ratings: 4.8,
-        images: [{ image: "https://www.themealdb.com/images/ingredients/kale.png" },
-        { image: "https://www.themealdb.com/images/media/meals/st1ifa1583267248.jpg" }
+        images: [{ image: "https://www.themealdb.com/images/ingredients/kale-medium.png" },
+        { image: "https://www.themealdb.com/images/media/meals/st1ifa1583267248.jpg/medium" }
         ],
         category: "Vegetables",
         seller: "GreenRoot",
@@ -291,7 +291,7 @@ export const data = [
         description: "Fresh yellow bananas full of potassium and natural sweetness.",
         ratings: 4.9,
         images: [{ image: "https://www.themealdb.com/images/ingredients/banana-medium.png" },
-        { image: "https://www.themealdb.com/images/media/meals/sywswr1511383814.jpg" }
+        { image: "https://www.themealdb.com/images/media/meals/sywswr1511383814.jpg/medium" }
         ],
         category: "Fruits",
         seller: "TropiFresh",
@@ -343,6 +343,143 @@ export const data = [
         ],
         createdAt: "2024-06-14T08:00:00Z",
         user: "665f3b41b7d3bc002177c700"
-    }
+    },
+    {
+        "name": "Organic Cabbage",
+        "price": 22.5,
+        "description": "Fresh organic green cabbage, harvested locally without the use of synthetic fertilizers or pesticides. Perfect for salads, stir-fries, or fermenting into sauerkraut.",
+        "ratings": 4.6,
+        "images": [
+            {
+                "image": "https://www.themealdb.com/images/ingredients/cabbage-medium.png"
+            },
+            {
+                "image": "https://www.themealdb.com/images/media/meals/60oc3k1699009846.jpg/medium"
+            }
+        ],
+        "category": "Vegetables",
+        "seller": "Green Farm Co.",
+        "stock": 50,
+        "numOfReviews": 12,
+        "reviews": [
+            {
+                "user": "60d21b8667d0d8992e610c85",
+                "rating": 5,
+                "comment": "Very fresh and crisp! Tastes amazing in coleslaw.",
+                "date": "2025-06-25T12:00:00Z"
+            },
+            {
+                "user": "60d21b8667d0d8992e610c86",
+                "rating": 4,
+                "comment": "Good quality but a bit smaller than expected.",
+                "date": "2025-06-24T15:30:00Z"
+            }
+        ],
+        "createdAt": "2025-06-20T10:00:00Z",
+        "user": "60d21b8667d0d8992e610c80"
+    },
 
+    {
+        "name": "Organic Prunes",
+        "price": 45.0,
+        "description": "Naturally dried organic prunes packed with fiber and nutrients. No added sugar or preservatives. Great for snacking or baking.",
+        "ratings": 4.8,
+        "images": [
+            {
+                "image": "https://www.themealdb.com/images/ingredients/prunes-medium.png"
+            },
+            {
+                "image": "https://www.themealdb.com/images/media/meals/kos9av1699014767.jpg/medium"
+            },
+
+        ],
+        "category": "Fruits",
+        "seller": "Nature's Basket",
+        "stock": 100,
+        "numOfReviews": 8,
+        "reviews": [
+            {
+                "user": "60d21b8667d0d8992e610c91",
+                "rating": 5,
+                "comment": "Delicious and soft. Perfectly sweet!",
+                "date": "2025-06-20T11:00:00Z"
+            },
+            {
+                "user": "60d21b8667d0d8992e610c92",
+                "rating": 4,
+                "comment": "Healthy and tasty, but a few were a bit dry.",
+                "date": "2025-06-18T09:30:00Z"
+            }
+        ],
+        "createdAt": "2025-06-19T14:00:00Z",
+        "user": "60d21b8667d0d8992e610c90"
+    },
+    {
+        "name": "Organic Dill",
+        "price": 15.0,
+        "description": "Fresh organic dill with a bold aroma and flavor, perfect for seasoning fish, potatoes, and sauces. Grown without synthetic pesticides or fertilizers.",
+        "ratings": 4.7,
+        "images": [
+            {
+                "image": "https://www.themealdb.com/images/ingredients/dill-medium.png"
+            },
+            {
+                "image": "https://www.themealdb.com/images/media/meals/zadvgb1699012544.jpg/medium"
+            }
+        ],
+        "category": "Vegetables",
+        "seller": "Herb Garden Co.",
+        "stock": 35,
+        "numOfReviews": 6,
+        "reviews": [
+            {
+                "user": "60d21b8667d0d8992e610c75",
+                "rating": 5,
+                "comment": "So fragrant and fresh — made my potato salad pop!",
+                "date": "2025-06-21T08:15:00Z"
+            },
+            {
+                "user": "60d21b8667d0d8992e610c76",
+                "rating": 4,
+                "comment": "Good flavor, but could be packed more carefully.",
+                "date": "2025-06-20T12:45:00Z"
+            }
+        ],
+        "createdAt": "2025-06-20T10:30:00Z",
+        "user": "60d21b8667d0d8992e610c70"
+    },
+    {
+        "name": "Organic Cannellini Beans",
+        "price": 32.0,
+        "description": "Creamy and mild-tasting organic cannellini beans, perfect for soups, stews, and salads. Packed with protein and fiber. No added salt or preservatives.",
+        "ratings": 4.5,
+        "images": [
+            {
+                "image": "https://www.themealdb.com/images/ingredients/cannellini%20beans-medium.png"
+            },
+            {
+                "image": "https://www.themealdb.com/images/media/meals/zadvgb1699012544.jpg/medium"
+            }
+        ],
+        "category": "Baking Items",
+        "seller": "Legume Lovers Co.",
+        "stock": 60,
+        "numOfReviews": 9,
+        "reviews": [
+            {
+                "user": "60d21b8667d0d8992e610c81",
+                "rating": 5,
+                "comment": "Excellent texture and flavor. Perfect in minestrone soup!",
+                "date": "2025-06-23T14:20:00Z"
+            },
+            {
+                "user": "60d21b8667d0d8992e610c82",
+                "rating": 4,
+                "comment": "Good quality, though a few beans were split.",
+                "date": "2025-06-22T10:45:00Z"
+            }
+        ],
+        "createdAt": "2025-06-22T09:00:00Z",
+        "user": "60d21b8667d0d8992e610c80"
+    },
 ]

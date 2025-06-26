@@ -4,19 +4,26 @@ import type { PaginateProps } from "../../types"
 const Paginate = ({ pageCount, onPageChange }: PaginateProps) => {
     return (
         <ReactPaginate
-            initialPage={0}
             pageCount={pageCount}
             onPageChange={({ selected }) => onPageChange(selected)}
             containerClassName="flex gap-2 list-none"
-            pageClassName="px-3 py-1 border rounded cursor-pointer"
+            pageClassName="border rounded cursor-pointer"
+            pageLinkClassName="block px-3 py-1 w-full h-full"
             activeClassName="bg-orange-400 text-white"
-            pageRangeDisplayed={5}
-            previousLabel='←'
-            nextLabel='→'
-            previousClassName="px-3 py-1 border rounded"
-            nextClassName="px-3 py-1 border rounded"
+            activeLinkClassName="text-white"
+            pageRangeDisplayed={3}
+            previousLabel="←"
+            nextLabel="→"
+            previousClassName="border rounded cursor-pointer"
+            previousLinkClassName="block px-3 py-1"
+            nextClassName="border rounded cursor-pointer"
+            nextLinkClassName="block px-3 py-1"
             breakLabel="..."
-            renderOnZeroPageCount={null} />
+            breakClassName="border rounded"
+            breakLinkClassName="block px-3 py-1"
+            renderOnZeroPageCount={null}
+        />
+
     )
 }
 export default Paginate

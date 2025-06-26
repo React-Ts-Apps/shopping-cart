@@ -13,7 +13,7 @@ const Card = ({ data }: { data: ItemProps }) => {
     }
 
     return (
-        <div className="p-4 w-full sm:w-1/2 lg:w-1/3">
+        <div className="p-4 h-full">
             <div className="bg-white rounded-lg shadow-md h-full p-4 flex flex-col">
                 {
                     data.images.length > 0 && (
