@@ -14,13 +14,20 @@ const newProduct = asyncError(async (req, res, next) => {
 //Get products - /api/v1/products
 //Search using keyword
 const getProducts = async (req, res) => {
-    const searchFeatures = new ApiFeatures(Product.find(), req.query).
-        search().
-        filter().
-        paginate()
+    const { limit = 10 } = req.query
 
-    const products = await searchFeatures.query
-    return res.status(201).json({ success: true, count: products.length, products })
+    const apiFeatures = new ApiFeatures(Product.find(), req.query).search().filter()
+
+    const totalCount = await apiFeatures.query.clone().countDocuments({})
+    const products = await apiFeatures.paginate().query
+
+    return res.status(201).json({
+        success: true,
+        count: products.length,
+        total: totalCount,
+        limit: Number(limit),
+        products
+    })
 }
 
 //Get single product - /api/v1/products/:id

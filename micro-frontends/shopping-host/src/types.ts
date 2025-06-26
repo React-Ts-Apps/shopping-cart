@@ -45,3 +45,8 @@ export type CartItemProps = ItemProps & {
     quantity: number;
 }
 
+export type PaginateProps = {
+    pageCount: number;
+    onPageChange: (pageNum: number) => void;
+}
+

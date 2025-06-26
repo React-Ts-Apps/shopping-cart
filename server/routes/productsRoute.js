@@ -9,7 +9,7 @@ router.route('/products').get(getProducts)
 
 //GET: get product by id
 //PUT: update product by id
-router.route('/products/:id').
+router.route('/product/:id').
     get(getProductById).
     put(isAuthenticated, isAuthenticatedRole('admin'), updateProduct).
     delete(isAuthenticated, isAuthenticatedRole('admin'), deleteProduct)
