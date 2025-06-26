@@ -7,13 +7,14 @@ import { useEffect, useState } from "react"
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 import { fetchError } from "../../utils/fetchError"
 import Paginate from "../ui/Paginate"
+import { useParams } from "react-router-dom"
 
 const ITEMS_PER_PAGE = 5
 
 const ProductList = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
-    const { data, error, isLoading } = useGetProductsQuery({ page: currentPage, limit: ITEMS_PER_PAGE })
-
+    const { keyword } = useParams()
+    const { data, error, isLoading } = useGetProductsQuery({ keyword, page: currentPage, limit: ITEMS_PER_PAGE })
 
     useTitle('Home')
 
