@@ -30,12 +30,13 @@ const ProductDetails = () => {
                 <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
                     <h3 className="font-semibold text-2xl text-gray-800 mb-2">{data.product.name}</h3>
                     <p className="text-sm  text-gray-500 mb-4">Product #{data.product._id}</p>
+
                     <div className="flex items-center gap-2 mb-4">
                         <ReviewStars ratings={data.product.ratings} />
                         <span className="text-gray-600 text-sm">({data.product.numOfReviews} reviews)</span>
                     </div>
-
-                    <p className="text-gray-800 font-bold text-xl mb-4">{data.product.price} kr</p>
+                    <hr className=" text-gray-300 my-4" />
+                    <p className="text-gray-800 font-bold text-2xl mb-6">{data.product.price} kr</p>
 
                     <div className="flex items-center gap-2 overflow-hidden">
                         <div>
@@ -47,7 +48,7 @@ const ProductDetails = () => {
                                 type="text"
                                 readOnly
                                 value={1}
-                                className="w-16 text-center py-1"
+                                className="w-10 text-center  py-1"
                             />
 
                             <button className="bg-blue-600 text-white px-3 py-2  hover:bg-blue-700">
@@ -68,7 +69,7 @@ const ProductDetails = () => {
                             {data.product.stock > 0 ? 'In Stock' : 'Out of Stock'}
                         </span>
                     </p>
-                    <hr className="my-4" />
+                    <hr className=" text-gray-300 my-4" />
                     <h4 className="text-lg font-semibold text-gray-800 mb-2">Description:</h4>
                     <p className="text-gray-600 leading-relaxed">{data.product.description}</p>
 
