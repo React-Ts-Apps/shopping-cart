@@ -16,7 +16,7 @@ export const productsApi = createApi({
                 if (keyword.trim()) queryString += `&keyword=${keyword}`
                 if (price) queryString += `&price[gte]=${price[0]}&price[lte]=${price[1]}`
                 if (category.trim()) queryString += `&category=${category}`
-                if (ratings.trim()) queryString += `&ratings[gte]=${ratings}`
+                if (ratings != null) queryString += `&ratings[gte]=${ratings}`
                 return queryString
             }
         }),
