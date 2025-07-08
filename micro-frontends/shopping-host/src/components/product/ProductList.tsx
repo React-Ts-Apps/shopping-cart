@@ -26,16 +26,21 @@ const ProductList = () => {
     const updateSearchParams = useUpdateSearchParams();
 
     const [isSideBarOpen, setIsSideBarOpen] = useState(true);
+
     const [currentPriceRange, setCurrentPriceRange] = useState<[number, number]>(DEFAULT_PRICE_RANGE);
-    const [activePriceRange, setActivePriceRange] = useState<[number, number]>(DEFAULT_PRICE_RANGE);
+    const [applyPriceRange, setApplyPriceRange] = useState<[number, number]>(DEFAULT_PRICE_RANGE);
+
+    const [selectedRatings, setSelectedRatings] = useState<number | null>(null)
+    const [applyRatings, setApplyRatings] = useState<number | null>(null)
 
     // Fetch products data from API using RTK Query with current filter params
     const { data, error, isLoading } = useGetProductsQuery({
         keyword,
         page,
         limit: ITEMS_PER_PAGE,     // TODO: Move to filter condition
-        price: activePriceRange,  // Use applied price range to query products
+        price: applyPriceRange,  // Use applied price range to query products
         category: categoryParam,
+        ratings: applyRatings?.toString() || ''
     });
 
     // If there is an error from API call, show error notification
@@ -45,13 +50,15 @@ const ProductList = () => {
 
     useEffect(() => {
         setCurrentPriceRange(DEFAULT_PRICE_RANGE);
-        setActivePriceRange(DEFAULT_PRICE_RANGE);
+        setApplyPriceRange(DEFAULT_PRICE_RANGE);
     }, [category])
 
     // Calculate total number of pages for pagination (safe with optional chaining)
     const pageCount = Math.ceil(data?.total / data?.limit) || 0;
 
-    const isPriceChanged = JSON.stringify(currentPriceRange) !== JSON.stringify(activePriceRange)
+    const isPriceChanged = JSON.stringify(currentPriceRange) !== JSON.stringify(applyPriceRange)
+    const isRatingChanged = selectedRatings !== applyRatings;
+    const isApplyDisabled = !isPriceChanged && !isRatingChanged;
 
     // Updates page query param to selected page + 1 (since react-paginate is 0-based)
     const handlePageChange = useCallback((selected: number) => {
@@ -60,15 +67,22 @@ const ProductList = () => {
 
     // Handler to apply price filter: updates activePriceRange and resets page to 1
     const applyFilter = useCallback(() => {
-        setActivePriceRange(currentPriceRange);
+        setApplyPriceRange(currentPriceRange);
+        setApplyRatings(selectedRatings)
         updateSearchParams({ page: '1' });
-    }, [currentPriceRange, updateSearchParams]);
+    }, [currentPriceRange, selectedRatings, updateSearchParams]);
 
 
     // Resets price range to default and updates category and page params in URL
     const handleCategoryChange = useCallback((category: string) => {
+        setSelectedRatings(null)
+        setApplyRatings(null)
         updateSearchParams({ category: category === DEFAULT_CATEGORY || !category ? '' : category, page: '1' }, true);
     }, [updateSearchParams]);
+
+    const filterByReviews = (ratings: number) => {
+        setSelectedRatings(prev => (prev === ratings ? null : ratings))
+    }
 
     // Render loading or error states early
     if (error) return null;
@@ -85,7 +99,9 @@ const ProductList = () => {
                 price={currentPriceRange}
                 onApplyFilter={applyFilter}
                 productCategory={categoryParam}
-                isApplyDisabled={!isPriceChanged}
+                isApplyDisabled={isApplyDisabled}
+                selectedRatings={selectedRatings}
+                onSelectReviews={filterByReviews}
             />
             <main>
                 <section className="lg:col-span-5">

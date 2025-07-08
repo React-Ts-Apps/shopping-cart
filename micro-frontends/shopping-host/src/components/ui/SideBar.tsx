@@ -2,6 +2,7 @@ import { Menu } from 'lucide-react';
 import MenuClose from "../ui/MenuClose"
 import PriceSlider from "../ui/PriceSlider"
 import { Categories } from "../product/Categories"
+import ReviewStars from './ReviewStars';
 
 interface SideBarProps {
     isOpen: boolean;
@@ -12,6 +13,8 @@ interface SideBarProps {
     onApplyFilter: () => void;
     productCategory: string;
     isApplyDisabled: boolean;
+    selectedRatings: number | null;
+    onSelectReviews: (ratings: number) => void;
 }
 
 const SideBar = ({
@@ -22,7 +25,9 @@ const SideBar = ({
     price,
     onApplyFilter,
     productCategory,
-    isApplyDisabled
+    isApplyDisabled,
+    onSelectReviews,
+    selectedRatings
 }: SideBarProps) => {
     return (
         <>
@@ -35,7 +40,7 @@ const SideBar = ({
 
                 {isOpen && (
                     <>
-                        {/* Categories list, passes selected category to handler */}
+                        {/* Categories Filter */}
                         <Categories onSelect={onCategoryChange} selectedCategory={productCategory} />
 
                         <hr className="text-gray-300 my-4" />
@@ -52,6 +57,22 @@ const SideBar = ({
                         </div>
 
                         <hr className="text-gray-300 my-9" />
+
+                        {/* Reviews Filter */}
+
+                        <div>
+                            <p className="font-bold text-md text-teal-700">Reviews</p>
+                            <div className="my-4">
+                                {[5, 4, 3, 2, 1].map((rating => {
+                                    const isSelected = rating === selectedRatings
+                                    return (<div key={`rating-${rating}`}
+                                        className={`cursor-pointer p-1 ${isSelected ? 'bg-orange-100 border border-orange-500' : 'hover:bg-gray-500'}`}
+                                        onClick={() => onSelectReviews(rating)}>
+                                        <ReviewStars ratings={rating} />
+                                    </div>)
+                                }))}
+                            </div>
+                        </div>
 
                         {/* Apply Filter button, right-aligned */}
                         <div className="flex justify-end">
