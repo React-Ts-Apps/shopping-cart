@@ -5,6 +5,6 @@ export function useQueryParams() {
     return {
         keyword: searchParams.get('keyword') || '',
         page: parseInt(searchParams.get('page') || '1', 10),
-        category: searchParams.get('category') || '',
+        category: searchParams.get('category') || ''
     }
 }

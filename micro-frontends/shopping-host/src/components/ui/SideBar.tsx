@@ -2,27 +2,18 @@ import { Menu } from 'lucide-react';
 import MenuClose from "../ui/MenuClose"
 import PriceSlider from "../ui/PriceSlider"
 import { Categories } from "../product/Categories"
-
-interface SideBarProps {
-    isOpen: boolean;
-    onToggle: () => void;
-    onCategoryChange: (category: string) => void;
-    onPriceChange: (value: [number, number]) => void;
-    price: [number, number];
-    onApplyFilter: () => void;
-    productCategory: string;
-    isApplyDisabled: boolean;
-}
+import ReviewStars from './ReviewStars';
+import type { SideBarProps } from '../../types';
 
 const SideBar = ({
     isOpen,
     onToggle,
     onCategoryChange,
-    onPriceChange,
-    price,
     onApplyFilter,
     productCategory,
-    isApplyDisabled
+    isApplyDisabled,
+    filters,
+    onFilterChange
 }: SideBarProps) => {
     return (
         <>
@@ -35,7 +26,7 @@ const SideBar = ({
 
                 {isOpen && (
                     <>
-                        {/* Categories list, passes selected category to handler */}
+                        {/* Categories Filter */}
                         <Categories onSelect={onCategoryChange} selectedCategory={productCategory} />
 
                         <hr className="text-gray-300 my-4" />
@@ -45,13 +36,29 @@ const SideBar = ({
                             <p className="font-bold text-md text-teal-700">Price</p>
                             <div className="my-4">
                                 <PriceSlider
-                                    sliderHandle={(value) => onPriceChange(value as [number, number])} // Pass slider changes to parent
-                                    price={price}                                                      // Current price range state
+                                    sliderHandle={(value) => onFilterChange('price', value as [number, number])} // Pass slider changes to parent
+                                    price={filters.price}                                                      // Current price range state
                                 />
                             </div>
                         </div>
 
                         <hr className="text-gray-300 my-9" />
+
+                        {/* Reviews Filter */}
+
+                        <div>
+                            <p className="font-bold text-md text-teal-700">Reviews</p>
+                            <div className="my-4">
+                                {[5, 4, 3, 2, 1].map((rating => {
+                                    const isSelected = rating === filters.ratings
+                                    return (<div key={`rating-${rating}`}
+                                        className={`cursor-pointer p-1 ${isSelected ? 'bg-orange-100 border border-orange-500' : 'hover:bg-gray-500'}`}
+                                        onClick={() => onFilterChange('ratings', rating)}>
+                                        <ReviewStars ratings={rating} />
+                                    </div>)
+                                }))}
+                            </div>
+                        </div>
 
                         {/* Apply Filter button, right-aligned */}
                         <div className="flex justify-end">
