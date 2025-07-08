@@ -1,10 +1,11 @@
 import ReactPaginate from "react-paginate"
 import type { PaginateProps } from "../../types"
 
-const Paginate = ({ pageCount, onPageChange }: PaginateProps) => {
+const Paginate = ({ pageCount, onPageChange, currentPage }: PaginateProps) => {
     return (
         <ReactPaginate
             pageCount={pageCount}
+            forcePage={currentPage}
             onPageChange={({ selected }) => onPageChange(selected)}
             containerClassName="flex gap-2 list-none"
             pageClassName="border rounded cursor-pointer"
