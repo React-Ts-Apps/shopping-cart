@@ -64,7 +64,7 @@ export const data = [
             {
                 "image": "https://www.themealdb.com/images/ingredients/yoghurt-medium.png"
             },
-            { "image": "https://www.themealdb.com/images/ingredients/yogurt.png/medium" },
+            { "image": "https://www.themealdb.com/images/ingredients/yogurt.png" },
             { "image": "https://www.themealdb.com/images/media/meals/y2irzl1585563479.jpg/medium" }
         ],
         "category": "Diary Products",
@@ -162,8 +162,8 @@ export const data = [
         description: "Cold-pressed olive oil from organic olives. Great for dressings and cooking.",
         ratings: 4.3,
         images: [{ image: "https://www.themealdb.com/images/ingredients/olive_oil-medium.png" },
-        { image: "https://www.themealdb.com/images/ingredients/olive.png/medium" },
-        { image: "https://www.themealdb.com/images/ingredients/oil.png/medium" }
+        { image: "https://www.themealdb.com/images/ingredients/olive.png" },
+        { image: "https://www.themealdb.com/images/ingredients/oil.png" }
         ],
         category: "Oils",
         seller: "GreenHarvest",

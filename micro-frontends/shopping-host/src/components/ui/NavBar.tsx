@@ -36,7 +36,7 @@ const NavBar = () => {
                             <>
                                 <li>
                                     <span
-                                        onClick={() => navigate('/home', { replace: true })}
+                                        onClick={() => navigate('/home?category=All Products&page=1', { replace: true })}
                                         className="cursor-pointer text-white hover:text-orange-300"
                                     >
                                         Home
