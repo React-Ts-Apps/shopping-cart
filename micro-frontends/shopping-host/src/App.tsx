@@ -7,6 +7,7 @@ import CartView from "./components/user/CartView"
 
 import RecipeApp from "recipes-remote/RecipesApp"
 import ProductDetails from "./components/product/ProductDetails"
+import LoginForm from "./components/user/LoginForm"
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path='/' element={<LayOut />} >
           <Route index element={<ProductList />} />
           <Route path='/home' element={<ProductList />} />
+          <Route path='/login' element={<LoginForm />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/home/cart' element={<CartView />} />
           <Route path='/recipes/*' element={

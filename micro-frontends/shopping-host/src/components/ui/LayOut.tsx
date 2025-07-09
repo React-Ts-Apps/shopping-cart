@@ -8,7 +8,7 @@ const LayOut = () => {
         <>
             <div className="min-h-screen flex flex-col">
                 <NavBar />
-                <ToastContainer position="top-right" pauseOnHover />
+                <ToastContainer position="bottom-center" theme="colored" pauseOnHover />
                 <main className="flex-grow">
                     <Outlet />
                 </main>

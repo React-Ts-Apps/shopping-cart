@@ -33,13 +33,20 @@ export type ItemProps = {
     reviews: Review[];
     createdAt: string | Date;
 }
-export type UserProps = {
+export type User = {
+    _id: string;
     name: string;
     email: string;
-    password: string;
+    avatar?: string;
+    role?: string;
 }
 
-export type LoginProps = Omit<UserProps, 'name'>
+export type AuthState = {
+    user: User | null;
+    isAuthenticated: boolean;
+}
+
+export type LoginProps = Omit<User, 'name'>
 
 export type CartItemProps = ItemProps & {
     quantity: number;

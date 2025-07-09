@@ -61,7 +61,7 @@ const NavBar = () => {
                     {!isRecipesPath && <div>
                         <Search />
                     </div>}
-                    <Link to='/' className='block bg-orange-300  font-semibold text-sm py-2 px-4 p-2 rounded-sm hover:bg-teal-700'>
+                    <Link to='/login' className='block bg-orange-400 text-white font-semibold text-sm py-2 px-4 rounded-sm hover:bg-teal-700'>
                         Login
                     </Link>
                 </div>
