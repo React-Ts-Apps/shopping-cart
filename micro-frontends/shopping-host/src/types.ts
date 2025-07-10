@@ -33,13 +33,20 @@ export type ItemProps = {
     reviews: Review[];
     createdAt: string | Date;
 }
-export type UserProps = {
+export type User = {
+    _id: string;
     name: string;
     email: string;
-    password: string;
+    avatar?: string;
+    role?: string;
 }
 
-export type LoginProps = Omit<UserProps, 'name'>
+export type AuthState = {
+    user: User | null;
+    isAuthenticated: boolean;
+}
+
+export type LoginProps = Omit<User, 'name'>
 
 export type CartItemProps = ItemProps & {
     quantity: number;
@@ -49,6 +56,22 @@ export type PaginateProps = {
     pageCount: number;
     onPageChange: (pageNum: number) => void;
     currentPage: number;
+}
+
+export type FilterProps = {
+    price: [number, number];
+    ratings: null | number;
+}
+
+export type SideBarProps = {
+    isOpen: boolean;
+    onToggle: () => void;
+    onCategoryChange: (category: string) => void;
+    onApplyFilter: () => void;
+    productCategory: string;
+    isApplyDisabled: boolean;
+    filters: FilterProps;
+    onFilterChange: <K extends keyof FilterProps>(name: K, value: FilterProps[K]) => void;
 }
 
 

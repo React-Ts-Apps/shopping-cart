@@ -11,11 +11,12 @@ export const productsApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/api/v1` }),
     endpoints: (builder) => ({
         getProducts: builder.query({
-            query: ({ page = 1, limit = 5, keyword, price, category }) => {
+            query: ({ page = 1, limit = 5, keyword, price, category, ratings }) => {
                 let queryString = `/products?page=${page}&limit=${limit}`;
                 if (keyword.trim()) queryString += `&keyword=${keyword}`
                 if (price) queryString += `&price[gte]=${price[0]}&price[lte]=${price[1]}`
                 if (category.trim()) queryString += `&category=${category}`
+                if (ratings != null) queryString += `&ratings[gte]=${ratings}`
                 return queryString
             }
         }),

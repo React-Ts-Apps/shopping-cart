@@ -1,13 +1,12 @@
 import Card from "./Card"
 import LoadData from "../ui/LoadData"
-import type { ItemProps } from "../../types"
+import type { FilterProps, ItemProps } from "../../types"
 import { useTitle } from "../../hooks/useTitle"
 import { useGetProductsQuery } from "../../services/productsApi"
 import { useCallback, useEffect, useState } from "react"
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 import { fetchError } from "../../utils/fetchError"
 import Paginate from "../ui/Paginate"
-
 import { useUpdateSearchParams } from "../../hooks/useUpdateSearchParams"
 import SideBar from "../ui/SideBar"
 import { useQueryParams } from "../../hooks/useQueryParams"
@@ -26,16 +25,17 @@ const ProductList = () => {
     const updateSearchParams = useUpdateSearchParams();
 
     const [isSideBarOpen, setIsSideBarOpen] = useState(true);
-    const [currentPriceRange, setCurrentPriceRange] = useState<[number, number]>(DEFAULT_PRICE_RANGE);
-    const [activePriceRange, setActivePriceRange] = useState<[number, number]>(DEFAULT_PRICE_RANGE);
+
+    const [filters, setFilters] = useState<FilterProps>({ price: DEFAULT_PRICE_RANGE, ratings: null })
+    const [appliedFilters, setAppliedFilters] = useState<FilterProps>({ price: DEFAULT_PRICE_RANGE, ratings: null })
 
     // Fetch products data from API using RTK Query with current filter params
     const { data, error, isLoading } = useGetProductsQuery({
         keyword,
         page,
         limit: ITEMS_PER_PAGE,     // TODO: Move to filter condition
-        price: activePriceRange,  // Use applied price range to query products
         category: categoryParam,
+        ...appliedFilters
     });
 
     // If there is an error from API call, show error notification
@@ -44,14 +44,15 @@ const ProductList = () => {
     }, [error]);
 
     useEffect(() => {
-        setCurrentPriceRange(DEFAULT_PRICE_RANGE);
-        setActivePriceRange(DEFAULT_PRICE_RANGE);
+        setFilters({ price: DEFAULT_PRICE_RANGE, ratings: null })
+        setAppliedFilters({ price: DEFAULT_PRICE_RANGE, ratings: null })
     }, [category])
 
     // Calculate total number of pages for pagination (safe with optional chaining)
     const pageCount = Math.ceil(data?.total / data?.limit) || 0;
 
-    const isPriceChanged = JSON.stringify(currentPriceRange) !== JSON.stringify(activePriceRange)
+    const isApplyDisabled = JSON.stringify(filters) !== JSON.stringify(appliedFilters)
+
 
     // Updates page query param to selected page + 1 (since react-paginate is 0-based)
     const handlePageChange = useCallback((selected: number) => {
@@ -60,9 +61,9 @@ const ProductList = () => {
 
     // Handler to apply price filter: updates activePriceRange and resets page to 1
     const applyFilter = useCallback(() => {
-        setActivePriceRange(currentPriceRange);
+        setAppliedFilters(filters)
         updateSearchParams({ page: '1' });
-    }, [currentPriceRange, updateSearchParams]);
+    }, [filters, updateSearchParams]);
 
 
     // Resets price range to default and updates category and page params in URL
@@ -81,11 +82,13 @@ const ProductList = () => {
                 isOpen={isSideBarOpen}
                 onToggle={() => setIsSideBarOpen(prev => !prev)}
                 onCategoryChange={handleCategoryChange}
-                onPriceChange={setCurrentPriceRange}
-                price={currentPriceRange}
+                filters={filters}
                 onApplyFilter={applyFilter}
                 productCategory={categoryParam}
-                isApplyDisabled={!isPriceChanged}
+                isApplyDisabled={!isApplyDisabled}
+                onFilterChange={(name, value) =>
+                    setFilters((prev) => ({ ...prev, [name]: value }))
+                }
             />
             <main>
                 <section className="lg:col-span-5">
