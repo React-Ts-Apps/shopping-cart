@@ -7,7 +7,6 @@ import Search from './Search';
 
 const NavBar = () => {
     const { admin } = useParams<{ admin: string }>();
-
     const cartCount = useSelector(cartCountSelector);
     const navigate = useNavigate();
     const location = useLocation()

@@ -8,9 +8,21 @@ import CartView from "./components/user/CartView"
 import RecipeApp from "recipes-remote/RecipesApp"
 import ProductDetails from "./components/product/ProductDetails"
 import LoginForm from "./components/user/LoginForm"
+import RegisterForm from "./components/user/RegisterForm"
+import { useDispatch } from "react-redux"
+import { useGetCurrentUserQuery } from "./services/authApi"
+import { useEffect } from "react"
+import { setCredentials } from "./redux/features/user/authSlice"
 
 
 function App() {
+  const dispatch = useDispatch()
+  const { data } = useGetCurrentUserQuery()
+  useEffect(() => {
+    if (data?.success && data?.user) {
+      dispatch(setCredentials(data.user))
+    }
+  })
   return (
     <Router>
 
@@ -19,6 +31,7 @@ function App() {
           <Route index element={<ProductList />} />
           <Route path='/home' element={<ProductList />} />
           <Route path='/login' element={<LoginForm />} />
+          <Route path='/register' element={<RegisterForm />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/home/cart' element={<CartView />} />
           <Route path='/recipes/*' element={
