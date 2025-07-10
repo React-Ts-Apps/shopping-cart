@@ -1,16 +1,25 @@
 
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cartCountSelector } from '../../redux/features/cart/selectors';
 import Search from './Search';
+import type { RootState } from '../../redux/store';
+import UserDropdown from '../user/UserDropdown';
+import { resetCredentials } from '../../redux/features/user/authSlice';
+import { useLogoutMutation } from '../../services/authApi';
+import { showToast } from '../../utils/showToast';
+
 
 const NavBar = () => {
     const { admin } = useParams<{ admin: string }>();
     const cartCount = useSelector(cartCountSelector);
     const navigate = useNavigate();
     const location = useLocation()
+    const dispatch = useDispatch()
     const isRecipesPath = location.pathname.startsWith('/recipes')
+    const { isAuthenticated, user } = useSelector((state: RootState) => state.auth)
+    const [logout] = useLogoutMutation()
 
     const viewCart = () => {
         navigate('/home/cart', { replace: true });
@@ -20,6 +29,16 @@ const NavBar = () => {
         navigate('/recipes', { replace: true });
     };
 
+    const logoutHandler = async () => {
+        try {
+            const res = await logout().unwrap()
+            dispatch(resetCredentials())
+            showToast.success(res.message)
+        } catch (error) {
+            console.log(error);
+            showToast.error('Logout failed')
+        }
+    }
     return (
         <nav className="w-full bg-teal-900 shadow-md p-4">
             <div className="container flex items-center">
@@ -60,9 +79,11 @@ const NavBar = () => {
                     {!isRecipesPath && <div>
                         <Search />
                     </div>}
-                    <Link to='/login' className='block bg-orange-400 text-white font-semibold text-sm py-2 px-4 rounded-sm hover:bg-teal-700'>
-                        Login
-                    </Link>
+                    {isAuthenticated && user ? <UserDropdown user={user} logoutHandler={logoutHandler} /> :
+                        <Link to='/login' className='block bg-orange-400 text-white font-semibold text-sm py-2 px-4 rounded-sm hover:bg-teal-700'>
+                            Login
+                        </Link>}
+
                 </div>
             </div>
         </nav>
