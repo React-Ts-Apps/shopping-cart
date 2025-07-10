@@ -1,15 +1,21 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import cartReducer from './features/cart/cartSlice'
+import authReducer from './features/user/authSlice'
 import { productsApi } from "../services/productsApi";
+import { authApi } from "../services/authApi";
 
 const reducer = combineReducers({
     cart: cartReducer,
-    [productsApi.reducerPath]: productsApi.reducer
+    auth: authReducer,
+    [productsApi.reducerPath]: productsApi.reducer,
+    [authApi.reducerPath]: authApi.reducer
 })
 
 export const store = configureStore({
     reducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productsApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().
+        concat(productsApi.middleware).
+        concat(authApi.middleware)
 })
 
 export type RootState = ReturnType<typeof store.getState>

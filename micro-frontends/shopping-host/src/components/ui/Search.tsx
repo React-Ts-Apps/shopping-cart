@@ -29,7 +29,7 @@ const Search = () => {
             />
             <button
                 id="search_btn"
-                className="bg-orange-300 hover:bg-teal-700 text-white px-4 py-2.5"
+                className="bg-orange-400 hover:bg-teal-700 text-white px-4 py-2.5"
                 onClick={searchHandler}
             >
                 <FaSearch />
