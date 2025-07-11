@@ -14,6 +14,7 @@ import { useGetCurrentUserQuery } from "./services/authApi"
 import { useEffect } from "react"
 import { setCredentials } from "./redux/features/user/authSlice"
 import UserProfile from "./components/user/UserProfile"
+import UpdateProfile from "./components/user/UpdateProfile"
 
 
 function App() {
@@ -33,7 +34,9 @@ function App() {
           <Route path='/home' element={<ProductList />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/register' element={<RegisterForm />} />
-          <Route path='/profile' element={<UserProfile />} />
+          <Route path='/profile' element={<UserProfile />} > </Route>
+          <Route path='/profile/update' element={<UpdateProfile />} />
+
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/home/cart' element={<CartView />} />
           <Route path='/recipes/*' element={

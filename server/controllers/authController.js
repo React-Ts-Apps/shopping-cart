@@ -82,7 +82,6 @@ export const forgotPassword = asyncError(async (req, res, next) => {
 //Reset Password- /api/v1/reset/:token
 export const resetPassword = asyncError(async (req, res, next) => {
     const token = crypto.createHash('sha256').update(req.params.token).digest('hex')
-    console.log(token)
     const user = await User.findOne({
         resetPasswordToken: token.toString()
     })
@@ -130,6 +129,11 @@ export const updateProfile = asyncError(async (req, res, next) => {
         name: req.body.name,
         email: req.body.email
     }
+
+    if (req.file) {
+        newUserData.avatar = `${process.env.BACKEND_URL}/uploads/user/${req.generatedFileName}`;
+    }
+
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
         new: true,
         runValidators: true

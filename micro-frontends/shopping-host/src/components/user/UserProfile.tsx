@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import type { RootState } from "../../redux/store"
 import { Link } from "react-router-dom"
+import defaultAvatar from '../../assets/default_avatar.png'
 
 const UserProfile = () => {
     const { user } = useSelector((state: RootState) => state.auth)
@@ -10,7 +11,7 @@ const UserProfile = () => {
             <div className="flex flex-col items-center w-full ">
                 <figure className="w-32 h-32 mb-6">
                     <img
-                        src={user?.avatar}
+                        src={user?.avatar || defaultAvatar}
                         alt="User Avatar"
                         className="rounded-full w-full h-full object-cover border border-gray-300 shadow"
                     />

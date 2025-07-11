@@ -13,6 +13,13 @@ export const authApi = createApi({
                 body: formData
             })
         }),
+        updateProfile: builder.mutation<{ user: User; success: boolean }, FormData>({
+            query: (formData) => ({
+                url: '/update/profile',
+                method: 'PUT',
+                body: formData
+            })
+        }),
         login: builder.mutation<{ user: User }, { email: string, password: string }>({
             query: (body) => ({
                 url: '/login',
@@ -35,6 +42,7 @@ export const authApi = createApi({
 })
 
 export const { useRegisterMutation,
+    useUpdateProfileMutation,
     useLoginMutation,
     useGetCurrentUserQuery,
     useLogoutMutation } = authApi
