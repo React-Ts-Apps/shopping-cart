@@ -1,5 +1,5 @@
 
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartCountSelector } from '../../redux/features/cart/selectors';
@@ -12,7 +12,6 @@ import { showToast } from '../../utils/showToast';
 
 
 const NavBar = () => {
-    const { admin } = useParams<{ admin: string }>();
     const cartCount = useSelector(cartCountSelector);
     const navigate = useNavigate();
     const location = useLocation()
@@ -46,35 +45,27 @@ const NavBar = () => {
 
                 <div className="flex justify-between items-center w-full ml-6">
                     <ul className="flex space-x-6 items-center font-semibold">
-                        {admin === 'admin' ? (
-                            <li>
-                                <span className="cursor-pointer text-white hover:text-orange-300">Admin Panel</span>
-                            </li>
-                        ) : (
-                            <>
-                                <li>
-                                    <span
-                                        onClick={() => navigate('/home?category=All Products&page=1', { replace: true })}
-                                        className="cursor-pointer text-white hover:text-orange-300"
-                                    >
-                                        Home
+                        <li>
+                            <span
+                                onClick={() => navigate('/home?category=All Products&page=1', { replace: true })}
+                                className="cursor-pointer text-white hover:text-orange-300"
+                            >
+                                Home
+                            </span>
+                        </li>
+                        <li onClick={showRecipes}>
+                            <span className="cursor-pointer text-white hover:text-orange-300">Recipes</span>
+                        </li>
+                        <li onClick={viewCart}>
+                            <div className="relative text-white cursor-pointer hover:text-orange-300">
+                                <ShoppingCart className="w-6 h-6" />
+                                {cartCount > 0 && (
+                                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                                        {cartCount}
                                     </span>
-                                </li>
-                                <li onClick={showRecipes}>
-                                    <span className="cursor-pointer text-white hover:text-orange-300">Recipes</span>
-                                </li>
-                                <li onClick={viewCart}>
-                                    <div className="relative text-white cursor-pointer hover:text-orange-300">
-                                        <ShoppingCart className="w-6 h-6" />
-                                        {cartCount > 0 && (
-                                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
-                                                {cartCount}
-                                            </span>
-                                        )}
-                                    </div>
-                                </li>
-                            </>
-                        )}
+                                )}
+                            </div>
+                        </li>
                     </ul>
                     {!isRecipesPath && <div>
                         <Search />
