@@ -28,7 +28,7 @@ const Card = ({ data }: { data: ItemProps }) => {
                 <div className="mt-auto">
                     <div className="flex items-center">
                         <ReviewStars ratings={data.ratings} />
-                        <span className="text-gray-600 ml-2">({data.numOfReviews} reviews)</span>
+                        <span className="text-gray-600">({data.numOfReviews})</span>
                     </div>
 
                     <div className="flex justify-between mb-4">

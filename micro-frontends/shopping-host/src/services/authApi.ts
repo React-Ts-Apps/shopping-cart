@@ -41,6 +41,15 @@ export const authApi = createApi({
                 body: { password, confirmPassword }
             })
         }),
+
+        updatePassword: builder.mutation<{ user: User; success: boolean }, { oldPassword: string, password: string }>({
+            query: (body) => ({
+                url: '/password/change',
+                method: 'PUT',
+                body
+            })
+        }),
+
         getCurrentUser: builder.query<{ user: User; success: boolean }, void>({
             query: () => ({
                 url: '/me'
@@ -60,5 +69,6 @@ export const { useRegisterMutation,
     useLoginMutation,
     useForgotPasswordMutation,
     useResetPasswordMutation,
+    useUpdatePasswordMutation,
     useGetCurrentUserQuery,
     useLogoutMutation } = authApi
