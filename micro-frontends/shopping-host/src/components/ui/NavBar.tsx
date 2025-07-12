@@ -33,6 +33,7 @@ const NavBar = () => {
             const res = await logout().unwrap()
             dispatch(resetCredentials())
             showToast.success(res.message)
+            navigate('/home', { replace: true })
         } catch (error) {
             console.log(error);
             showToast.error('Logout failed')

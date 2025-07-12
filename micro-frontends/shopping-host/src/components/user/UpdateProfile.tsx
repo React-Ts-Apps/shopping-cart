@@ -7,12 +7,13 @@ import type { FetchBaseQueryError } from "@reduxjs/toolkit/query/react"
 import { useEffect } from "react"
 import { showToast } from "../../utils/showToast"
 import { setCredentials } from "../../redux/features/user/authSlice"
+import { useNavigate } from "react-router-dom"
 
 const UpdateProfile = () => {
     const { user } = useSelector((state: RootState) => state.auth)
     const [updateProfile, { isLoading, isError, error }] = useUpdateProfileMutation()
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     useEffect(() => {
         if (isError) {
             fetchError(error as FetchBaseQueryError);
@@ -26,6 +27,7 @@ const UpdateProfile = () => {
             const res = await updateProfile(formData).unwrap();
             dispatch(setCredentials(res.user))
             showToast.success('Updated Successfully')
+            navigate('/profile', { replace: true })
         } catch (err) {
             console.error(err);
             showToast.error('Updation failed')

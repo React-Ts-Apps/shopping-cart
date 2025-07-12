@@ -9,6 +9,12 @@ export type Image = {
     image: string;
 }
 
+export type ErrorPops = {
+    data?: {
+        message?: string
+    }
+}
+
 export type UserFormProps = {
     initialValues: {
         name: string;
