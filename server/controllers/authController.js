@@ -52,12 +52,12 @@ export const logout = (req, res, next) => {
 export const forgotPassword = asyncError(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email })
     if (!user) {
-        return next(new ErrorHandler('User does not exist'))
+        return next(new ErrorHandler('User does not exist', 500))
     }
     const resetToken = user.getResetToken()
     await user.save({ validateBeforeSave: false })
 
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/forgot/password/${resetToken}`
+    const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`
     const message = `Your password reset url is as follows \n\n ${resetUrl} \n\n 
             If you have not requested password change, ignore this email`
 
