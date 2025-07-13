@@ -1,10 +1,10 @@
-const loadCartFromLocalStorage = () => {
+const loadCartFromLocalStorage = (title: string) => {
     try {
-        const cartData = localStorage.getItem('cart');
-        return cartData ? JSON.parse(cartData) : [];
+        const cartData = localStorage.getItem(title);
+        return cartData ? JSON.parse(cartData) : undefined;
     } catch (e) {
         console.error("Failed to load cart from localStorage", e);
-        return [];
+        return undefined;
     }
 };
 

@@ -94,6 +94,13 @@ export type SideBarProps = {
     onFilterChange: <K extends keyof FilterProps>(name: K, value: FilterProps[K]) => void;
 }
 
+export type ShippingProps = {
+    address: string,
+    country: string,
+    city: string,
+    phoneNo: string,
+    postalCode: string,
+}
 
 
 
