@@ -18,5 +18,11 @@ export const store = configureStore({
         concat(authApi.middleware)
 })
 
+store.subscribe(() => {
+    const cartState = store.getState().cart.items;
+    localStorage.setItem('cart', JSON.stringify(cartState));
+});
+
+
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
