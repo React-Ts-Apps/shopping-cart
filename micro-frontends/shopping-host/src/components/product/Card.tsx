@@ -9,8 +9,10 @@ const Card = ({ data }: { data: ItemProps }) => {
     const dispatch = useDispatch()
 
     const handleAddToCart = () => {
-        dispatch(addToCart(data))
+        dispatch(addToCart({ ...data, quantity: 1 }))
     }
+
+    const isDisabled = data.stock === 0
 
     return (
         <div className="p-4 h-full">
@@ -34,7 +36,8 @@ const Card = ({ data }: { data: ItemProps }) => {
                     <div className="flex justify-between mb-4">
                         <span className="text-green-600 font-bold text-base" >{data.price}kr</span>
                         <ShoppingCart size={22}
-                            className="text-teal-700 hover:text-teal-800 cursor-pointer"
+                            className={`${isDisabled ? 'text-gray-400 cursor-not-allowed' : 'text-teal-700 hover:text-teal-800 cursor-pointer'
+                                }`}
                             onClick={handleAddToCart}
                         />
                     </div>

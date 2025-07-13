@@ -8,6 +8,7 @@ dotenv.config()
 
 // https://vite.dev/config/
 export default defineConfig({
+  publicDir: 'public',
   plugins: [react(), tailwindcss(),
   federation({
     name: 'shopping-host',
