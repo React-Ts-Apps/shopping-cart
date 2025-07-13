@@ -11,6 +11,7 @@ import { useUpdateSearchParams } from "../../hooks/useUpdateSearchParams"
 import SideBar from "../ui/SideBar"
 import { useQueryParams } from "../../hooks/useQueryParams"
 import { DEFAULT_CATEGORY, DEFAULT_PRICE_RANGE } from "../../constants"
+import LoadFail from "../ui/LoadFail"
 
 const ITEMS_PER_PAGE = 4
 
@@ -72,7 +73,7 @@ const ProductList = () => {
     }, [updateSearchParams]);
 
     // Render loading or error states early
-    if (error) return null;
+    if (error) return <LoadFail />
     if (isLoading) return <LoadData message="Render responding..." />;
 
     return (
