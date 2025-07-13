@@ -3,7 +3,7 @@ import type { RootState } from "../../redux/store"
 import { Trash2 } from "lucide-react"
 import { decrementCartItem, deleteCartItem, incrementCartItem } from "../../redux/features/cart/cartSlice"
 import { cartCountSelector, cartSumSelector } from "../../redux/features/cart/selectors"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useTitle } from "../../hooks/useTitle"
 
 const Cart = () => {
@@ -11,7 +11,12 @@ const Cart = () => {
     const items = useSelector((state: RootState) => state.cart.items)
     const cartCount = useSelector(cartCountSelector);
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const cartSum = useSelector(cartSumSelector)
+
+    const checkoutHandler = () => {
+        navigate('/login?redirects=shipping', { replace: true })
+    }
 
     return (
         <>
@@ -85,7 +90,7 @@ const Cart = () => {
                         </div>
 
                         {/* Summary - take 1/3 width */}
-                        <div className="p-6 border border-gray-300 rounded shadow-lg pl-8 font-serif h-fit bg-white">
+                        <div className="p-6 border border-gray-300  text-center rounded shadow-lg pl-8 font-serif h-fit bg-white">
                             <h4 className="text-xl font-semibold mb-4">Order Summary</h4>
                             <hr className="border-gray-300 mb-6" />
 
@@ -104,8 +109,8 @@ const Cart = () => {
 
                             <button
                                 id="checkout_btn"
-                                onClick={() => alert('checkoutHandler')}
-                                className="w-full bg-orange-400 hover:bg-teal-900 text-white font-semibold py-2 rounded"
+                                onClick={checkoutHandler}
+                                className="w-3/4 bg-orange-400 hover:bg-teal-900 text-white font-semibold py-2 rounded-2xl"
                             >
                                 Check out
                             </button>
