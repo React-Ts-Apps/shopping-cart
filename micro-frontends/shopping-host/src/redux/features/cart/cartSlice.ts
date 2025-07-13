@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import loadCartFromLocalStorage from "../../../utils/storage";
 import type { CartItemProps } from "../../../types";
-
-const initialState: { items: CartItemProps[] } = { items: [] }
 
 const cartSlice = createSlice({
     name: 'cart',
-    initialState,
+    initialState: { items: loadCartFromLocalStorage() as CartItemProps[] || [] },
     reducers: {
         addToCart: (state, action) => {
             const { _id, quantity, ...rest } = action.payload

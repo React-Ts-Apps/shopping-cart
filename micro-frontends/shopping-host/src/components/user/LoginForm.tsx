@@ -7,6 +7,7 @@ import type { FetchBaseQueryError } from "@reduxjs/toolkit/query/react"
 import { useDispatch, useSelector } from "react-redux"
 import { setCredentials } from "../../redux/features/user/authSlice"
 import type { RootState } from "../../redux/store"
+import { useRedirectAfterLogin } from "../../hooks/useRedirectAfterLogin"
 
 const LoginForm = () => {
     useTitle('Login')
@@ -14,6 +15,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const redirect = useRedirectAfterLogin()
     const [login, { isLoading, isError, error }] = useLoginMutation()
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
     useEffect(() => {
@@ -22,10 +24,10 @@ const LoginForm = () => {
             return
         }
         if (isAuthenticated) {
-            navigate('/home', { replace: true })
+            redirect()
         }
 
-    }, [error, isAuthenticated, isError, navigate]);
+    }, [error, isAuthenticated, isError, navigate, redirect]);
 
     const loginHandler = async (e: FormEvent) => {
         e.preventDefault()
