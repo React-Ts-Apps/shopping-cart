@@ -3,7 +3,7 @@ import ProductList from "./components/product/ProductList"
 import AdminDashBoard from "./components/admin/AdminDashBoard"
 import ActionPage from "./components/user/ActionPage"
 import LayOut from "./components/ui/LayOut"
-import CartView from "./components/user/CartView"
+
 
 import RecipeApp from "recipes-remote/RecipesApp"
 import ProductDetails from "./components/product/ProductDetails"
@@ -18,6 +18,7 @@ import UpdateProfile from "./components/user/UpdateProfile"
 import ForgotPassword from "./components/user/ForgotPassword"
 import ResetPassword from "./components/user/ResetPassword"
 import UpdatePassword from "./components/user/UpdatePassword"
+import Cart from "./components/cart/Cart"
 
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
           <Route path='/password/forgot' element={<ForgotPassword />} />
           <Route path='/password/reset/:token' element={<ResetPassword />} />
           <Route path='/product/:id' element={<ProductDetails />} />
-          <Route path='/home/cart' element={<CartView />} />
+          <Route path='/home/cart' element={<Cart />} />
           <Route path='/recipes/*' element={
 
             <RecipeApp />
