@@ -13,6 +13,11 @@ import { useDispatch } from "react-redux"
 import { useGetCurrentUserQuery } from "./services/authApi"
 import { useEffect } from "react"
 import { setCredentials } from "./redux/features/user/authSlice"
+import UserProfile from "./components/user/UserProfile"
+import UpdateProfile from "./components/user/UpdateProfile"
+import ForgotPassword from "./components/user/ForgotPassword"
+import ResetPassword from "./components/user/ResetPassword"
+import UpdatePassword from "./components/user/UpdatePassword"
 
 
 function App() {
@@ -32,6 +37,11 @@ function App() {
           <Route path='/home' element={<ProductList />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/register' element={<RegisterForm />} />
+          <Route path='/profile' element={<UserProfile />} > </Route>
+          <Route path='/profile/update' element={<UpdateProfile />} />
+          <Route path='/password/update' element={<UpdatePassword />} />
+          <Route path='/password/forgot' element={<ForgotPassword />} />
+          <Route path='/password/reset/:token' element={<ResetPassword />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/home/cart' element={<CartView />} />
           <Route path='/recipes/*' element={

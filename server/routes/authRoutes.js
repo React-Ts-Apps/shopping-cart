@@ -45,7 +45,7 @@ router.route('/password/forgot').post(forgotPassword)
 router.route('/password/reset/:token').post(resetPassword)
 router.route('/password/change').put(isAuthenticated, changePassword)
 router.route('/me').get(isAuthenticated, getUserProfile)
-router.route('/update/profile').put(isAuthenticated, updateProfile)
+router.route('/update/profile').put(isAuthenticated, upload.single('avatar'), updateProfile)
 
 //Admin routes
 router.route('/admin/users').get(isAuthenticated, isAuthenticatedRole('admin'), getUsers)

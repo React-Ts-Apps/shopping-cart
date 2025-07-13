@@ -9,6 +9,25 @@ export type Image = {
     image: string;
 }
 
+export type ErrorPops = {
+    data?: {
+        message?: string
+    }
+}
+
+export type UserFormProps = {
+    initialValues: {
+        name: string;
+        email: string;
+        password?: string;
+        avatar?: string;
+    };
+    onSubmit: (formData: FormData) => void;
+    buttonLabel: string;
+    showPasswordField?: boolean;
+    isLoading?: boolean;
+}
+
 
 export type ItemProps = {
     _id?: number;
@@ -39,6 +58,7 @@ export type User = {
     email: string;
     avatar?: string;
     role?: string;
+    createdAt?: Date;
 }
 
 export type AuthState = {
@@ -73,6 +93,8 @@ export type SideBarProps = {
     filters: FilterProps;
     onFilterChange: <K extends keyof FilterProps>(name: K, value: FilterProps[K]) => void;
 }
+
+
 
 
 
