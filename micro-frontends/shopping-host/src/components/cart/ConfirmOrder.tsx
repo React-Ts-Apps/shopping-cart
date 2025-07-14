@@ -2,8 +2,9 @@ import { useSelector } from "react-redux"
 import { useTitle } from "../../hooks/useTitle"
 import CheckoutGuide from "./CheckoutGuide"
 import type { RootState } from "../../redux/store"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { cartCountSelector, cartSumSelector } from "../../redux/features/cart/selectors"
+import { SHIPPING_PRICE } from "../../constants"
 
 const ConfirmOrder = () => {
     useTitle('Confirm Order')
@@ -11,6 +12,21 @@ const ConfirmOrder = () => {
     const { shippingInfo, items } = useSelector((state: RootState) => state.cart)
     const cartCount = useSelector(cartCountSelector);
     const cartSum = useSelector(cartSumSelector)
+    const navigate = useNavigate()
+    const shippingPrice = cartSum > 699 ? 0 : SHIPPING_PRICE
+    const taxValue = +(cartSum * 0.05)
+    const totalPrice = +(cartSum + shippingPrice + taxValue)
+
+    const paymentHandler = () => {
+        const data = {
+            cartSum,
+            shippingPrice,
+            taxValue,
+            totalPrice
+        }
+        sessionStorage.setItem('orderInfo', JSON.stringify(data))
+        navigate('/payment', { replace: true })
+    }
 
     return (<>
         <CheckoutGuide hasItems shipping hasConfirmed />
@@ -50,29 +66,48 @@ const ConfirmOrder = () => {
                     </div>
                 ))}
             </div>
-            <div className="p-6 mt-20 border border-gray-300  text-center rounded shadow-lg pl-8 font-serif h-fit bg-white">
-                <h4 className="text-xl font-semibold mb-4">Order Summary</h4>
+            <div className="p-6 mt-20 border border-gray-300 text-center rounded shadow-lg pl-8 font-serif h-fit bg-white max-w-sm">
+                <h4 className="text-xl font-semibold mb-6 text-left">Order Summary</h4>
                 <hr className="border-gray-300 mb-6" />
 
-                <p className="mb-3">
-                    Subtotal:{' '}
-                    <span className="font-semibold">
-                        {cartCount} (Items)
-                    </span>
-                </p>
-                <p className="mb-6">
-                    Est. total:{' '}
-                    <span className="font-semibold">
-                        kr {cartSum.toFixed(2)}
-                    </span>
-                </p>
+                {/* Subtotal */}
+                <div className="flex justify-between mb-3 text-sm">
+                    <span className="text-gray-600">Subtotal:</span>
+                    <span className="font-semibold">{cartCount} Items</span>
+                </div>
+
+                {/* Estimated Total */}
+                <div className="flex justify-between mb-3 text-sm">
+                    <span className="text-gray-600">Est. total:</span>
+                    <span className="font-semibold">kr {cartSum.toFixed(2)}</span>
+                </div>
+
+                {/* Shipping */}
+                <div className="flex justify-between mb-3 text-sm">
+                    <span className="text-gray-600">Shipping:</span>
+                    <span className="font-semibold">kr {shippingPrice.toFixed(2)}</span>
+                </div>
+
+                {/* VAT */}
+                <div className="flex justify-between mb-3 text-sm">
+                    <span className="text-gray-600">VAT:</span>
+                    <span className="font-semibold">kr {taxValue.toFixed(2)}</span>
+                </div>
+
+                {/* Total */}
+                <div className="flex justify-between mb-6 text-base">
+                    <span className="text-gray-700 font-semibold">Total:</span>
+                    <span className="text-lg font-bold text-teal-800">kr {totalPrice.toFixed(2)}</span>
+                </div>
 
                 <button
                     id="confirm_btn"
+                    onClick={paymentHandler}
                     className="w-3/4 bg-orange-400 hover:bg-teal-900 text-white font-semibold py-2 rounded-2xl">
-                    Confirm Order
+                    Proceed To Payment
                 </button>
             </div>
+
         </div>
 
     </>)

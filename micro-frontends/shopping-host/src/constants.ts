@@ -14,3 +14,5 @@ export const CATEGORIES = [
     'Nuts and Seeds',
     'Miscellaneous'
 ]
+
+export const SHIPPING_PRICE = 99
