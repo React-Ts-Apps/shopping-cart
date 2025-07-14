@@ -14,7 +14,7 @@ const ConfirmOrder = () => {
 
     return (<>
         <CheckoutGuide hasItems shipping hasConfirmed />
-        <div className="ml-8 mt-6 grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-7xl">
+        <div className="ml-8 mt-6 grid grid-cols-1 lg:grid-cols-3  gap-10 max-w-7xl">
             <div className="lg:col-span-2 space-y-4">
                 <h2 className="mt-5 text-2xl text-gray-700 font-serif font-semibold">
                     Shipping Details:
