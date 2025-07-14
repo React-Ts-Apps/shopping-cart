@@ -20,6 +20,7 @@ import ResetPassword from "./components/user/ResetPassword"
 import UpdatePassword from "./components/user/UpdatePassword"
 import Cart from "./components/cart/Cart"
 import ShippingDetails from "./components/cart/ShippingDetails"
+import ConfirmOrder from "./components/cart/ConfirmOrder"
 
 
 function App() {
@@ -39,8 +40,9 @@ function App() {
           <Route path='/home' element={<ProductList />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/register' element={<RegisterForm />} />
-          <Route path='/profile' element={<UserProfile />} > </Route>
-          <Route path='/shipping' element={<ShippingDetails />} > </Route>
+          <Route path='/profile' element={<UserProfile />} />
+          <Route path='/shipping' element={<ShippingDetails />} />
+          <Route path='/confirm/order' element={<ConfirmOrder />} />
           <Route path='/profile/update' element={<UpdateProfile />} />
           <Route path='/password/update' element={<UpdatePassword />} />
           <Route path='/password/forgot' element={<ForgotPassword />} />
