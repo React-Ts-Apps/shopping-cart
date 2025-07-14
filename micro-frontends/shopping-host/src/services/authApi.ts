@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "./urls";
-import type { User } from "../types";
+import type { StripeShippingInfo, User } from "../types";
 
 export const authApi = createApi({
     reducerPath: 'authApi',
@@ -50,6 +50,20 @@ export const authApi = createApi({
             })
         }),
 
+        getStripeApiKey: builder.query<{ stripeKey: string }, void>({
+            query: () => ({
+                url: '/stripe/key'
+            })
+        }),
+
+        stripeProcess: builder.mutation<{ client_secret: string, success: boolean }, { amount: number, shipping: StripeShippingInfo }>({
+            query: (body) => ({
+                url: '/payment/process',
+                method: 'POST',
+                body
+            })
+        }),
+
         getCurrentUser: builder.query<{ user: User; success: boolean }, void>({
             query: () => ({
                 url: '/me'
@@ -71,4 +85,6 @@ export const { useRegisterMutation,
     useResetPasswordMutation,
     useUpdatePasswordMutation,
     useGetCurrentUserQuery,
+    useGetStripeApiKeyQuery,
+    useStripeProcessMutation,
     useLogoutMutation } = authApi

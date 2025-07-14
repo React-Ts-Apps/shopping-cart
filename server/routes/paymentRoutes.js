@@ -5,6 +5,6 @@ import { processPaymnet, sendStripeKey } from '../controllers/paymentController.
 const router = new Router()
 
 router.route('/payment/process').post(isAuthenticated, processPaymnet)
-router.route('/stripe/api').get(isAuthenticated, sendStripeKey)
+router.route('/stripe/key').get(isAuthenticated, sendStripeKey)
 
 export default router

@@ -19,6 +19,6 @@ export const processPaymnet = asyncError(async (req, res, next) => {
 })
 
 // eslint-disable-next-line no-unused-vars
-export const sendStripeKey = asyncError(async (req, res, next) => {
+export const sendStripeKey = (req, res, next) => {
     res.status(200).json({ stripeKey: process.env.STRIPE_PUBLIC_KEY })
-})
+}

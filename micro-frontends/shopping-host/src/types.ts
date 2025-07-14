@@ -102,6 +102,17 @@ export type ShippingProps = {
     postalCode: string,
 }
 
+export type StripeShippingInfo = {
+    name: string;
+    address: {
+        line1: string;
+        city: string;
+        postal_code: string;
+        country: string;
+        state?: string;
+    };
+};
+
 
 
 

@@ -3,8 +3,6 @@ import ProductList from "./components/product/ProductList"
 import AdminDashBoard from "./components/admin/AdminDashBoard"
 import ActionPage from "./components/user/ActionPage"
 import LayOut from "./components/ui/LayOut"
-
-
 import RecipeApp from "recipes-remote/RecipesApp"
 import ProductDetails from "./components/product/ProductDetails"
 import LoginForm from "./components/user/LoginForm"
@@ -22,6 +20,8 @@ import Cart from "./components/cart/Cart"
 import ShippingDetails from "./components/cart/ShippingDetails"
 import ConfirmOrder from "./components/cart/ConfirmOrder"
 
+import Payment from "./components/cart/Payment"
+
 
 function App() {
   const dispatch = useDispatch()
@@ -30,6 +30,7 @@ function App() {
     if (data?.success && data?.user) {
       dispatch(setCredentials(data.user))
     }
+
   })
   return (
     <Router>
@@ -49,6 +50,7 @@ function App() {
           <Route path='/password/reset/:token' element={<ResetPassword />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/home/cart' element={<Cart />} />
+          <Route path='/payment' element={<Payment />} />
           <Route path='/recipes/*' element={
 
             <RecipeApp />
