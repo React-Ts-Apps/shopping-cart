@@ -1,5 +1,5 @@
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe } from "@stripe/react-stripe-js"
-import { useState, type FormEvent } from "react"
+import { useEffect, useState, type FormEvent } from "react"
 import { useStripeProcessMutation } from "../../services/authApi"
 import { showToast } from "../../utils/showToast"
 import { useSelector } from "react-redux"
@@ -7,12 +7,15 @@ import type { RootState } from "../../redux/store"
 import { useNavigate } from "react-router-dom"
 import { usePlaceOrderMutation } from "../../services/orderApi"
 import StripeField from "../stripe/StripeField"
+import { Loader } from "lucide-react"
+import { useOrderValidation } from "../../hooks/useOrderValidation"
 
 const PaymentForm = () => {
     const [name, setName] = useState('')
+    const [loading, setLoading] = useState(false)
     const { shippingInfo, items } = useSelector((state: RootState) => state.cart)
     const { user } = useSelector((state: RootState) => state.auth)
-
+    const validateOrder = useOrderValidation()
     const [stripeProcess] = useStripeProcessMutation()
     const [placeOrder] = usePlaceOrderMutation()
     const elements = useElements()
@@ -21,8 +24,13 @@ const PaymentForm = () => {
 
     const orderInfo = sessionStorage.getItem('orderInfo') ? JSON.parse(sessionStorage.getItem('orderInfo') as string) : null;
 
+    useEffect(() => {
+        validateOrder('payment')
+    })
+
     const submitHandler = async (e: FormEvent) => {
         e.preventDefault()
+        setLoading(true)
         try {
             const shipping = {
                 name,
@@ -114,9 +122,19 @@ const PaymentForm = () => {
                         <button
                             id="payment_btn"
                             type="submit"
-                            className="w-full  mt-4 py-3 rounded-xl text-white font-semibold  bg-orange-400 hover:bg-teal-700">
-                            Pay - {`kr ${orderInfo && orderInfo.totalPrice}`}
+                            disabled={loading}
+                            className={`w-full mt-4 py-3 rounded-xl text-white font-semibold flex items-center justify-center gap-2 ${loading ? 'bg-gray-300 cursor-not-allowed' : 'bg-orange-400 hover:bg-teal-700'
+                                }`}>
+                            {loading ? (
+                                <>
+                                    <span className="text-gray-400">Processing</span>
+                                    <Loader className="animate-spin w-5 h-5 text-gray-700" />
+                                </>
+                            ) : (
+                                `Pay - kr ${orderInfo?.totalPrice}`
+                            )}
                         </button>
+
                     </form>
                 </div>
             </div>

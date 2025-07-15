@@ -1,4 +1,4 @@
-import React, { useState, type FormEvent } from "react"
+import React, { useEffect, useState, type FormEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "../../redux/store"
 import type { ShippingProps } from "../../types"
@@ -7,6 +7,7 @@ import { saveShippingInfo } from "../../redux/features/cart/cartSlice"
 import { useNavigate } from "react-router-dom"
 import CheckoutGuide from "./CheckoutGuide"
 import { useTitle } from "../../hooks/useTitle"
+import { useOrderValidation } from "../../hooks/useOrderValidation"
 
 const ShippingDetails = () => {
     const { shippingInfo } = useSelector((state: RootState) => state.cart)
@@ -14,7 +15,12 @@ const ShippingDetails = () => {
     const countriesList = Object.values(countries)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const validateOrder = useOrderValidation()
     useTitle('Shipping Info')
+
+    useEffect(() => {
+        validateOrder('confirm')
+    })
 
     const shippingHandler = (e: FormEvent) => {
         e.preventDefault()

@@ -5,6 +5,8 @@ import type { RootState } from "../../redux/store"
 import { Link, useNavigate } from "react-router-dom"
 import { cartCountSelector, cartSumSelector } from "../../redux/features/cart/selectors"
 import { SHIPPING_PRICE } from "../../constants"
+import { useEffect } from "react"
+import { useOrderValidation } from "../../hooks/useOrderValidation"
 
 const ConfirmOrder = () => {
     useTitle('Confirm Order')
@@ -13,9 +15,14 @@ const ConfirmOrder = () => {
     const cartCount = useSelector(cartCountSelector);
     const cartSum = useSelector(cartSumSelector)
     const navigate = useNavigate()
+    const validateOrder = useOrderValidation()
     const shippingPrice = cartSum > 699 ? 0 : SHIPPING_PRICE
     const taxValue = +(cartSum * 0.05)
     const totalPrice = +(cartSum + shippingPrice + taxValue)
+
+    useEffect(() => {
+        validateOrder('confirm')
+    })
 
     const paymentHandler = () => {
         const data = {

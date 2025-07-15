@@ -11,8 +11,7 @@ const Payment = () => {
     useTitle('Payment')
     const { data } = useGetStripeApiKeyQuery()
     const stripeKey = data?.stripeKey
-    if (!stripeKey) return <p>Not able to pay.</p>
-
+    if (!stripeKey) return <h2 className="mt-5 text-center text-xl font-semibold">Not able to pay.</h2>
     return (
         <>
             <CheckoutGuide hasItems shipping hasConfirmed hasPaid />
