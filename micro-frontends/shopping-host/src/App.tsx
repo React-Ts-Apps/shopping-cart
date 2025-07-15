@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import ProductList from "./components/product/ProductList"
 import AdminDashBoard from "./components/admin/AdminDashBoard"
-import ActionPage from "./components/user/ActionPage"
 import LayOut from "./components/ui/LayOut"
 import RecipeApp from "recipes-remote/RecipesApp"
 import ProductDetails from "./components/product/ProductDetails"
@@ -56,7 +55,6 @@ function App() {
             <RecipeApp />
 
           } />
-          <Route path='/:action' element={<ActionPage />} />
           <Route path='/:admin/items' element={<AdminDashBoard />} />
 
         </Route>

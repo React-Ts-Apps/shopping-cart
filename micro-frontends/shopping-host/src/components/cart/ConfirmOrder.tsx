@@ -19,7 +19,7 @@ const ConfirmOrder = () => {
 
     const paymentHandler = () => {
         const data = {
-            cartSum,
+            itemsPrice: cartSum,
             shippingPrice,
             taxValue,
             totalPrice

@@ -3,8 +3,7 @@ import { useTitle } from "../../hooks/useTitle"
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from "@stripe/stripe-js"
 import { useGetStripeApiKeyQuery } from "../../services/authApi"
-
-import StripeForm from "./StripeForm"
+import PaymentForm from "./PaymentForm"
 
 const stripePromise = (key: string) => loadStripe(key);
 
@@ -18,7 +17,7 @@ const Payment = () => {
         <>
             <CheckoutGuide hasItems shipping hasConfirmed hasPaid />
             <Elements stripe={stripePromise(stripeKey)}>
-                <StripeForm />
+                <PaymentForm />
             </Elements>
 
         </>)
