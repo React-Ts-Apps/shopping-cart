@@ -20,6 +20,7 @@ import ShippingDetails from "./components/cart/ShippingDetails"
 import ConfirmOrder from "./components/cart/ConfirmOrder"
 
 import Payment from "./components/cart/Payment"
+import OrderSuccess from "./components/order/OrderSuccess"
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/home/cart' element={<Cart />} />
           <Route path='/payment' element={<Payment />} />
+          <Route path='/order/success' element={<OrderSuccess />} />
           <Route path='/recipes/*' element={
 
             <RecipeApp />
