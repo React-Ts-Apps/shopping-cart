@@ -5,9 +5,10 @@ import { decrementCartItem, deleteCartItem, incrementCartItem } from "../../redu
 import { cartCountSelector, cartSumSelector } from "../../redux/features/cart/selectors"
 import { Link, useNavigate } from "react-router-dom"
 import { useTitle } from "../../hooks/useTitle"
+import CheckoutGuide from "./CheckoutGuide"
 
 const Cart = () => {
-    useTitle('Cart')
+    useTitle('Cart Items')
     const items = useSelector((state: RootState) => state.cart.items)
     const cartCount = useSelector(cartCountSelector);
     const dispatch = useDispatch()
@@ -24,19 +25,18 @@ const Cart = () => {
                 <h2 className="mt-5 text-center text-xl font-semibold">Your Cart is Empty</h2>
             ) : (
                 <>
+                    <CheckoutGuide hasItems />
                     <h2 className="mt-5 text-2xl font-bold ml-8">
                         Your Cart has: <b>{cartCount} items</b>
                     </h2>
 
                     <div className="ml-8 mt-6 grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-7xl">
-                        {/* Cart Items - take 2/3 width */}
                         <div className="lg:col-span-2 space-y-4">
                             {items.map(item => (
                                 <div
                                     key={item._id}
                                     className="flex items-center gap-4 border-b border-b-gray-300 pb-3"
                                 >
-                                    {/* Image */}
                                     <div className="w-20 flex-shrink-0">
                                         <img
                                             src={item.images[0].image}
@@ -103,7 +103,7 @@ const Cart = () => {
                             <p className="mb-6">
                                 Est. total:{' '}
                                 <span className="font-semibold">
-                                    kr {cartSum}
+                                    kr {cartSum.toFixed(2)}
                                 </span>
                             </p>
 

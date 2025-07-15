@@ -1,3 +1,4 @@
+import type { CardCvcElementComponent, CardExpiryElementComponent, CardNumberElementComponent } from "@stripe/react-stripe-js"
 
 export type Review = {
     name: string;
@@ -94,6 +95,53 @@ export type SideBarProps = {
     onFilterChange: <K extends keyof FilterProps>(name: K, value: FilterProps[K]) => void;
 }
 
+export type ShippingProps = {
+    address: string;
+    country: string;
+    city: string;
+    phoneNo: string;
+    postalCode: string;
+}
+
+export type StripeShippingInfo = {
+    name: string;
+    address: {
+        line1: string;
+        city: string;
+        postal_code: string;
+        country: string;
+        state?: string;
+    };
+};
+
+export type OrderItemProps = {
+    name: string;
+    quantity: number;
+    image: string;
+    price: number;
+    product: string;
+}
+
+export type OrderBaseProps = {
+    shippingInfo: ShippingProps;
+    orderItems: OrderItemProps[];
+    itemsPrice: number;
+    shippingPrice: number;
+    taxValue: number;
+    totalPrice: number;
+    paidAt: Date;
+}
+
+export type OrderProps = OrderBaseProps & {
+    paidAt: Date,
+    user: string;
+}
+
+export type StripeFieldProps = {
+    label: string;
+    id: string;
+    Element: CardCvcElementComponent | CardExpiryElementComponent | CardNumberElementComponent;
+}
 
 
 

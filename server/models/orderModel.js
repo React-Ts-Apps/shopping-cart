@@ -62,6 +62,11 @@ const orderSchema = new Schema({
         required: true,
         default: 0.0
     },
+    taxValue: {
+        type: Number,
+        required: true,
+        default: 0.0
+    },
     totalPrice: {
         type: Number,
         required: true,
@@ -69,6 +74,7 @@ const orderSchema = new Schema({
     },
     paidAt: {
         type: Date,
+        required: true
     },
     deliveredAt: {
         type: Date,
@@ -80,7 +86,7 @@ const orderSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     }
 })
 const Order = model('Order', orderSchema)

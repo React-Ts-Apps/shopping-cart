@@ -1,10 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import ProductList from "./components/product/ProductList"
 import AdminDashBoard from "./components/admin/AdminDashBoard"
-import ActionPage from "./components/user/ActionPage"
 import LayOut from "./components/ui/LayOut"
-
-
 import RecipeApp from "recipes-remote/RecipesApp"
 import ProductDetails from "./components/product/ProductDetails"
 import LoginForm from "./components/user/LoginForm"
@@ -19,6 +16,10 @@ import ForgotPassword from "./components/user/ForgotPassword"
 import ResetPassword from "./components/user/ResetPassword"
 import UpdatePassword from "./components/user/UpdatePassword"
 import Cart from "./components/cart/Cart"
+import ShippingDetails from "./components/cart/ShippingDetails"
+import ConfirmOrder from "./components/cart/ConfirmOrder"
+
+import Payment from "./components/cart/Payment"
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
     if (data?.success && data?.user) {
       dispatch(setCredentials(data.user))
     }
+
   })
   return (
     <Router>
@@ -38,19 +40,21 @@ function App() {
           <Route path='/home' element={<ProductList />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/register' element={<RegisterForm />} />
-          <Route path='/profile' element={<UserProfile />} > </Route>
+          <Route path='/profile' element={<UserProfile />} />
+          <Route path='/shipping' element={<ShippingDetails />} />
+          <Route path='/confirm/order' element={<ConfirmOrder />} />
           <Route path='/profile/update' element={<UpdateProfile />} />
           <Route path='/password/update' element={<UpdatePassword />} />
           <Route path='/password/forgot' element={<ForgotPassword />} />
           <Route path='/password/reset/:token' element={<ResetPassword />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/home/cart' element={<Cart />} />
+          <Route path='/payment' element={<Payment />} />
           <Route path='/recipes/*' element={
 
             <RecipeApp />
 
           } />
-          <Route path='/:action' element={<ActionPage />} />
           <Route path='/:admin/items' element={<AdminDashBoard />} />
 
         </Route>
