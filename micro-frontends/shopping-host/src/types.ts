@@ -141,6 +141,11 @@ export type OrderProps = OrderBaseProps & {
     user: string;
 }
 
+export type MyOrderProps = OrderProps & {
+    orderStatus: string;
+    _id: string;
+}
+
 export type StripeFieldProps = {
     label: string;
     id: string;

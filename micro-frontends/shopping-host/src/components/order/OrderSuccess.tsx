@@ -1,6 +1,8 @@
 import { CheckCircle } from "lucide-react"
+import { useTitle } from "../../hooks/useTitle"
 
 const OrderSuccess = () => {
+    useTitle('Order Success')
     return (
         <div className="flex justify-center font-sans items-start min-h-screen  bg-gray-100 px-4 pt-10">
             <div className="max-w-md w-full text-center bg-white p-8 rounded shadow-md">
@@ -11,7 +13,7 @@ const OrderSuccess = () => {
                 </h2>
 
                 <a
-                    href="/orders"
+                    href="/my/orders"
                     className="inline-block mt-4 px-6 py-2 text-white bg-teal-500 hover:bg-teal-600 rounded transition-colors duration-300"
                 >
                     Go to Orders
