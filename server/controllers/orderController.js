@@ -11,7 +11,9 @@ export const newOrder = asyncError(async (req, res, next) => {
         shippingInfo,
         shippingPrice,
         itemsPrice,
-        totalPrice
+        totalPrice,
+        taxValue,
+        paidAt
     } = req.body
 
     const order = await Order.create({
@@ -20,11 +22,12 @@ export const newOrder = asyncError(async (req, res, next) => {
         shippingPrice,
         itemsPrice,
         totalPrice,
-        paidAt: Date.now(),
+        taxValue,
+        paidAt,
         user: req.user.id
     })
 
-    res.status(200).json({ success: true, order })
+    res.status(200).json({ success: true, order, message: 'Order placed successfully' })
 })
 
 //Get specific order -/api/v1/order/:id

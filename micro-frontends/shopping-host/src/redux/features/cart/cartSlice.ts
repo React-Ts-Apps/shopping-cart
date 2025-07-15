@@ -1,10 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import loadCartFromLocalStorage from "../../../utils/storage";
-import type { CartItemProps } from "../../../types";
+import type { CartItemProps, ShippingProps } from "../../../types";
 
 const cartSlice = createSlice({
     name: 'cart',
-    initialState: { items: loadCartFromLocalStorage() as CartItemProps[] || [] },
+    initialState: {
+        items: loadCartFromLocalStorage('cart') as CartItemProps[] || [],
+        shippingInfo: loadCartFromLocalStorage('shippingInfo') as ShippingProps || {
+            address: '',
+            city: '',
+            postalCode: '',
+            phoneNo: '',
+            country: '',
+        }
+    },
     reducers: {
         addToCart: (state, action) => {
             const { _id, quantity, ...rest } = action.payload
@@ -26,15 +35,14 @@ const cartSlice = createSlice({
         deleteCartItem: (state, action) => {
             state.items = state.items.filter(i => i._id !== action.payload)
         },
-        clearCart: (state) => {
-            state.items = []
+        saveShippingInfo: (state, action) => {
+            state.shippingInfo = action.payload
         }
-
     }
 })
 export const { addToCart,
     incrementCartItem,
     decrementCartItem,
     deleteCartItem,
-    clearCart } = cartSlice.actions
+    saveShippingInfo } = cartSlice.actions
 export default cartSlice.reducer
