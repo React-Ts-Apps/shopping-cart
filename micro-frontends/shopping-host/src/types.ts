@@ -130,10 +130,14 @@ export type OrderBaseProps = {
     taxValue: number;
     totalPrice: number;
     paidAt: Date;
+    createdAt: Date;
+    paymentInfo: {
+        id: string;
+        status: string;
+    }
 }
 
 export type OrderProps = OrderBaseProps & {
-    paidAt: Date,
     user: string;
 }
 

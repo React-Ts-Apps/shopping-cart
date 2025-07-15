@@ -25,7 +25,7 @@ const Card = ({ data }: { data: ItemProps }) => {
                     )
                 }
                 <h2 className="text-lg font-semibold text-center text-gray-800 mb-2">
-                    <Link to='/' className="hover:underline">{data.name}</Link>
+                    <Link to={`/product/${data._id}`} className="hover:underline">{data.name}</Link>
                 </h2>
                 <div className="mt-auto">
                     <div className="flex items-center">

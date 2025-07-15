@@ -13,7 +13,9 @@ export const newOrder = asyncError(async (req, res, next) => {
         itemsPrice,
         totalPrice,
         taxValue,
-        paidAt
+        paidAt,
+        createdAt,
+        paymentInfo
     } = req.body
 
     const order = await Order.create({
@@ -24,6 +26,8 @@ export const newOrder = asyncError(async (req, res, next) => {
         totalPrice,
         taxValue,
         paidAt,
+        createdAt,
+        paymentInfo,
         user: req.user.id
     })
 
