@@ -15,6 +15,7 @@ import {
 } from '../controllers/authController.js'
 import { isAuthenticated, isAuthenticatedRole } from '../middlewares/authenticate.js'
 import multer from 'multer'
+import fs from 'fs'
 import { generateFileName } from '../utils/generateFileName.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -28,7 +29,9 @@ const router = Router()
 const upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, path.join(__dirname, '..', 'uploads/user'))
+            const uploadPath = path.join(__dirname, '..', 'uploads/user')
+            fs.mkdirSync(uploadPath, { recursive: true })
+            cb(null, uploadPath)
         },
         filename: function (req, file, cb) {
             const uniqueFileName = generateFileName(file)
