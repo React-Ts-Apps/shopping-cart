@@ -31,7 +31,7 @@ export type UserFormProps = {
 
 
 export type ItemProps = {
-    _id?: number;
+    _id: string;
     __v?: string;
     name: string;
     price: number;
@@ -142,7 +142,7 @@ export type OrderProps = OrderBaseProps & {
 }
 
 export type MyOrderProps = OrderProps & {
-    orderStatus: string;
+    orderStatus: 'Processing' | 'Delivered';
     _id: string;
 }
 

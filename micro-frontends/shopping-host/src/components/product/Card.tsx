@@ -36,7 +36,7 @@ const Card = ({ data }: { data: ItemProps }) => {
                     <div className="flex justify-between mb-4">
                         <span className="text-green-600 font-bold text-base" >{data.price}kr</span>
                         <ShoppingCart size={22}
-                            className={`${isDisabled ? 'text-gray-400 cursor-not-allowed' : 'text-teal-700 hover:text-teal-800 cursor-pointer'
+                            className={`active:scale-80 transition-all duration-150 ${isDisabled ? 'text-gray-400 cursor-not-allowed' : 'text-teal-700 hover:text-teal-800 cursor-pointer'
                                 }`}
                             onClick={handleAddToCart}
                         />

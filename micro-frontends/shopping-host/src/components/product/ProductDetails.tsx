@@ -87,7 +87,7 @@ const ProductDetails = () => {
                         <button
                             onClick={isDisabled ? () => showToast.success('Email will be sent when available') : handleCart}
                             className={`text-white rounded px-4 py-2 font-semibold
-                            ${isDisabled ? 'bg-gray-400' : 'bg-orange-400  hover:bg-teal-700'}`}>
+                            ${isDisabled ? 'bg-gray-400' : 'bg-orange-400  hover:bg-teal-700 active:scale-80 transition-all duration-150'}`}>
                             {isDisabled ? 'Notify Me' : 'Add To Cart'}
                         </button>
                     </div>

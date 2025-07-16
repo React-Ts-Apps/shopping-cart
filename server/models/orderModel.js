@@ -92,6 +92,9 @@ const orderSchema = new Schema({
     orderStatus: {
         type: String,
         required: true,
+        enum: {
+            values: ['Processing', 'Delivered']
+        },
         default: 'Processing'
     },
     createdAt: {

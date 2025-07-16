@@ -1,8 +1,16 @@
 import { CheckCircle } from "lucide-react"
 import { useTitle } from "../../hooks/useTitle"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { clearCart } from "../../redux/features/cart/cartSlice"
 
 const OrderSuccess = () => {
     useTitle('Order Success')
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(clearCart())
+        localStorage.removeItem('cart')
+    }, [dispatch])
     return (
         <div className="flex justify-center font-sans items-start min-h-screen  bg-gray-100 px-4 pt-10">
             <div className="max-w-md w-full text-center bg-white p-8 rounded shadow-md">

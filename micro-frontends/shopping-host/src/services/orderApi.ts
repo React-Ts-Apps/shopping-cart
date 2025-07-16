@@ -18,10 +18,14 @@ export const orderApi = createApi({
                 url: '/myorders',
                 method: 'GET'
             })
+        }),
+        getOrderById: builder.query<{ success: true, order: MyOrderProps }, { id: string }>({
+            query: ({ id }: { id: string }) => `/order/${id}`
         })
     })
 
 })
 
 export const { usePlaceOrderMutation,
-    useMyOrdersQuery } = orderApi
+    useMyOrdersQuery,
+    useGetOrderByIdQuery } = orderApi
