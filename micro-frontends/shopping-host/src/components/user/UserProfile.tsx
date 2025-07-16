@@ -40,7 +40,7 @@ const UserProfile = () => {
 
                         <div className="flex flex-col items-start space-y-3 text-center md:items-stretch gap-3 pt-4">
                             <Link
-                                to="/orders"
+                                to="/my/orders"
                                 className="px-6 py-2 w-60 bg-red-500 text-white rounded hover:bg-red-600 transition"
                             >
                                 My Orders

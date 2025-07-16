@@ -1,5 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "./urls";
+import type { ReviewProps } from "../types";
+
+type ReviewSubmitProps = ReviewProps & { productId: string }
 
 //createApi- Create service layer for products api 
 //reducerPath - Provides name tobe used in redux state tree
@@ -9,6 +12,7 @@ import { BASE_URL } from "./urls";
 export const productsApi = createApi({
     reducerPath: 'productsApi',
     baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/api/v1` }),
+    tagTypes: ['Product'], // Define the tag type explicitly
     endpoints: (builder) => ({
         getProducts: builder.query({
             query: ({ page = 1, limit = 5, keyword, price, category, ratings }) => {
@@ -21,11 +25,24 @@ export const productsApi = createApi({
             }
         }),
         getProductById: builder.query({
-            query: (id: string) => `/product/${id}`
+            query: (id: string) => `/product/${id}`,
+            providesTags: (_result, _error, id) => [{ type: 'Product', id }]
+        }),
+
+        addReview: builder.mutation<{ sucess: true, message: string }, ReviewSubmitProps>({
+            query: (body) => ({
+                url: '/review',
+                body,
+                method: 'PUT',
+                credentials: 'include'
+            }),
+            invalidatesTags: (_result, _error, arg) => [{ type: 'Product', id: arg.productId }],
         })
+
     })
 })
 
 export const { useGetProductsQuery,
-    useGetProductByIdQuery
+    useGetProductByIdQuery,
+    useAddReviewMutation
 } = productsApi

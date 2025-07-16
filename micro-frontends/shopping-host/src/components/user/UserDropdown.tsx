@@ -66,7 +66,7 @@ const UserDropdown = ({ user, logoutHandler }: DropDownProps) => {
                     </button>
                     <button
                         onClick={() => {
-                            navigate('/orders')
+                            navigate('/my/orders')
                             setOpen(false)
                         }}
                         className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200">

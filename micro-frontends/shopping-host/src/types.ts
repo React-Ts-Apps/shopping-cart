@@ -31,7 +31,7 @@ export type UserFormProps = {
 
 
 export type ItemProps = {
-    _id?: number;
+    _id: string;
     __v?: string;
     name: string;
     price: number;
@@ -130,11 +130,20 @@ export type OrderBaseProps = {
     taxValue: number;
     totalPrice: number;
     paidAt: Date;
+    createdAt: Date;
+    paymentInfo: {
+        id: string;
+        status: string;
+    }
 }
 
 export type OrderProps = OrderBaseProps & {
-    paidAt: Date,
     user: string;
+}
+
+export type MyOrderProps = OrderProps & {
+    orderStatus: 'Processing' | 'Delivered';
+    _id: string;
 }
 
 export type StripeFieldProps = {
@@ -143,6 +152,11 @@ export type StripeFieldProps = {
     Element: CardCvcElementComponent | CardExpiryElementComponent | CardNumberElementComponent;
 }
 
+export type ReviewProps = {
+    rating: number;
+    comment?: string;
+    date: Date;
+}
 
 
 

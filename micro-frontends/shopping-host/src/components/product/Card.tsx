@@ -25,7 +25,7 @@ const Card = ({ data }: { data: ItemProps }) => {
                     )
                 }
                 <h2 className="text-lg font-semibold text-center text-gray-800 mb-2">
-                    <Link to='/' className="hover:underline">{data.name}</Link>
+                    <Link to={`/product/${data._id}`} className="hover:underline">{data.name}</Link>
                 </h2>
                 <div className="mt-auto">
                     <div className="flex items-center">
@@ -36,7 +36,7 @@ const Card = ({ data }: { data: ItemProps }) => {
                     <div className="flex justify-between mb-4">
                         <span className="text-green-600 font-bold text-base" >{data.price}kr</span>
                         <ShoppingCart size={22}
-                            className={`${isDisabled ? 'text-gray-400 cursor-not-allowed' : 'text-teal-700 hover:text-teal-800 cursor-pointer'
+                            className={`active:scale-80 transition-all duration-150 ${isDisabled ? 'text-gray-400 cursor-not-allowed' : 'text-teal-700 hover:text-teal-800 cursor-pointer'
                                 }`}
                             onClick={handleAddToCart}
                         />
