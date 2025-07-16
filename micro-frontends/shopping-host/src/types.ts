@@ -152,6 +152,11 @@ export type StripeFieldProps = {
     Element: CardCvcElementComponent | CardExpiryElementComponent | CardNumberElementComponent;
 }
 
+export type ReviewProps = {
+    rating: number;
+    comment?: string;
+    date: Date;
+}
 
 
 

@@ -16,16 +16,7 @@ export const data = [
         "stock": 15,
         "numOfReviews": 2,
         "reviews": [
-            {
-                "name": "Alice",
-                "rating": "5",
-                "comment": "Sweet and fresh!"
-            },
-            {
-                "name": "Bob",
-                "rating": "4",
-                "comment": "Great taste, but a bit pricey."
-            }
+
         ],
         "createdAt": "2025-06-01T10:00:00.000Z"
     },
@@ -47,11 +38,7 @@ export const data = [
         "stock": 30,
         "numOfReviews": 1,
         "reviews": [
-            {
-                "name": "Derek",
-                "rating": "4",
-                "comment": "Good quality flour for daily use."
-            }
+
         ],
         "createdAt": "2025-06-02T09:30:00.000Z"
     },
@@ -72,21 +59,6 @@ export const data = [
         "stock": 20,
         "numOfReviews": 3,
         "reviews": [
-            {
-                "name": "Emma",
-                "rating": "5",
-                "comment": "Perfect for breakfast or smoothies!"
-            },
-            {
-                "name": "Leo",
-                "rating": "5",
-                "comment": "Very creamy and flavorful."
-            },
-            {
-                "name": "Tina",
-                "rating": "4",
-                "comment": "Great texture, wish it was cheaper."
-            }
         ],
         "createdAt": "2025-06-02T11:45:00.000Z"
     },
@@ -108,16 +80,7 @@ export const data = [
         "stock": 40,
         "numOfReviews": 2,
         "reviews": [
-            {
-                "name": "James",
-                "rating": "5",
-                "comment": "Fresh and crunchy!"
-            },
-            {
-                "name": "Nina",
-                "rating": "4",
-                "comment": "Tasty but a bit dry."
-            }
+
         ],
         "createdAt": "2025-06-03T08:15:00.000Z"
     },
@@ -137,21 +100,7 @@ export const data = [
         "stock": 10,
         "numOfReviews": 3,
         "reviews": [
-            {
-                "name": "Ravi",
-                "rating": "5",
-                "comment": "Very fresh and tasty!"
-            },
-            {
-                "name": "Ana",
-                "rating": "5",
-                "comment": "Cooks well, no fishy smell."
-            },
-            {
-                "name": "Mark",
-                "rating": "4",
-                "comment": "Good quality, packaging could be better."
-            }
+
         ],
         "createdAt": "2025-06-04T13:20:00.000Z"
     },

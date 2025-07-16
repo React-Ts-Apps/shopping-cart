@@ -70,8 +70,7 @@ const productSchema = new Schema(
                     required: true
                 },
                 comment: {
-                    type: String,
-                    required: true
+                    type: String
                 },
                 date: {
                     type: Date,
