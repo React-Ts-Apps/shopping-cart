@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../../redux/features/cart/cartSlice"
 import { showToast } from "../../utils/showToast"
 import type { RootState } from "../../redux/store"
+import Reviews from "./Reviews"
 
 const ProductDetails = () => {
     const { id } = useParams()
@@ -77,7 +78,6 @@ const ProductDetails = () => {
         }
 
     }
-
     return (
         <div className="max-w-6xl mx-auto px-4 py-8">
             <div className="flex lg:flex-row gap-8">
@@ -179,7 +179,7 @@ const ProductDetails = () => {
                             </div>
                         </div>
                     )}
-
+                    <Reviews reviews={product.reviews} />
                 </div>
 
             </div >

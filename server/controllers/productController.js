@@ -32,7 +32,7 @@ const getProducts = async (req, res) => {
 
 //Get single product - /api/v1/products/:id
 const getProductById = async (req, res, next) => {
-    const product = await Product.findById(req.params.id)
+    const product = await Product.findById(req.params.id).populate('reviews.user', 'name')
 
     if (!product) {
         return next(new ErrorHandler('Product not found', 404))
@@ -72,12 +72,11 @@ const createReview = asyncError(async (req, res, next) => {
         rating
     }
     const product = await Product.findById(productId)
-    console.log(product)
+
     //Find if user already reviewed
     const hasReviewed = product.reviews.find(review => {
         return review.user.toString() === req.user.id.toString()
     })
-    console.log(hasReviewed)
 
     if (hasReviewed) {
         //Update existing review
