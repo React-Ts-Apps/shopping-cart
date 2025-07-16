@@ -105,7 +105,7 @@ export const resetPassword = asyncError(async (req, res, next) => {
     sendJwt(user, res, 201)
 })
 
-//Get user profile - /api/v1/myprofile
+//Get user profile - /api/v1/me
 // eslint-disable-next-line no-unused-vars
 export const getUserProfile = asyncError(async (req, res, next) => {
     const user = await User.findById(req.user.id)

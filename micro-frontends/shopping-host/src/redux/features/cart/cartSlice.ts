@@ -37,12 +37,17 @@ const cartSlice = createSlice({
         },
         saveShippingInfo: (state, action) => {
             state.shippingInfo = action.payload
+        },
+        clearCart: (state) => {
+            state.items = []
         }
+
     }
 })
 export const { addToCart,
     incrementCartItem,
     decrementCartItem,
     deleteCartItem,
-    saveShippingInfo } = cartSlice.actions
+    saveShippingInfo,
+    clearCart } = cartSlice.actions
 export default cartSlice.reducer

@@ -32,7 +32,7 @@ const getProducts = async (req, res) => {
 
 //Get single product - /api/v1/products/:id
 const getProductById = async (req, res, next) => {
-    const product = await Product.findById(req.params.id)
+    const product = await Product.findById(req.params.id).populate('reviews.user', 'name')
 
     if (!product) {
         return next(new ErrorHandler('Product not found', 404))
@@ -64,7 +64,7 @@ const deleteProduct = async (req, res) => {
 //Create review - /api/v1/review
 // eslint-disable-next-line no-unused-vars
 const createReview = asyncError(async (req, res, next) => {
-    console.log(req.body)
+    console.log(1)
     const { productId, comment, rating } = req.body
     const review = {
         user: req.user.id,
@@ -72,6 +72,7 @@ const createReview = asyncError(async (req, res, next) => {
         rating
     }
     const product = await Product.findById(productId)
+
     //Find if user already reviewed
     const hasReviewed = product.reviews.find(review => {
         return review.user.toString() === req.user.id.toString()
@@ -97,7 +98,7 @@ const createReview = asyncError(async (req, res, next) => {
     }, 0) / product.numOfReviews
 
     await product.save({ validateBeforeSave: false })
-    res.status(200).json({ success: true })
+    res.status(200).json({ success: true, message: 'Review added' })
 
 })
 

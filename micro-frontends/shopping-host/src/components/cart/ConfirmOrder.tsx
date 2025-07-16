@@ -2,11 +2,12 @@ import { useSelector } from "react-redux"
 import { useTitle } from "../../hooks/useTitle"
 import CheckoutGuide from "./CheckoutGuide"
 import type { RootState } from "../../redux/store"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { cartCountSelector, cartSumSelector } from "../../redux/features/cart/selectors"
 import { SHIPPING_PRICE } from "../../constants"
 import { useEffect } from "react"
 import { useOrderValidation } from "../../hooks/useOrderValidation"
+import OrderItems from "../order/OrderItems"
 
 const ConfirmOrder = () => {
     useTitle('Confirm Order')
@@ -19,6 +20,15 @@ const ConfirmOrder = () => {
     const shippingPrice = cartSum > 699 ? 0 : SHIPPING_PRICE
     const taxValue = +(cartSum * 0.05)
     const totalPrice = +(cartSum + shippingPrice + taxValue)
+
+    const orderItems = items.map(item => ({
+        product: item._id,
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+        image: item.images[0].image
+    }))
+
 
     useEffect(() => {
         validateOrder('confirm')
@@ -47,31 +57,7 @@ const ConfirmOrder = () => {
                 <p className="mb-4 ml-2"><b>Address:</b> {shippingInfo.address}, {shippingInfo.city}, {shippingInfo.postalCode}, {shippingInfo.country} </p>
 
                 <hr className=" border-gray-300 mb-6" />
-                <h4 className="mt-5 text-2xl text-gray-700 font-serif font-semibold">Your Cart Items:</h4>
-                {items.map((item) => (
-                    <div
-                        key={item._id}
-                        className="flex items-center px-2 py-3 border-b border-gray-200 gap-x-2">
-                        <div className="w-16 flex-shrink-0">
-                            <img
-                                src={item.images[0].image}
-                                alt={item.name}
-                                className="w-16 h-12 object-cover rounded" />
-                        </div>
-
-                        <div className="flex-1 px-2 max-w-xs">
-                            <Link
-                                to={`/product/${item._id}`}
-                                className="text-teal-600 font-serif hover:underline font-medium truncate">
-                                {item.name}
-                            </Link>
-                        </div>
-
-                        <div className="text-right text-gray-800 text-md font-serif min-w-[120px]">
-                            {item.quantity} x kr {item.price} = <b>kr {item.quantity * item.price}</b>
-                        </div>
-                    </div>
-                ))}
+                <OrderItems data={orderItems || []} />
             </div>
             <div className="p-6 mt-20 border border-gray-300 text-center rounded shadow-lg pl-8 font-serif h-fit bg-white max-w-sm">
                 <h4 className="text-xl font-semibold mb-6 text-left">Order Summary</h4>

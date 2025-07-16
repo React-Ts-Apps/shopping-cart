@@ -68,13 +68,18 @@ const PaymentForm = () => {
                     quantity: item.quantity,
                     image: item.images[0].image,
                     price: item.price,
-                    product: item._id
+                    product: item._id,
                 }))
 
                 const orderData = {
                     shippingInfo,
                     orderItems,
                     paidAt,
+                    createdAt: Date.now(),
+                    paymentInfo: {
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status
+                    },
                     ...orderInfo
                 }
                 try {

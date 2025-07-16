@@ -19,7 +19,7 @@ const ShippingDetails = () => {
     useTitle('Shipping Info')
 
     useEffect(() => {
-        validateOrder('confirm')
+        validateOrder('shipping')
     })
 
     const shippingHandler = (e: FormEvent) => {
