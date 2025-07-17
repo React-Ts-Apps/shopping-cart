@@ -101,7 +101,7 @@ const ProductList = () => {
 
                     {/* Show pagination if multiple pages */}
                     {pageCount > 1 && (
-                        <div className="flex mt-4 justify-center">
+                        <div className="flex mt-4 mb-2 justify-center">
                             <Paginate
                                 pageCount={pageCount}
                                 currentPage={page - 1}          // react-paginate 0-based current page
