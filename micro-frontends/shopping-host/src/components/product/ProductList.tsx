@@ -28,7 +28,6 @@ const ProductList = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
     const [filters, setFilters] = useState<FilterProps>({ price: DEFAULT_PRICE_RANGE, ratings: null })
-    const [appliedFilters, setAppliedFilters] = useState<FilterProps>({ price: DEFAULT_PRICE_RANGE, ratings: null })
 
     // Fetch products data from API using RTK Query with current filter params
     const { data, error, isLoading } = useGetProductsQuery({
@@ -36,7 +35,7 @@ const ProductList = () => {
         page,
         limit: ITEMS_PER_PAGE,     // TODO: Move to filter condition
         category: categoryParam,
-        ...appliedFilters
+        ...filters
     });
 
     // If there is an error from API call, show error notification
@@ -46,13 +45,10 @@ const ProductList = () => {
 
     useEffect(() => {
         setFilters({ price: DEFAULT_PRICE_RANGE, ratings: null })
-        setAppliedFilters({ price: DEFAULT_PRICE_RANGE, ratings: null })
     }, [category])
 
     // Calculate total number of pages for pagination (safe with optional chaining)
     const pageCount = Math.ceil(data?.total / data?.limit) || 0;
-
-    const isApplyDisabled = JSON.stringify(filters) !== JSON.stringify(appliedFilters)
 
 
     // Updates page query param to selected page + 1 (since react-paginate is 0-based)
@@ -61,10 +57,10 @@ const ProductList = () => {
     }, [updateSearchParams]);
 
     // Handler to apply price filter: updates activePriceRange and resets page to 1
-    const applyFilter = useCallback(() => {
-        setAppliedFilters(filters)
+    const applyFilter = useCallback(<K extends keyof FilterProps>(name: K, value: FilterProps[K]) => {
+        setFilters((prev) => ({ ...prev, [name]: value }));
         updateSearchParams({ page: '1' });
-    }, [filters, updateSearchParams]);
+    }, [updateSearchParams]);
 
 
     // Resets price range to default and updates category and page params in URL
@@ -84,12 +80,8 @@ const ProductList = () => {
                 onToggle={() => setIsSideBarOpen(prev => !prev)}
                 onCategoryChange={handleCategoryChange}
                 filters={filters}
-                onApplyFilter={applyFilter}
                 productCategory={categoryParam}
-                isApplyDisabled={!isApplyDisabled}
-                onFilterChange={(name, value) =>
-                    setFilters((prev) => ({ ...prev, [name]: value }))
-                }
+                onFilterChange={applyFilter}
             />
             <main>
                 <section className="lg:col-span-5">
@@ -122,6 +114,4 @@ const ProductList = () => {
         </div>
     );
 };
-
-
 export default ProductList

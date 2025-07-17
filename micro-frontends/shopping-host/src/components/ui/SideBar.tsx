@@ -9,9 +9,7 @@ const SideBar = ({
     isOpen,
     onToggle,
     onCategoryChange,
-    onApplyFilter,
     productCategory,
-    isApplyDisabled,
     filters,
     onFilterChange
 }: SideBarProps) => {
@@ -58,18 +56,6 @@ const SideBar = ({
                                     </div>)
                                 }))}
                             </div>
-                        </div>
-
-                        {/* Apply Filter button, right-aligned */}
-                        <div className="flex justify-end">
-                            <button
-                                className="bg-orange-400 text-white text-sm font-semibold px-4 py-2 rounded
-                                 hover:bg-teal-900 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                                onClick={onApplyFilter}
-                                disabled={isApplyDisabled}
-                            >
-                                Apply Filter
-                            </button>
                         </div>
                     </>
                 )}
