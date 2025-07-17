@@ -5,6 +5,7 @@ import { setCredentials } from "../../redux/features/user/authSlice"
 import type { ErrorPops } from "../../types"
 import { showToast } from "../../utils/showToast"
 import { useDispatch } from "react-redux"
+import Button from "../ui/Button"
 
 const UpdatePassword = () => {
     const [oldPassword, setOldPassword] = useState('')
@@ -53,10 +54,8 @@ const UpdatePassword = () => {
                             className={`w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 ${isError ? 'border-red-400' : 'border-gray-300 '}`}
                             required />
                     </div>
-                    <button id="update_password_button" type="submit"
-                        className=" bg-orange-400 hover:bg-teal-900 w-full py-3 rounded text-white font-semibold">UpdatePassword</button>
+                    <Button id="update_password_button" text="Update Password" />
                 </form>
-
             </div>
         </div>)
 

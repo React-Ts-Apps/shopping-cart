@@ -20,10 +20,8 @@ const OrderSuccess = () => {
                     Your order has been placed successfully.
                 </h2>
 
-                <a
-                    href="/my/orders"
-                    className="inline-block mt-4 px-6 py-2 text-white bg-teal-500 hover:bg-teal-600 rounded transition-colors duration-300"
-                >
+                <a href="/my/orders"
+                    className="inline-block mt-4 px-6 py-2 text-white bg-teal-500 hover:bg-teal-600 rounded transition-colors duration-300">
                     Go to Orders
                 </a>
             </div>

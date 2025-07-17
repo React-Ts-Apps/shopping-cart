@@ -6,6 +6,7 @@ import { cartCountSelector, cartSumSelector } from "../../redux/features/cart/se
 import { Link, useNavigate } from "react-router-dom"
 import { useTitle } from "../../hooks/useTitle"
 import CheckoutGuide from "./CheckoutGuide"
+import Button from "../ui/Button"
 
 const Cart = () => {
     useTitle('Cart Items')
@@ -106,14 +107,7 @@ const Cart = () => {
                                     kr {cartSum.toFixed(2)}
                                 </span>
                             </p>
-
-                            <button
-                                id="checkout_btn"
-                                onClick={checkoutHandler}
-                                className="w-3/4 bg-orange-400 hover:bg-teal-900 text-white font-semibold py-2 rounded-2xl"
-                            >
-                                Check out
-                            </button>
+                            <Button type="button" id="checkout_btn" onClick={checkoutHandler} text='Check Out' />
                         </div>
                     </div>
                 </>

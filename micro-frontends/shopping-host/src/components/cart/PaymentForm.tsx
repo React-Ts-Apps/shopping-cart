@@ -7,8 +7,8 @@ import type { RootState } from "../../redux/store"
 import { useNavigate } from "react-router-dom"
 import { usePlaceOrderMutation } from "../../services/orderApi"
 import StripeField from "../stripe/StripeField"
-import { Loader } from "lucide-react"
 import { useOrderValidation } from "../../hooks/useOrderValidation"
+import Button from "../ui/Button"
 
 const PaymentForm = () => {
     const [name, setName] = useState('')
@@ -124,22 +124,9 @@ const PaymentForm = () => {
                         <StripeField id='cardnum_field' label='Card Number' Element={CardNumberElement} />
                         <StripeField id='cardcvc_field' label='CVC Code' Element={CardCvcElement} />
                         <StripeField id='cardexp_field' label='Card Expiry' Element={CardExpiryElement} />
-                        <button
-                            id="payment_btn"
-                            type="submit"
-                            disabled={loading}
-                            className={`w-full mt-4 py-3 rounded-xl text-white font-semibold flex items-center justify-center gap-2 ${loading ? 'bg-gray-300 cursor-not-allowed' : 'bg-orange-400 hover:bg-teal-700'
-                                }`}>
-                            {loading ? (
-                                <>
-                                    <span className="text-gray-400">Processing</span>
-                                    <Loader className="animate-spin w-5 h-5 text-gray-700" />
-                                </>
-                            ) : (
-                                `Pay - kr ${orderInfo?.totalPrice}`
-                            )}
-                        </button>
-
+                        <div className="flex justify-center">
+                            <Button id='payment_btn' loading={loading} text={`Pay - kr ${orderInfo?.totalPrice}`} />
+                        </div>
                     </form>
                 </div>
             </div>

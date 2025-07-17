@@ -13,7 +13,7 @@ import { useQueryParams } from "../../hooks/useQueryParams"
 import { DEFAULT_CATEGORY, DEFAULT_PRICE_RANGE } from "../../constants"
 import LoadFail from "../ui/LoadFail"
 
-const ITEMS_PER_PAGE = 4
+const ITEMS_PER_PAGE = 10
 
 const ProductList = () => {
     // Set document title to 'Home' on component mount

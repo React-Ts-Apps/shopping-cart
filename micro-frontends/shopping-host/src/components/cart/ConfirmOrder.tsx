@@ -8,6 +8,7 @@ import { SHIPPING_PRICE } from "../../constants"
 import { useEffect } from "react"
 import { useOrderValidation } from "../../hooks/useOrderValidation"
 import OrderItems from "../order/OrderItems"
+import Button from "../ui/Button"
 
 const ConfirmOrder = () => {
     useTitle('Confirm Order')
@@ -17,6 +18,7 @@ const ConfirmOrder = () => {
     const cartSum = useSelector(cartSumSelector)
     const navigate = useNavigate()
     const validateOrder = useOrderValidation()
+
     const shippingPrice = cartSum > 699 ? 0 : SHIPPING_PRICE
     const taxValue = +(cartSum * 0.05)
     const totalPrice = +(cartSum + shippingPrice + taxValue)
@@ -92,17 +94,11 @@ const ConfirmOrder = () => {
                     <span className="text-gray-700 font-semibold">Total:</span>
                     <span className="text-lg font-bold text-teal-800">kr {totalPrice.toFixed(2)}</span>
                 </div>
-
-                <button
-                    id="confirm_btn"
-                    onClick={paymentHandler}
-                    className="w-3/4 bg-orange-400 hover:bg-teal-900 text-white font-semibold py-2 rounded-2xl">
-                    Proceed To Payment
-                </button>
+                <div className="flex justify-center">
+                    <Button id="confirm_btn" onClick={paymentHandler} text='Proceed To Payment' />
+                </div>
             </div>
-
         </div>
-
     </>)
 }
 export default ConfirmOrder
