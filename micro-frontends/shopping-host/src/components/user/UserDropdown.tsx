@@ -3,6 +3,7 @@ import defaultAvatar from '../../assets/default_avatar.png'
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { ChevronDown } from 'lucide-react'
+import Button from "../ui/Button"
 
 type DropDownProps = {
     user: User;
@@ -48,38 +49,46 @@ const UserDropdown = ({ user, logoutHandler }: DropDownProps) => {
             {open && (
                 <div className="absolute right-0 mt-2 w-40 bg-white border border-teal-700 shadow-lg rounded z-50">
                     {user.role === 'admin' &&
-                        <button
+
+                        <Button
+                            type="button"
+                            id="dashboard_btn"
                             onClick={() => {
                                 navigate('/admin/dashboard')
                                 setOpen(false)
                             }}
-                            className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200">
-                            Dashboard
-                        </button>}
-                    <button
+                            text=" Dashboard"
+                            className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200" />
+                    }
+                    <Button
+                        type="button"
+                        id="profile_btn"
                         onClick={() => {
                             navigate('/profile')
                             setOpen(false)
                         }}
-                        className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200">
-                        Profile
-                    </button>
-                    <button
+                        text="Profile"
+                        className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200" />
+
+                    <Button
+                        type="button"
+                        id="orders_btn"
                         onClick={() => {
                             navigate('/my/orders')
                             setOpen(false)
                         }}
-                        className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200">
-                        Orders
-                    </button>
-                    <button
+                        text="Orders"
+                        className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200" />
+
+                    <Button
+                        type="button"
+                        id="logout_btn"
                         onClick={() => {
                             logoutHandler()
                             setOpen(false)
                         }}
-                        className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200">
-                        Logout
-                    </button>
+                        text="Logout"
+                        className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200" />
                 </div>
             )}
         </div>)

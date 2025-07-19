@@ -31,6 +31,10 @@ export const newOrder = asyncError(async (req, res, next) => {
         user: req.user.id
     })
 
+    for (const item of orderItems) {
+        await Product.findByIdAndUpdate(item.product, { $inc: { stock: -item.quantity } })
+    }
+
     res.status(200).json({ success: true, order, message: 'Order placed successfully' })
 })
 
@@ -48,6 +52,25 @@ export const getOrder = asyncError(async (req, res, next) => {
 export const myOrders = asyncError(async (req, res, next) => {
     const orders = await Order.find({ user: req.user.id })
     res.status(200).json({ success: true, orders })
+})
+
+export const validateOrder = asyncError(async (req, res, next) => {
+    const stockData = req.body
+    const productIds = stockData.map(item => item.productId)
+    const products = await Product.find({ _id: { $in: productIds } })
+    const stockMap = new Map();
+    products.forEach(p => stockMap.set(p._id.toString(), p.stock))
+    const stockList = []
+    let hasError = false
+    for (const item of stockData) {
+        const stock = stockMap.get(item.productId)
+        if (!stock || stock < item.quantity) {
+            hasError = true
+            stockList.push({ _id: item.productId, stock })
+        }
+    }
+    if (hasError) return next(res.status(404).json({ success: false, stockList }))
+    else return res.status(200).json({ success: true })
 })
 
 //Get orders for Admin - /api/v1/admin/orders

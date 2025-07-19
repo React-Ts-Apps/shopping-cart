@@ -88,9 +88,7 @@ export type SideBarProps = {
     isOpen: boolean;
     onToggle: () => void;
     onCategoryChange: (category: string) => void;
-    onApplyFilter: () => void;
     productCategory: string;
-    isApplyDisabled: boolean;
     filters: FilterProps;
     onFilterChange: <K extends keyof FilterProps>(name: K, value: FilterProps[K]) => void;
 }

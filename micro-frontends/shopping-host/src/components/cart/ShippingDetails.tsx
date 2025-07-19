@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import CheckoutGuide from "./CheckoutGuide"
 import { useTitle } from "../../hooks/useTitle"
 import { useOrderValidation } from "../../hooks/useOrderValidation"
+import Button from "../ui/Button"
 
 const ShippingDetails = () => {
     const { shippingInfo } = useSelector((state: RootState) => state.cart)
@@ -16,6 +17,7 @@ const ShippingDetails = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const validateOrder = useOrderValidation()
+    const [loading, setLoading] = useState(false)
     useTitle('Shipping Info')
 
     useEffect(() => {
@@ -24,8 +26,10 @@ const ShippingDetails = () => {
 
     const shippingHandler = (e: FormEvent) => {
         e.preventDefault()
+        setLoading(prev => !prev)
         localStorage.setItem('shippingInfo', JSON.stringify(shippingData))
         dispatch(saveShippingInfo(shippingData))
+        setLoading(prev => !prev)
         navigate('/confirm/order', { replace: true })
     }
 
@@ -119,12 +123,7 @@ const ShippingDetails = () => {
                                 required
                             />
                         </div>
-                        <button
-                            id="shipping_button"
-                            type="submit"
-                            className="w-full py-3 rounded text-white font-semibold  bg-orange-400 hover:bg-teal-700">
-                            Continue Checkout
-                        </button>
+                        <Button id='shipping_button' loading={loading} text='Confirm Shipping Address' />
                     </form>
                 </div>
             </div>

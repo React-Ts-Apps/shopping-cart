@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react"
 import { useForgotPasswordMutation } from "../../services/authApi"
 import { showToast } from "../../utils/showToast"
 import type { ErrorPops } from "../../types"
+import Button from "../ui/Button"
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('')
@@ -37,8 +38,7 @@ const ForgotPassword = () => {
                             required
                         />
                     </div>
-                    <button id="forgot_password_button" type="submit"
-                        className=" bg-orange-400 hover:bg-teal-900 w-full py-3 rounded text-white font-semibold">Send Email</button>
+                    <Button id="forgot_password_button" text='Send Email' />
                 </form>
             </div>
         </div>
