@@ -6,9 +6,9 @@ import { cartCountSelector, cartSumSelector } from "../../redux/features/cart/se
 import { Link, useNavigate } from "react-router-dom"
 import { useTitle } from "../../hooks/useTitle"
 import CheckoutGuide from "./CheckoutGuide"
-import Button from "../ui/Button"
 import { showToast } from "../../utils/showToast"
 import { useValidateStock } from "../../hooks/useValidateStock"
+import OrderSummaryBox from "../order/OrderSummary"
 
 const Cart = () => {
     useTitle('Cart Items')
@@ -112,24 +112,12 @@ const Cart = () => {
                         </div>
 
                         {/* Summary - take 1/3 width */}
-                        <div className="p-6 border border-gray-300  text-center rounded shadow-lg pl-8 font-serif h-fit bg-white">
-                            <h4 className="text-xl font-semibold mb-4">Order Summary</h4>
-                            <hr className="border-gray-300 mb-6" />
-
-                            <p className="mb-3">
-                                Subtotal:{' '}
-                                <span className="font-semibold">
-                                    {cartCount} (Items)
-                                </span>
-                            </p>
-                            <p className="mb-6">
-                                Est. total:{' '}
-                                <span className="font-semibold">
-                                    kr {cartSum.toFixed(2)}
-                                </span>
-                            </p>
-                            <Button type="button" id="checkout_btn" onClick={checkoutHandler} text='Check Out' />
-                        </div>
+                        <OrderSummaryBox
+                            cartCount={cartCount}
+                            cartSum={cartSum}
+                            buttonText="Check Out"
+                            onClick={checkoutHandler}
+                        />
                     </div>
                 </>
             )}

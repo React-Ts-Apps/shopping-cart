@@ -8,7 +8,7 @@ import { SHIPPING_PRICE } from "../../constants"
 import { useEffect } from "react"
 import { useOrderValidation } from "../../hooks/useOrderValidation"
 import OrderItems from "../order/OrderItems"
-import Button from "../ui/Button"
+import OrderSummaryBox from "../order/OrderSummary"
 
 const ConfirmOrder = () => {
     useTitle('Confirm Order')
@@ -61,43 +61,16 @@ const ConfirmOrder = () => {
                 <hr className=" border-gray-300 mb-6" />
                 <OrderItems data={orderItems || []} />
             </div>
-            <div className="p-6 mt-20 border border-gray-300 text-center rounded shadow-lg pl-8 font-serif h-fit bg-white max-w-sm">
-                <h4 className="text-xl font-semibold mb-6 text-left">Order Summary</h4>
-                <hr className="border-gray-300 mb-6" />
-
-                {/* Subtotal */}
-                <div className="flex justify-between mb-3 text-sm">
-                    <span className="text-gray-600">Subtotal:</span>
-                    <span className="font-semibold">{cartCount} Items</span>
-                </div>
-
-                {/* Estimated Total */}
-                <div className="flex justify-between mb-3 text-sm">
-                    <span className="text-gray-600">Est. total:</span>
-                    <span className="font-semibold">kr {cartSum.toFixed(2)}</span>
-                </div>
-
-                {/* Shipping */}
-                <div className="flex justify-between mb-3 text-sm">
-                    <span className="text-gray-600">Shipping:</span>
-                    <span className="font-semibold">kr {shippingPrice.toFixed(2)}</span>
-                </div>
-
-                {/* VAT */}
-                <div className="flex justify-between mb-3 text-sm">
-                    <span className="text-gray-600">VAT:</span>
-                    <span className="font-semibold">kr {taxValue.toFixed(2)}</span>
-                </div>
-
-                {/* Total */}
-                <div className="flex justify-between mb-6 text-base">
-                    <span className="text-gray-700 font-semibold">Total:</span>
-                    <span className="text-lg font-bold text-teal-800">kr {totalPrice.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-center">
-                    <Button id="confirm_btn" onClick={paymentHandler} text='Proceed To Payment' />
-                </div>
-            </div>
+            <OrderSummaryBox
+                cartCount={cartCount}
+                cartSum={cartSum - taxValue}
+                shippingPrice={shippingPrice}
+                taxValue={taxValue}
+                totalPrice={totalPrice}
+                showBreakdown
+                buttonText="Proceed To Payment"
+                onClick={paymentHandler}
+            />
         </div>
     </>)
 }
