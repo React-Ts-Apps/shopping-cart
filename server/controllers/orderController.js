@@ -31,6 +31,10 @@ export const newOrder = asyncError(async (req, res, next) => {
         user: req.user.id
     })
 
+    for (const item of orderItems) {
+        await Product.findByIdAndUpdate(item.product, { $inc: { stock: -item.quantity } })
+    }
+
     res.status(200).json({ success: true, order, message: 'Order placed successfully' })
 })
 
