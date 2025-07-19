@@ -14,7 +14,6 @@ const MealListBase = () => {
     const { mealHubItem, currentPage, showPopUp, handleShowPopUp, setSelectedDishId } = useRecipesStore()
     const selectedValue = useSelectedList()
     const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(mealHubItem, selectedValue)
-    console.log('ggg')
     const menuList = useMemo(() => {
         const firstIndex = currentPage * itemsPerPage - itemsPerPage;
         const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);
@@ -48,7 +47,7 @@ const MealListBase = () => {
                                                     </div>
                                                 </div>
 
-                                                <Link to={`/view/${dish.idMeal}`} onClick={() => setSelectedDishId(dish.idMeal)}>
+                                                <Link to={`/recipes/view/${dish.idMeal}`} onClick={() => setSelectedDishId(dish.idMeal)}>
                                                     <h4 className="mt-2 text-sm font-semibold truncate hover:text-orange-600 transition">
                                                         {dish.strMeal}
                                                     </h4>

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteOrder, getOrder, myOrders, newOrder, orders, updateOrder } from "../controllers/orderController.js";
+import { deleteOrder, getOrder, myOrders, newOrder, orders, updateOrder, validateOrder } from "../controllers/orderController.js";
 import { isAuthenticated, isAuthenticatedRole } from "../middlewares/authenticate.js";
 
 const router = new Router()
@@ -7,6 +7,7 @@ const router = new Router()
 router.route('/order/new').post(isAuthenticated, newOrder)
 router.route('/order/:id').get(isAuthenticated, getOrder)
 router.route('/myorders').get(isAuthenticated, myOrders)
+router.route('/order/validate').post(isAuthenticated, validateOrder)
 
 //Admin routes
 router.route('/admin/orders').get(isAuthenticated, isAuthenticatedRole('admin'), orders)

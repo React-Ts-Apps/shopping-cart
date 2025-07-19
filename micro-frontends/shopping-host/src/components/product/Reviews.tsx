@@ -20,20 +20,19 @@ const Reviews = ({ reviews }: { reviews: ReviewsDisplayProps[] }) => {
                     key={review._id}
                     className="bg-white shadow-md rounded-xl p-5 mb-6 transition hover:shadow-lg"
                 >
-                    <div className="flex items-center justify-between mb-2">
-                        <p className="text-sm text-gray-600 font-medium">
-                            {review.user?.name || 'Anonymous'}
-                        </p>
-                        <p className="text-xs text-gray-400">
-                            {new Date(review.date).toLocaleString('en-GB', {
-                                dateStyle: 'medium',
-                                timeStyle: 'short'
-                            })}
-                        </p>
-                    </div>
-
-                    <div className="flex items-center mb-2">
+                    {/* Single horizontal row for stars, name, and date */}
+                    <div className="flex items-center gap-4 text-sm text-gray-600 mb-2 flex-wrap">
                         <ReviewStars ratings={review.rating} />
+
+                        <span className="font-semibold text-gray-400">{review.user?.name || 'Anonymous'}</span>
+
+                        <span className="text-gray-400 text-xs">
+                            · {new Date(review.date).toLocaleDateString('en-GB', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric',
+                            })}
+                        </span>
                     </div>
 
                     <p className="text-gray-700 text-sm leading-relaxed">
@@ -43,5 +42,6 @@ const Reviews = ({ reviews }: { reviews: ReviewsDisplayProps[] }) => {
             ))}
         </div>
     );
-}
+};
+
 export default Reviews

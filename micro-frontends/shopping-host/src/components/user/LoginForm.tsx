@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setCredentials } from "../../redux/features/user/authSlice"
 import type { RootState } from "../../redux/store"
 import { useRedirectAfterLogin } from "../../hooks/useRedirectAfterLogin"
+import Button from "../ui/Button"
 
 const LoginForm = () => {
     useTitle('Login')
@@ -78,15 +79,7 @@ const LoginForm = () => {
                         </Link>
                     </div>
 
-                    <button
-                        id="login_button"
-                        type="submit"
-                        disabled={isLoading}
-                        className={`w-full py-3 rounded text-white font-semibold ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-orange-400 hover:bg-teal-700"
-                            }`}
-                    >
-                        LOGIN
-                    </button>
+                    <Button id="login_button" text="LOGIN" loading={isLoading} />
 
                     <div className="flex justify-end">
                         <Link to="/register" className="text-sm font-semibold text-teal-600 hover:underline">

@@ -2,13 +2,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import ProductList from "./components/product/ProductList"
 import AdminDashBoard from "./components/admin/AdminDashBoard"
 import LayOut from "./components/ui/LayOut"
-import RecipeApp from "recipes-remote/RecipesApp"
 import ProductDetails from "./components/product/ProductDetails"
 import LoginForm from "./components/user/LoginForm"
 import RegisterForm from "./components/user/RegisterForm"
 import { useDispatch } from "react-redux"
 import { useGetCurrentUserQuery } from "./services/authApi"
-import { useEffect } from "react"
+import { lazy, Suspense, useEffect } from "react"
 import { setCredentials } from "./redux/features/user/authSlice"
 import UserProfile from "./components/user/UserProfile"
 import UpdateProfile from "./components/user/UpdateProfile"
@@ -24,6 +23,7 @@ import OrderSuccess from "./components/order/OrderSuccess"
 import UserOrders from "./components/order/UserOrders"
 import OrderDetails from "./components/order/OrderDetails"
 
+const RecipeApp = lazy(() => import("recipes-remote/RecipesApp"))
 
 function App() {
   const dispatch = useDispatch()
@@ -57,9 +57,9 @@ function App() {
           <Route path='/payment' element={<Payment />} />
           <Route path='/order/success' element={<OrderSuccess />} />
           <Route path='/recipes/*' element={
-
-            <RecipeApp />
-
+            <Suspense fallback={<div>Loading recipes...</div>}>
+              <RecipeApp />
+            </Suspense>
           } />
           <Route path='/:admin/items' element={<AdminDashBoard />} />
 

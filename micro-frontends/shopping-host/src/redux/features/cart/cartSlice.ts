@@ -35,6 +35,13 @@ const cartSlice = createSlice({
         deleteCartItem: (state, action) => {
             state.items = state.items.filter(i => i._id !== action.payload)
         },
+        updateStock: (state, action) => {
+            const { productId, stock } = action.payload
+            const item = state.items.find(item => item._id === productId)
+            if (item) {
+                item.stock = stock;
+            }
+        },
         saveShippingInfo: (state, action) => {
             state.shippingInfo = action.payload
         },
@@ -48,6 +55,7 @@ export const { addToCart,
     incrementCartItem,
     decrementCartItem,
     deleteCartItem,
+    updateStock,
     saveShippingInfo,
     clearCart } = cartSlice.actions
 export default cartSlice.reducer

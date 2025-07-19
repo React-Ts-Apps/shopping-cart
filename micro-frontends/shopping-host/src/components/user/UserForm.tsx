@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import type { UserFormProps } from "../../types";
 import defaultAvatar from '../../assets/default_avatar.png'
+import Button from "../ui/Button";
 
 const UserForm = ({
     initialValues,
@@ -127,16 +128,7 @@ const UserForm = ({
                         </div>
                     </div>
 
-                    {/* Submit Button */}
-                    <button
-                        type="submit"
-                        className={`w-full py-3 rounded text-white font-semibold text-sm transition duration-200 ${isLoading
-                            ? 'bg-gray-400 cursor-not-allowed'
-                            : 'bg-orange-400 hover:bg-teal-700'
-                            }`}
-                    >
-                        {buttonLabel}
-                    </button>
+                    <Button id="profile_btn" loading={isLoading} text={buttonLabel} />
                 </form>
             </div>
         </div>
