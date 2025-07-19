@@ -12,7 +12,7 @@ type ReviewSubmitProps = ReviewProps & { productId: string }
 export const productsApi = createApi({
     reducerPath: 'productsApi',
     baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/api/v1` }),
-    tagTypes: ['Product'], // Define the tag type explicitly
+    tagTypes: ['Product'],
     endpoints: (builder) => ({
         getProducts: builder.query({
             query: ({ page = 1, limit = 5, keyword, price, category, ratings }) => {

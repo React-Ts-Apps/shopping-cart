@@ -21,13 +21,13 @@ const Button = ({ id,
             type={type}
             onClick={onClick}
             className={`${className ? className :
-                `w-full py-3 rounded text-white font-semibold text-sm transition duration-200 
+                `w-full py-3 rounded text-white items-center font-semibold text-sm transition duration-200 
                 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-400 hover:bg-teal-700'
                 }`}`}>
             {
                 loading ? (
                     <>
-                        <span className='text-gray-400'>Processing..</span>
+                        <span className='text-white'>Processing..</span>
                         <Loader className='w-5 h-5 animate-spin text-gray-700' />
                     </>
                 ) : text

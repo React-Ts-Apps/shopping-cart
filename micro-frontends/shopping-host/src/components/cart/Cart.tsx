@@ -7,6 +7,8 @@ import { Link, useNavigate } from "react-router-dom"
 import { useTitle } from "../../hooks/useTitle"
 import CheckoutGuide from "./CheckoutGuide"
 import Button from "../ui/Button"
+import { showToast } from "../../utils/showToast"
+import { useValidateStock } from "../../hooks/useValidateStock"
 
 const Cart = () => {
     useTitle('Cart Items')
@@ -15,9 +17,16 @@ const Cart = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const cartSum = useSelector(cartSumSelector)
+    const validateStockBeforeOrder = useValidateStock()
 
-    const checkoutHandler = () => {
-        navigate('/login?redirects=shipping', { replace: true })
+
+    const checkoutHandler = async () => {
+        try {
+            await validateStockBeforeOrder(items)
+            navigate('/login?redirects=shipping', { replace: true })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -62,25 +71,37 @@ const Cart = () => {
                                     </div>
 
                                     {/* Quantity Controls */}
-                                    <div className="flex items-center space-x-1">
-                                        <button
-                                            onClick={() => dispatch(decrementCartItem(item._id))}
-                                            className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded"
-                                        >
-                                            -
-                                        </button>
-                                        <input
-                                            type="number"
-                                            readOnly
-                                            value={item.quantity}
-                                            className="w-12 text-center border border-gray-300 rounded py-1"
-                                        />
-                                        <button
-                                            onClick={() => dispatch(incrementCartItem(item._id))}
-                                            className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded"
-                                        >
-                                            +
-                                        </button>
+                                    <div className="flex flex-col items-center">
+                                        <div className="flex items-center space-x-1">
+                                            <button
+                                                onClick={() => {
+                                                    if (item.quantity - 1 < 1) return
+                                                    dispatch(decrementCartItem(item._id))
+                                                }}
+                                                className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded"
+                                            >
+                                                -
+                                            </button>
+                                            <input
+                                                type="number"
+                                                readOnly
+                                                value={item.quantity}
+                                                className={`w-12 text-center border rounded py-1 ${item.quantity > item.stock ? 'border-red-500' : 'border-gray-300'}`}
+                                            />
+                                            <button
+                                                onClick={() => {
+                                                    if (item.quantity + 1 > item.stock) {
+                                                        showToast.error(`Only ${item.stock} pieces are available `)
+                                                        return
+                                                    }
+                                                    dispatch(incrementCartItem(item._id))
+                                                }}
+                                                className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                        {item.quantity + 1 > item.stock && <span className="text-red-700">{`Only ${item.stock} pieces`}</span>}
                                     </div>
 
                                     {/* Delete Button */}

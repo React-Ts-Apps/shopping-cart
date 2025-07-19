@@ -9,6 +9,8 @@ import { usePlaceOrderMutation } from "../../services/orderApi"
 import StripeField from "../stripe/StripeField"
 import { useOrderValidation } from "../../hooks/useOrderValidation"
 import Button from "../ui/Button"
+import { useValidateStock } from "../../hooks/useValidateStock"
+
 
 const PaymentForm = () => {
     const [name, setName] = useState('')
@@ -21,6 +23,7 @@ const PaymentForm = () => {
     const elements = useElements()
     const stripe = useStripe()
     const navigate = useNavigate()
+    const validateStockBeforeOrder = useValidateStock()
 
     const orderInfo = sessionStorage.getItem('orderInfo') ? JSON.parse(sessionStorage.getItem('orderInfo') as string) : null;
 
@@ -32,6 +35,7 @@ const PaymentForm = () => {
         e.preventDefault()
         setLoading(true)
         try {
+            await validateStockBeforeOrder(items)
             const shipping = {
                 name,
                 address: {

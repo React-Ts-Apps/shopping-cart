@@ -2,6 +2,12 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "./urls";
 import type { MyOrderProps, OrderBaseProps, OrderProps } from "../types";
 
+type StockValidationProps = {
+    productId: string;
+    name: string;
+    quantity: number;
+}
+
 export const orderApi = createApi({
     reducerPath: 'orderApi',
     baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/api/v1`, credentials: "include" }),
@@ -13,6 +19,14 @@ export const orderApi = createApi({
                 body
             })
         }),
+        validateStock: builder.mutation<{ success: boolean, message: string }, StockValidationProps[]>({
+            query: (body) => ({
+                url: '/order/validate',
+                method: 'POST',
+                body
+            })
+        }),
+
         myOrders: builder.query<{ success: boolean, orders: MyOrderProps[] }, void>({
             query: () => ({
                 url: '/myorders',
@@ -27,5 +41,6 @@ export const orderApi = createApi({
 })
 
 export const { usePlaceOrderMutation,
+    useValidateStockMutation,
     useMyOrdersQuery,
     useGetOrderByIdQuery } = orderApi
