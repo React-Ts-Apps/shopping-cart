@@ -11,7 +11,7 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const FRONTEND_URL = process.env.FRONTEND_URL
+//const FRONTEND_URL = process.env.FRONTEND_URL
 
 // 👇 Recreate __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -24,7 +24,7 @@ connectDB()
 
 // Enable CORS for all origins
 app.use(cors({
-    origin: FRONTEND_URL,
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
 }));
