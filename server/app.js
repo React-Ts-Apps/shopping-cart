@@ -23,7 +23,11 @@ app.set('query parser', str => qs.parse(str))
 connectDB()
 
 // Enable CORS for all origins
-app.use(cors({ origin: FRONTEND_URL, credentials: true }));
+app.use(cors({
+    origin: FRONTEND_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true
+}));
 app.use(json())
 app.use(cookieParser())
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
