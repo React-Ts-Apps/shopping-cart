@@ -81,6 +81,5 @@ export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) =>
         selectedCategory: state.selectedCategory,
         selectedIngredient: state.selectedIngredient,
         currentPage: state.currentPage,
-        searchText: state.searchText
     })
 }))

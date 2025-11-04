@@ -1,19 +1,17 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useRecipesStore } from "../store/RecipesStore"
 
 const RecipeSearch = () => {
     const [input, setInput] = useState('')
-    const { setSearchText, searchText } = useRecipesStore()
+    const { setSearchText } = useRecipesStore()
     const navigate = useNavigate()
+
     const handleOnClick = () => {
         setSearchText(input)
         navigate(`/recipes/search/${input}/page/1`, { replace: true })
     }
 
-    useEffect(() => {
-        setInput(searchText)
-    }, [searchText])
     return (
         <div className="p-10">
             <div className="pl-40 flex gap-2 mb-4">
