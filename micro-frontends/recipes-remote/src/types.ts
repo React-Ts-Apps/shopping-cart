@@ -43,7 +43,7 @@ export type MealHubGroups = {
 export type MealHubGroupsKeys = keyof MealHubGroups;
 
 export type MealHubListProps = {
-  type: MealHubGroupsKeys;
+  type: 'categories' | 'areas';
   onItemClick: (val: string) => void;
 }
 

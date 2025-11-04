@@ -2,18 +2,13 @@ import { useState } from "react";
 import { SMALL_IMG_URL } from "../api/urls";
 import { useListQuery } from "../hooks/useListQuery"
 import { useRecipesStore } from "../store/RecipesStore";
-import type { IngredientProps, MealHubGroupsKeys, PopUpProps } from "../types"
+import type { IngredientProps, PopUpProps } from "../types"
 import PopUp from "./PopUp";
 import RecipeLoader from "./RecipeLoader";
 import ErrorLoader from "./ErrorLoader";
 
-type IngredientListProps = {
-    data: IngredientProps[]; isLoading: boolean;
-    isError: boolean;
-}
-
-const IngredientList = ({ type }: { type: MealHubGroupsKeys }) => {
-    const { data: groups = [], isLoading, isError } = useListQuery(type) as IngredientListProps
+const IngredientList = () => {
+    const { data: groups = [], isLoading, isError } = useListQuery('ingredients')
     const { showPopUp, handleShowPopUp } = useRecipesStore()
     const [selectedIngredient, setSelectedIngredient] = useState<PopUpProps>()
 

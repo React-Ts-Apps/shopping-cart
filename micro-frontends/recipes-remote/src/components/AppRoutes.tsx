@@ -44,7 +44,7 @@ const AppRoutes = () => {
             <Route path="/areas/:area/page/:page" element={<MealListBase />} />
             <Route path="/random" element={<MealDetails />} />
             <Route path="/view/:id" element={<MealDetails />} />
-            <Route path="/ingredients" element={<IngredientList type="ingredients" />} />
+            <Route path="/ingredients" element={<IngredientList />} />
             <Route path="/ingredients/:ingredient/page/:page" element={<MealListBase />} />
             <Route path="/search" element={<RecipeSearch />} />
             <Route path="/search/:searchText/page/:page" element={

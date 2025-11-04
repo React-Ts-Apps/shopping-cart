@@ -6,7 +6,7 @@ import RecipeLoader from "./RecipeLoader";
 import ErrorLoader from "./ErrorLoader";
 
 const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
-  const { selectedDishId, setSelectedDish, setSelectedIngredient, closePopUp, currentPage } = useRecipesStore();
+  const { selectedDishId, setSelectedDish, setSelectedIngredient, closePopUp } = useRecipesStore();
   const { data: selectedDish, isLoading, isError } = useMealById(selectedDishId)
   const navigate = useNavigate()
   const dish = selectedDish?.[0];
@@ -33,7 +33,7 @@ const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
   const handleShowList = (ingredient: string) => {
     setSelectedIngredient(ingredient)
     closePopUp()
-    navigate(`/recipes/ingredients/${ingredient}/page/${currentPage}`, { replace: true })
+    navigate(`/recipes/ingredients/${ingredient}/page/1`, { replace: true })
   }
 
   return (

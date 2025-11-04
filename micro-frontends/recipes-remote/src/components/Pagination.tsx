@@ -17,7 +17,7 @@ const Pagination = ({ menuLength }: { menuLength: number }) => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
 
-    navigate(`/${mealHubItem}/${base}/page/${page}`, { replace: true })
+    navigate(`/recipes/${mealHubItem}/${base}/page/${page}`, { replace: true })
   }
 
   return (

@@ -20,9 +20,9 @@ const MealListBase = () => {
         return menu.slice(firstIndex, lastIndex);
     }, [currentPage, menu]);
 
-
     if (isLoading) return <RecipeLoader message='Loading..' />
     if (isError) return <ErrorLoader message='Something went wrong..' />
+    if (menu === null) return <p>No items found</p>
 
 
     return (

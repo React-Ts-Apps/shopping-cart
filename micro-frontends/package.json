@@ -8,7 +8,7 @@
     "recipes-remote"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev:remote\" \"npm run dev:host\"",
+    "dev": "concurrently \"npm run preview:remote\" \"npm run dev:host\"",
     "dev:remote": "npm run dev --prefix ./recipes-remote",
     "dev:host": "npm run dev --prefix ./shopping-host",
     "build": "npm run build:remote && npm run build:host",

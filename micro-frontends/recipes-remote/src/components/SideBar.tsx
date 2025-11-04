@@ -10,7 +10,7 @@ import ErrorLoader from "./ErrorLoader"
 
 const SideBar = () => {
     const [isOpen, setIsOpen] = useState(true)
-    const { mealHubItem, setMealHubItem, setSelectedDish } = useRecipesStore()
+    const { mealHubItem, setMealHubItem, setSelectedDish, setCurrentPage } = useRecipesStore()
     const navigate = useNavigate()
 
     //trigger only if random selected
@@ -29,6 +29,7 @@ const SideBar = () => {
     const handleHubChange = (item: MealHubProps) => {
         if (mealHubItem !== item) {
             setMealHubItem(item)
+            setCurrentPage(1)
             navigate('/recipes')
         }
     }
