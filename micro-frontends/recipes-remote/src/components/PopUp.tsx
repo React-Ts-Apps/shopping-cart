@@ -7,11 +7,11 @@ import ErrorLoader from "./ErrorLoader";
 
 const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
   const { selectedDishId, setSelectedDish, setSelectedIngredient, closePopUp } = useRecipesStore();
-  const shouldFetch = !dataToPopUp
+
   const { data: selectedDish, isLoading, isError } = useFilterQuery(
     "byId",
     selectedDishId,
-    shouldFetch
+    !dataToPopUp
   );
   const navigate = useNavigate()
   const dish = selectedDish?.[0];

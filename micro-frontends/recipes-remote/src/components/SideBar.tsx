@@ -10,7 +10,6 @@ const SideBar = () => {
     const { mealHubItem, setMealHubItem, setCurrentPage } = useRecipesStore()
     const navigate = useNavigate()
 
-
     const handleHubChange = (item: MealHubProps) => {
         if (mealHubItem !== item) {
             setMealHubItem(item)
