@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useMealById } from "../hooks/useFilterQuery";
+import { useFilterQuery } from "../hooks/useFilterQuery";
 import { useRecipesStore } from "../store/RecipesStore";
 import type { PopUpProps } from "../types";
 import RecipeLoader from "./RecipeLoader";
@@ -7,7 +7,12 @@ import ErrorLoader from "./ErrorLoader";
 
 const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
   const { selectedDishId, setSelectedDish, setSelectedIngredient, closePopUp } = useRecipesStore();
-  const { data: selectedDish, isLoading, isError } = useMealById(selectedDishId)
+  const shouldFetch = !dataToPopUp
+  const { data: selectedDish, isLoading, isError } = useFilterQuery(
+    "byId",
+    selectedDishId,
+    shouldFetch
+  );
   const navigate = useNavigate()
   const dish = selectedDish?.[0];
 

@@ -1,21 +1,22 @@
-import { useQuery } from "@tanstack/react-query"
-import { RecipeServices } from "../services/RecipeServices"
-import type { MealProps } from "../types"
-import { useRecipesStore } from "../store/RecipesStore"
+import { useQuery } from "@tanstack/react-query";
+import { RecipeServices } from "../services/RecipeServices";
+import type { MealHubProps, MealProps } from "../types";
 
-export const useMealById = (id: string) => {
-    return useQuery<MealProps[]>({
-        queryKey: ["selectedDish", id],
-        queryFn: () => RecipeServices.getMealById(id),
-        enabled: !!id
-    })
-}
+type ExtendedFilterTypes = 'byId' | MealHubProps
 
-export const useRandomMeal = () => {
-    const { mealHubItem } = useRecipesStore()
+export const useFilterQuery = (filterType: ExtendedFilterTypes, value: string | undefined, enabled?: boolean) => {
+    const queryMap = {
+        categories: () => RecipeServices.getByCategory(value ?? ""),
+        areas: () => RecipeServices.getByArea(value ?? ""),
+        ingredients: () => RecipeServices.getByIngredient(value ?? ""),
+        search: () => RecipeServices.searchByNameAndIngredient(value ?? ""),
+        random: () => RecipeServices.getRandomMeal(),
+        byId: () => RecipeServices.getMealById(value ?? "")
+    }
+
     return useQuery<MealProps[]>({
-        queryKey: ["randomDish"],
-        queryFn: () => RecipeServices.getRandomMeal(),
-        enabled: mealHubItem === 'random'
+        queryKey: ["menu", filterType, value],
+        queryFn: queryMap[filterType],
+        enabled: enabled ?? (filterType === 'random' || !!value),
     })
 }

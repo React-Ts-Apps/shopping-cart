@@ -1,19 +1,21 @@
 import { useParams } from "react-router-dom";
 import { useRecipesStore } from "../store/RecipesStore";
-import { useMealById } from "../hooks/useFilterQuery";
 import RecipeLoader from "./RecipeLoader";
 import ErrorLoader from "./ErrorLoader";
+import { useFilterQuery } from "../hooks/useFilterQuery";
 
 
 const MealDetails = () => {
-    const { selectedDish } = useRecipesStore()
+    const { mealHubItem, selectedDish } = useRecipesStore()
     const { id } = useParams()
-    const shouldFetch = !selectedDish || (id && selectedDish.idMeal !== id)
-    const { data: fetchedData, isError, isLoading } = useMealById(id!)
+    const shouldFetch = !selectedDish || (selectedDish.idMeal !== id)
+    const filterType = mealHubItem !== 'random' ? 'byId' : mealHubItem
+    const { data: fetchedData, isError, isLoading } = useFilterQuery(filterType, id, shouldFetch)
+
     if (isLoading) return <RecipeLoader message='Loading..' />
     if (isError) return <ErrorLoader message='Something went wrong..' />
 
-    const meal = shouldFetch ? fetchedData?.[0] : selectedDish
+    const meal = fetchedData?.[0]
     return (
         meal &&
         <div className="pl-70 pt-10 h-[80vh] overflow-y-auto">

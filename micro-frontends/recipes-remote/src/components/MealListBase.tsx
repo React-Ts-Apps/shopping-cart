@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useFilterByTypeQuery } from "../hooks/useFilterByTypeQuery";
+import { useFilterQuery } from "../hooks/useFilterQuery";
 import { useRecipesStore } from "../store/RecipesStore";
 import Pagination from "./Pagination";
 import PopUp from "./PopUp";
@@ -13,7 +13,8 @@ import ErrorLoader from "./ErrorLoader";
 const MealListBase = () => {
     const { mealHubItem, currentPage, showPopUp, handleShowPopUp, setSelectedDishId } = useRecipesStore()
     const selectedValue = useSelectedList()
-    const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(mealHubItem, selectedValue)
+    const { data: menu = [], isLoading, isError } = useFilterQuery(mealHubItem, selectedValue)
+
     const menuList = useMemo(() => {
         const firstIndex = currentPage * itemsPerPage - itemsPerPage;
         const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);
