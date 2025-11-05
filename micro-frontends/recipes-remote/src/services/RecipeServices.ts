@@ -53,18 +53,18 @@ export class RecipeServices {
     static async searchByNameAndIngredient(query: string) {
         const [byNameRes, byIngredientRes] = await Promise.all([this.searchByName(query), this.searchByIngredient(query)
         ])
-        const byName = byNameRes || [];
-        const byIngredient = byIngredientRes || [];
+        const byNameList = byNameRes || [];
+        const byIngredientList = byIngredientRes || [];
 
         const combinedMap = new Map<string, MealProps>();
 
-        byName.forEach((meal: MealProps | undefined) => {
+        byNameList.forEach((meal: MealProps | undefined) => {
             if (meal?.idMeal) {
                 combinedMap.set(meal.idMeal, meal);
             }
         });
 
-        byIngredient.forEach((meal: MealProps | undefined) => {
+        byIngredientList.forEach((meal: MealProps | undefined) => {
             if (meal?.idMeal) {
                 combinedMap.set(meal.idMeal, meal);
             }

@@ -16,6 +16,15 @@ const MealDetails = () => {
     if (isError) return <ErrorLoader message='Something went wrong..' />
 
     const meal = fetchedData?.[0]
+
+    const ingredients: string[] = []
+    for (let i = 1; i <= 20; i++) {
+        const ingredient = meal ? meal[`strIngredient${i}`] : undefined
+        const measure = meal ? meal[`strMeasure${i}`] : undefined
+        if (ingredient && ingredient.trim()) {
+            ingredients.push(`${ingredient} ${measure ? `: ${measure}` : ""}`)
+        }
+    }
     return (
         meal &&
         <div className="pl-70 pt-10 h-[80vh] overflow-y-auto">
@@ -35,13 +44,9 @@ const MealDetails = () => {
 
                     <h2 className="text-xl mt-4 mb-2 font-extrabold">Ingredients</h2>
                     <ol className="list-disc list-inside text-sky-700">
-                        {[...Array(20)].map((_, i) => {
-                            const ingredient = meal[`strIngredient${i + 1}`];
-                            const measure = meal[`strMeasure${i + 1}`];
-                            return ingredient && ingredient.trim() ? (
-                                <li key={i}>{ingredient}{measure ? `: ${measure}` : ''}</li>
-                            ) : null;
-                        })}
+                        {ingredients.map((item, index) => (
+                            <li key={index}>{item}</li>
+                        ))}
                     </ol>
                 </div>
             </div>

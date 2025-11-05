@@ -8,7 +8,7 @@ import RecipeLoader from "./RecipeLoader";
 import ErrorLoader from "./ErrorLoader";
 
 const IngredientList = () => {
-    const { data: groups = [], isLoading, isError } = useListQuery('ingredients')
+    const { data: groups, isLoading, isError } = useListQuery('ingredients')
     const { showPopUp, handleShowPopUp } = useRecipesStore()
     const [ingredientToPopUp, setIngredientToPopUp] = useState<PopUpProps>()
 
