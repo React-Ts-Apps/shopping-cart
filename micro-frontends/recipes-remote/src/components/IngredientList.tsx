@@ -10,10 +10,10 @@ import ErrorLoader from "./ErrorLoader";
 const IngredientList = () => {
     const { data: groups = [], isLoading, isError } = useListQuery('ingredients')
     const { showPopUp, handleShowPopUp } = useRecipesStore()
-    const [selectedIngredient, setSelectedIngredient] = useState<PopUpProps>()
+    const [ingredientToPopUp, setIngredientToPopUp] = useState<PopUpProps>()
 
     const handleShowIngredient = (item: IngredientProps) => {
-        setSelectedIngredient({
+        setIngredientToPopUp({
             id: item.idIngredient,
             description: item.strDescription,
             name: item.strIngredient,
@@ -27,7 +27,7 @@ const IngredientList = () => {
 
     return (
         <div>
-            {showPopUp && <PopUp dataToPopUp={selectedIngredient} />}
+            {showPopUp && <PopUp dataToPopUp={ingredientToPopUp} />}
             <div className="p-20 text-center">
                 <div className=" h-[70vh] overflow-y-auto ">
                     <ul className="pl-20 flex flex-wrap justify-center gap-4  " role="list">
