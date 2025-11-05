@@ -14,7 +14,7 @@ export const useMealById = (id: string) => {
 export const useRandomMeal = () => {
     const { mealHubItem } = useRecipesStore()
     return useQuery<MealProps[]>({
-        queryKey: ["selectedDish"],
+        queryKey: ["randomDish"],
         queryFn: () => RecipeServices.getRandomMeal(),
         enabled: mealHubItem === 'random'
     })
