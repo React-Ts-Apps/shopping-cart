@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom"
 import { useTitle } from "../../hooks/useTitle"
 import CheckoutGuide from "./CheckoutGuide"
 import { showToast } from "../../utils/showToast"
-import { useValidateStock } from "../../hooks/useValidateStock"
 import OrderSummaryBox from "../order/OrderSummary"
 
 const Cart = () => {
@@ -17,12 +16,9 @@ const Cart = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const cartSum = useSelector(cartSumSelector)
-    const validateStockBeforeOrder = useValidateStock()
-
 
     const checkoutHandler = async () => {
         try {
-            await validateStockBeforeOrder(items)
             navigate('/login?redirects=shipping', { replace: true })
         } catch (error) {
             console.log(error)
