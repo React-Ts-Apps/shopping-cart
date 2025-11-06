@@ -13,7 +13,7 @@ import { useQueryParams } from "../../hooks/useQueryParams"
 import { DEFAULT_CATEGORY, DEFAULT_PRICE_RANGE } from "../../constants"
 import LoadFail from "../ui/LoadFail"
 
-const ITEMS_PER_PAGE = 10
+const ITEMS_PER_PAGE = 8
 
 const ProductList = () => {
     // Set document title to 'Home' on component mount
@@ -21,7 +21,7 @@ const ProductList = () => {
 
     // Custom hooks for parsing search params
     const { keyword, page, category } = useQueryParams();
-    const categoryParam = category === DEFAULT_CATEGORY || !category ? '' : category
+    const categoryParam = category === DEFAULT_CATEGORY ? '' : category
 
     const updateSearchParams = useUpdateSearchParams();
 
@@ -65,7 +65,7 @@ const ProductList = () => {
 
     // Resets price range to default and updates category and page params in URL
     const handleCategoryChange = useCallback((category: string) => {
-        updateSearchParams({ category: category === DEFAULT_CATEGORY || !category ? '' : category, page: '1' }, true);
+        updateSearchParams({ category: category === DEFAULT_CATEGORY ? '' : category, page: '1' }, true);
     }, [updateSearchParams]);
 
     // Render loading or error states early

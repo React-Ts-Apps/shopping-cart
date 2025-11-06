@@ -22,7 +22,9 @@ const ProductDetails = () => {
     const [showModal, setShowModal] = useState(false)
     const [rating, setRating] = useState(0)
     const [review, setReview] = useState('')
+
     useTitle(data?.product.name || 'TasteHub')
+
     const { user } = useSelector((state: RootState) => state.auth)
     const dispatch = useDispatch()
 
